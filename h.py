@@ -1,5 +1,4 @@
 
---------------------------------------------------------
 server {
         listen 80;
         server_name new.vtao.net;
@@ -18,7 +17,6 @@ server {
  
  
 
---------------------------------------------------------
 #!/usr/bin/env python
 import web
 import datetime

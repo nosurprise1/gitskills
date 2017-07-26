@@ -28,5 +28,3 @@ class Handle(object):
                 return ""
         except Exception, Argument:
             return Argument
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help

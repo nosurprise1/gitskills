@@ -5,7 +5,7 @@ from tuling import get_response
 itchatmp.update_config(itchatmp.WechatConfig(
     token='123456',
     appId = 'wx7860b4c7296dcbdf',
-    appSecret = 'a8db85056d55d3e74d662667b9b015ea')
+    appSecret = 'a8db85056d55d3e74d662667b9b015ea'))
    
 @itchatmp.msg_register(TEXT)
 def text_reply(msg):

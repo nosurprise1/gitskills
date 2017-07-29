@@ -1,6 +1,6 @@
 import itchatmp
 from itchatmp.content import TEXT
-from tuling import get_response
+#from tuling import get_response
 
 itchatmp.update_config(itchatmp.WechatConfig(
     token='123456',
@@ -9,7 +9,7 @@ itchatmp.update_config(itchatmp.WechatConfig(
    
 @itchatmp.msg_register(TEXT)
 def text_reply(msg):
-    reply = get_response(msg['Content'])
+    reply = msg['Content']
     return {'MsgType': itchatmp.content.TEXT, 'Content': reply}
 
 app = itchatmp.run(isWsgi=True)

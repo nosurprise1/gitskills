@@ -9,10 +9,43 @@ import numpy as np
 from pandas import DataFrame
 # 在注册时增加isGroupChat=True将判定为群聊回复
 #总共有单独回复、群聊分析、群发广告、csv群发四块功能。
-
+from pymongo import MongoClient
 zhongjie=[u'浙江邮储杨炳']  #个人发送
 import pandas as pd
 import matplotlib.pyplot as plt
+client = MongoClient()
+client = MongoClient('139.196.79.93', 27017)
+
+
+db = client.piao
+collection = db.piao  #·½·¨1  ÊÇ²»ÊÇ_database Ö»ÄÜÓÃÕâÖÖ·½·¨µÃµ½Êý¾Ý¼¯ºÏ  http://www.jb51.net/article/77537.htm
+cursor = collection.find()
+piao_df= pd.DataFrame(list(cursor))
+piao_df=piao_df[['xuhao','ci','shou','chu','shoudai','chudai','shouhui','chuhui']]
+piao_df=piao_df.set_index('xuhao')
+piao_df=piao_df.sort_index(ascending=True)
+print (piao_df)
+
+db2 = client.bank
+collection2 = db2.bank   #·½·¨2
+cursor2 = collection2.find()
+bank_df = pd.DataFrame(list(cursor2))
+bank_df=bank_df[['xuhao','yinhang','fenlei1','fenlei2','fenlei3']]
+bank_df=bank_df.set_index('xuhao')
+bank_df=bank_df.sort_index(ascending=True)
+print (bank_df)
+
+db3 = client.piaofen
+collection3 = db3.piaofen   #·½·¨2
+cursor3 = collection3.find()
+piaofen_df = pd.DataFrame(list(cursor2))
+print (piaofen_df)
+
+
+
+
+
+
 
 from matplotlib.font_manager import FontProperties  
 font_set = FontProperties(fname=r"c:\windows\fonts\simsun.ttc", size=15)  

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+import itchatmp
 import os
 import re
 import time
@@ -18,7 +20,7 @@ client = MongoClient('139.196.79.93', 27017)
 
 
 db = client.piao
-collection = db.piao  #·½·¨1  ÊÇ²»ÊÇ_database Ö»ÄÜÓÃÕâÖÖ·½·¨µÃµ½Êý¾Ý¼¯ºÏ  http://www.jb51.net/article/77537.htm
+collection = db.piao  #http://www.jb51.net/article/77537.htm
 cursor = collection.find()
 piao_df= pd.DataFrame(list(cursor))
 piao_df=piao_df[['xuhao','ci','shou','chu','shoudai','chudai','shouhui','chuhui']]
@@ -38,7 +40,7 @@ print (bank_df)
 db3 = client.piaofen
 collection3 = db3.piaofen   #·½·¨2
 cursor3 = collection3.find()
-piaofen_df = pd.DataFrame(list(cursor2))
+piaofen_df = pd.DataFrame(list(cursor3))
 print (piaofen_df)
 
 
@@ -108,8 +110,8 @@ def text_reply(msg):
                 reader = csv.DictReader(csvfile)    #用dictreader根据行内容查找
                 c=piao_df.astype(str).loc[j,'ci'].strip()
                    # print(c)
-                    zhaop= re.search(c,string[i])
-                    if zhaop:
+                zhaop= re.search(c,string[i])
+                if zhaop:
                       #print(int(piao_df.astype(str).loc[j,'shou'])+shou)                     
                       shou=int(piao_df.astype(str).loc[j,'shou'].strip())+shou
                       chu=int(piao_df.astype(str).loc[j,'chu'].strip())+chu
@@ -245,3 +247,4 @@ def text_reply(msg):
 
 
 itchatmp.run()
+

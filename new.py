@@ -10,7 +10,7 @@ from pandas import DataFrame
 # 在注册时增加isGroupChat=True将判定为群聊回复
 #总共有单独回复、群聊分析、群发广告、csv群发四块功能。
 from pymongo import MongoClient
-zhongjie=[u'浙江邮储杨炳']  #个人发送
+#zhongjie=[u'浙江邮储杨炳']  #个人发送
 import pandas as pd
 import matplotlib.pyplot as plt
 client = MongoClient()

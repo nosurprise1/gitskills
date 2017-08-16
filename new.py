@@ -53,8 +53,7 @@ itchatmp.update_config(itchatmp.WechatConfig(
 
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
-     return(msg['Content'])
-     return("1")
+     #return(msg['Content'])
      guang=[]
      count=0
      friend=itchatmp.search_friends(userName=msg['FromUserName'])

@@ -198,7 +198,7 @@ def text_reply(msg):
 
     
      
-
+     a=len(piaofen_df)
      if shoufa==1 and chufa==0 and shoudaifa==0 and chudaifa==0 and shoufufa==0 and chufufa==0 and shoulifa==0 and chulifa==0 and shoucunfa==0 and chucunfa==0:
           for i in range(0,a-1):
               if data.ix[a-1-i,'shou']==1 and (data.ix[a-1-i,'hanglei2']==1 ) and (count<8) and (data.ix[a-1-i,'content'] not in guang)and (friend['NickName'] != data.ix[a-1-i,'nickname'] ):                  

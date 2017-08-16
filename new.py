@@ -108,22 +108,22 @@ def text_reply(msg):
                       chuhui=int(piao_df.astype(str).loc[j,'chuhui'].strip())+chuhui                    
                       print('11111')
                       break
-         if shou<>0:
+         if shou!=0:
              shou=1
              chufa=1
-         if chu<>0:
+         if chu!=0:
              chu=1
              shoufa=1
-         if shoudai<>0:
+         if shoudai!=0:
              shoudai=1
              chudaifa=1
-         if chudai<>0:
+         if chudai!=0:
              chudai=1
              shoudaifa=1
-         if shouhui<>0:
+         if shouhui!=0:
              shouhui=1
              chuhuifa=1
-         if chuhui<>0:
+         if chuhui!=0:
              chuhui=1
              shouhuifa=1
          yepiao=shou+chu+shoudai+chudai+shouhui+chuhui

@@ -173,7 +173,7 @@ def text_reply(msg):
                               'hanglei2':[hanglei2],
                               'hanglei3':[hanglei3],
                               'hanglei1':[hanglei1],
-                              'nickname':[name],
+                             # 'nickname':[name],
                               'shou':[shou],
                               'chu':[chu],
                               'shoudai':[shoudai],

@@ -41,7 +41,7 @@ cursor3 = collection3.find()
 piaofen_df = pd.DataFrame(list(cursor3))
 print (piaofen_df)
 
-
+content=[]
 
 
 
@@ -53,6 +53,7 @@ itchatmp.update_config(itchatmp.WechatConfig(
 
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
+     global content
      #return(msg['Content'])
      guang=[]
      count=0

@@ -56,7 +56,7 @@ def text_reply(msg):
      #return(msg['Content'])
      guang=[]
      count=0
-     friend=itchatmp.search_friends(userName=msg['FromUserName'])
+     #friend=itchatmp.search_friends(userName=msg['FromUserName'])
      shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
      shijian2=time.strftime('%H:%M',time.localtime(time.time()))
      hanglei2=0
@@ -95,8 +95,6 @@ def text_reply(msg):
      num=len(string)     #计量列表长度
      if num<=30:      #为防止数量太大占内存          
          for i in range(0,num): 
-             with open('piao.csv','rb') as csvfile:   #一、以下一段是查找银行类别
-                reader = csv.DictReader(csvfile)    #用dictreader根据行内容查找
                 c=piao_df.astype(str).loc[j,'ci'].strip()
                    # print(c)
                 zhaop= re.search(c,string[i])

@@ -90,11 +90,13 @@ def text_reply(msg):
      chucunfa=0
      shouhuifa=0
      chuhuifa=0
+  
      #以下一段是给中介画
      string=re.split(u'；|。|？|！|~~|，| |…',msg['Content'])   #将字符串分割，中午字符串分割需要用u
      num=len(string)     #计量列表长度
      if num<=30:      #为防止数量太大占内存          
          for i in range(0,num): 
+            for j range(1,162):
                 c=piao_df.astype(str).loc[j,'ci'].strip()
                    # print(c)
                 zhaop= re.search(c,string[i])

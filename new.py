@@ -12,8 +12,7 @@ from pandas import DataFrame
 #总共有单独回复、群聊分析、群发广告、csv群发四块功能。
 from pymongo import MongoClient
 #zhongjie=[u'浙江邮储杨炳']  #个人发送
-import pandas as pd
-import matplotlib.pyplot as plt
+
 client = MongoClient()
 client = MongoClient('139.196.79.93', 27017)
 
@@ -43,14 +42,6 @@ piaofen_df = pd.DataFrame(list(cursor3))
 print (piaofen_df)
 
 
-
-
-
-
-
-from matplotlib.font_manager import FontProperties  
-font_set = FontProperties(fname=r"c:\windows\fonts\simsun.ttc", size=15)  
-  #用于在散点图中输出中文
 
 
 

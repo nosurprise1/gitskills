@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import itchatmp
+import itchatmp,jason
 import os
 import re
 import time

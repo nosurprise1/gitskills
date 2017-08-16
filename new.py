@@ -6,7 +6,6 @@ import time
 import csv
 from itchatmp.content import *
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 from pandas import DataFrame
 # 在注册时增加isGroupChat=True将判定为群聊回复
@@ -238,8 +237,6 @@ def text_reply(msg):
      #else:
           #itchat.send(u'不能识别您的广告，或者您发送了多方向广告。发送业务广告精准对接，发送“s”了解收票情况，发送“m”了解卖票情况',msg['FromUserName'])
           #itchat.send('@img@%s' % 'guanggao.png',msg['FromUserName'])
-#银行客户的私人群功能
-
 
 
 

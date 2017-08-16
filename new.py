@@ -133,7 +133,7 @@ def text_reply(msg):
          if yepiao!=0:
            content.append(msg['Content'])             
            for j2 in range(1,326):
-                if bank_df.astype(str).loc[j2,'yinhang'].strip() in (msg['nickname']): 
+                if bank_df.astype(str).loc[j2,'yinhang'].strip() in (msg['NickName']): 
                        hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
                        hanglei2=bank_df.astype(str).loc[j2,'fenlei2'].strip()
                        hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()

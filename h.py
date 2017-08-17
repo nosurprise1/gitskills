@@ -6,5 +6,5 @@ import csv
 
 itchatmp.auto_login()
 friends= itchatmp.get_friends(update=True)
-print len(friends)
-print friends[0]
+print (len(friends))
+print (friends[0])

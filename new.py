@@ -47,8 +47,8 @@ content=[]
 
 itchatmp.update_config(itchatmp.WechatConfig(
     token='123456',
-    appId = 'wx7860b4c7296dcbdf',
-    appSecret = 'a8db85056d55d3e74d662667b9b015ea'))
+    appId = 'wxdca1daea0b4961c4',
+    appSecret = '4ff455b4b94a7f32e0f3eb04cd29c304'))
 
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
@@ -195,8 +195,8 @@ def text_reply(msg):
   
 
 
-     print（friend['NickName']）
-     
+     print（msg['nickname']）
+     print（msg['ActualNickName']）
      a=len(piaofen_df)
      print(a)
      if shoufa==1 and chufa==0 and shoudaifa==0 and chudaifa==0 and shoufufa==0 and chufufa==0 and shoulifa==0 and chulifa==0 and shoucunfa==0 and chucunfa==0:

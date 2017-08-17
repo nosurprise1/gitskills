@@ -40,7 +40,6 @@ collection3 = db3.piaofen   #·½·¨2
 cursor3 = collection3.find()
 piaofen_df = pd.DataFrame(list(cursor3))
 print (piaofen_df)
-
 content=[]
 
 
@@ -210,19 +209,22 @@ def text_reply(msg):
      elif shoufa==0 and chufa==1 and shoudaifa==0 and chudaifa==0 and shoufufa==0 and chufufa==0 and shoulifa==0 and chulifa==0 and shoucunfa==0 and chucunfa==0:
           for i in range(0,a-1):
               if data.ix[a-1-i,'chu']==1 and (data.ix[a-1-i,'hanglei2']==1 ) and (count<8) and (data.ix[a-1-i,'content'] not in guang)and(friend['NickName'] !=data.ix[a-1-i,'nickname'] ):
-                  itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
+                  return('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']))
+                  #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                   guang.append(data.ix[a-1-i,'content'])      
                   count+=1
      elif shoufa==0 and chufa==0 and shoudaifa==1 and chudaifa==0 and shoufufa==0 and chufufa==0 and shoulifa==0 and chulifa==0 and shoucunfa==0 and chucunfa==0:
           for i in range(0,a-1):
               if data.ix[a-1-i,'shoudai']==1 and (data.ix[a-1-i,'hanglei2']==1 ) and (count<8) and (data.ix[a-1-i,'content'] not in guang)and(friend['NickName'] !=data.ix[a-1-i,'nickname'] ):
-                  itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
+                  return('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']))
+                    #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                   guang.append(data.ix[a-1-i,'content'])      
                   count+=1
      elif shoufa==0 and chufa==0 and shoudaifa==0 and chudaifa==1 and shoufufa==0 and chufufa==0 and shoulifa==0 and chulifa==0 and shoucunfa==0 and chucunfa==0:
           for i in range(0,a-1):
               if data.ix[a-1-i,'chudai']==1 and (data.ix[a-1-i,'hanglei2']==1 ) and (count<8) and (data.ix[a-1-i,'content'] not in guang)and(friend['NickName'] !=data.ix[a-1-i,'nickname'] ):
-                  itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
+                  return('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']))
+                    #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                   guang.append(data.ix[a-1-i,'content'])      
                   count+=1
 

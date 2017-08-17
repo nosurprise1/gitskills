@@ -90,8 +90,8 @@ def text_reply(msg):
      chucunfa=0
      shouhuifa=0
      chuhuifa=0
-  
-     #以下一段是给中介画
+     huifu=[]
+     
      string=re.split(u'；|。|？|！|~~|，| |…',msg['Content'])   #将字符串分割，中午字符串分割需要用u
      num=len(string)     #计量列表长度
      if num<=30:      #为防止数量太大占内存          
@@ -108,7 +108,7 @@ def text_reply(msg):
                       chudai=int(piao_df.astype(str).loc[j,'chudai'].strip())+chudai
                       shouhui=int(piao_df.astype(str).loc[j,'shouhui'].strip())+shouhui
                       chuhui=int(piao_df.astype(str).loc[j,'chuhui'].strip())+chuhui                    
-                      print('11111')
+                      
                       break
          if shou!=0:
              shou=1
@@ -172,40 +172,45 @@ def text_reply(msg):
                               'hanglei2':[hanglei2],
                               'hanglei3':[hanglei3],
                               'hanglei1':[hanglei1],
-                             # 'nickname':[name],
+                              'nickname':[],
                               'shou':[shou],
                               'chu':[chu],
                               'shoudai':[shoudai],
                               'chudai':[chudai],
                               'shouhui':[shouhui],
                               'chuhui':[chuhui],
+                              'shoufu':[],
+                              'chufu':[],
+                              'shouli':[],
+                              'chuli':[],
+                              'shoucun':[],
+                              'chucun':[],
                               'content':[msg['Content']],
                               'leixing':['1']
                               })
-    #hanglei3,hanglei1,name,shou,chu,shoudai,chudai,shouhui,chuhui,shoufu,chufu,shouli,chuli,shoucun,chucun,msg['Content'],'2']
-           
-           #writer = csv.writer(csvfile)
-           #writer.writerow(data)
-           #csvfile.close()
            print(data)      
-           #print collection
            records = json.loads(data.T.to_json()).values()
            collection3.insert(records)
        
   
 
 
-     #print（msg['nickname']）
-     print（msg['ActualNickName']）
      a=len(piaofen_df)
      print(a)
      if shoufa==1 and chufa==0 and shoudaifa==0 and chudaifa==0 and shoufufa==0 and chufufa==0 and shoulifa==0 and chulifa==0 and shoucunfa==0 and chucunfa==0:
           for i in range(0,a-1):
-              if piaofen_df.ix[a-1-i,'shou']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (count<8) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
-                  return('%s,%s:%s'%(piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
+              if piaofen_df.ix[a-1-i,'shou']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
+                  huifu=huifu+'#######'+piaofen_df.ix[a-1-i,'time2']+piaofen_df.ix[a-1-i,'nickname']+piaofen_df.ix[a-1-i,'content']
                   #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                   guang.append(piaofen_df.ix[a-1-i,'content'])      
                   count+=1
+                  if count=8:
+                        return(huifu)
+                        break
+         
+                    
+                    
+                    
      elif shoufa==0 and chufa==1 and shoudaifa==0 and chudaifa==0 and shoufufa==0 and chufufa==0 and shoulifa==0 and chulifa==0 and shoucunfa==0 and chucunfa==0:
           for i in range(0,a-1):
               if piaofen_df.ix[a-1-i,'chu']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (count<8) and (piaofen_df.ix[a-1-i,'content'] not in guang):

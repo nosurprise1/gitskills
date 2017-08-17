@@ -208,27 +208,27 @@ def text_reply(msg):
                   count+=1
      elif shoufa==0 and chufa==1 and shoudaifa==0 and chudaifa==0 and shoufufa==0 and chufufa==0 and shoulifa==0 and chulifa==0 and shoucunfa==0 and chucunfa==0:
           for i in range(0,a-1):
-              if data.ix[a-1-i,'chu']==1 and (data.ix[a-1-i,'hanglei2']==1 ) and (count<8) and (data.ix[a-1-i,'content'] not in guang)and(friend['NickName'] !=data.ix[a-1-i,'nickname'] ):
+              if piaofen_df.ix[a-1-i,'chu']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (count<8) and (piaofen_df.ix[a-1-i,'content'] not in guang):
                   return('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']))
                   #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                   guang.append(data.ix[a-1-i,'content'])      
                   count+=1
      elif shoufa==0 and chufa==0 and shoudaifa==1 and chudaifa==0 and shoufufa==0 and chufufa==0 and shoulifa==0 and chulifa==0 and shoucunfa==0 and chucunfa==0:
           for i in range(0,a-1):
-              if data.ix[a-1-i,'shoudai']==1 and (data.ix[a-1-i,'hanglei2']==1 ) and (count<8) and (data.ix[a-1-i,'content'] not in guang)and(friend['NickName'] !=data.ix[a-1-i,'nickname'] ):
+              if piaofen_df.ix[a-1-i,'shoudai']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (count<8) and (piaofen_df.ix[a-1-i,'content'] not in guang):
                   return('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']))
                     #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                   guang.append(data.ix[a-1-i,'content'])      
                   count+=1
      elif shoufa==0 and chufa==0 and shoudaifa==0 and chudaifa==1 and shoufufa==0 and chufufa==0 and shoulifa==0 and chulifa==0 and shoucunfa==0 and chucunfa==0:
           for i in range(0,a-1):
-              if data.ix[a-1-i,'chudai']==1 and (data.ix[a-1-i,'hanglei2']==1 ) and (count<8) and (data.ix[a-1-i,'content'] not in guang)and(friend['NickName'] !=data.ix[a-1-i,'nickname'] ):
+              if piaofen_df.ix[a-1-i,'chudai']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (count<8) and (piaofen_df.ix[a-1-i,'content'] not in guang):
                   return('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']))
                     #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                   guang.append(data.ix[a-1-i,'content'])      
                   count+=1
 
-   
+  # and(friend['NickName'] !=data.ix[a-1-i,'nickname'] )
      #else:
           #itchat.send(u'不能识别您的广告，或者您发送了多方向广告。发送业务广告精准对接，发送“s”了解收票情况，发送“m”了解卖票情况',msg['FromUserName'])
           #itchat.send('@img@%s' % 'guanggao.png',msg['FromUserName'])

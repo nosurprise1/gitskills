@@ -195,7 +195,7 @@ def text_reply(msg):
   
 
 
-    
+     print（friend['NickName']）
      
      a=len(piaofen_df)
      print(a)

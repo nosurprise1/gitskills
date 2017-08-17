@@ -195,7 +195,7 @@ def text_reply(msg):
   
 
 
-     print（msg['nickname']）
+     #print（msg['nickname']）
      print（msg['ActualNickName']）
      a=len(piaofen_df)
      print(a)

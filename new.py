@@ -180,7 +180,7 @@ def text_reply(msg):
                               'shouhui':[shouhui],
                               'chuhui':[chuhui],
                               'content':[msg['Content']],
-                              'leixing':['2']
+                              'leixing':['1']
                               })
     #hanglei3,hanglei1,name,shou,chu,shoudai,chudai,shouhui,chuhui,shoufu,chufu,shouli,chuli,shoucun,chucun,msg['Content'],'2']
            
@@ -201,7 +201,7 @@ def text_reply(msg):
      print(a)
      if shoufa==1 and chufa==0 and shoudaifa==0 and chudaifa==0 and shoufufa==0 and chufufa==0 and shoulifa==0 and chulifa==0 and shoucunfa==0 and chucunfa==0:
           for i in range(0,a-1):
-              if data.ix[a-1-i,'shou']==1 and (data.ix[a-1-i,'hanglei2']==1 ) and (count<8) and (data.ix[a-1-i,'content'] not in guang):                  
+              if piaofen_df.ix[a-1-i,'shou']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (count<8) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                   return('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']))
                   #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                   guang.append(data.ix[a-1-i,'content'])      

@@ -1,13 +1,10 @@
-# -*- coding: utf-8 -*-
-# filename: main.py
-import web
-from handle import Handle
+import os
+import posixpath
+import urllib
+import itchatmp, time, requests
+import csv
 
-urls = (
-    '/wx', 'Handle',
-)
-
-if __name__ == '__main__':
-    app = web.application(urls, globals())
-    app.run()
- 
+itchatmp.auto_login()
+friends= itchatmp.get_friends(update=True)
+print len(friends)
+print friends[0]

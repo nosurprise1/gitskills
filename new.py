@@ -47,8 +47,8 @@ content=[]
 
 itchatmp.update_config(itchatmp.WechatConfig(
     token='123456',
-    appId = 'wxdca1daea0b4961c4',
-    appSecret = '4ff455b4b94a7f32e0f3eb04cd29c304'))
+    appId = 'wx7860b4c7296dcbdf',
+    appSecret = 'a8db85056d55d3e74d662667b9b015ea'))
 
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
@@ -200,9 +200,9 @@ def text_reply(msg):
      if shoufa==1 and chufa==0 and shoudaifa==0 and chudaifa==0 and shoufufa==0 and chufufa==0 and shoulifa==0 and chulifa==0 and shoucunfa==0 and chucunfa==0:
           for i in range(0,a-1):
               if piaofen_df.ix[a-1-i,'shou']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
-                  huifu=('%s,%s:%s'%(piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
+                  huifu0=('%s,%s:%s'%(piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                     
-                  huifu=huifu.append(huifu)
+                  huifu=('%s/n%s')%(huifu,huifu0)
                   #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                   guang.append(piaofen_df.ix[a-1-i,'content'])      
                   count+=1

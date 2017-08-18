@@ -63,7 +63,7 @@ db3 = client.piaofen
 collection3 = db3.piaofen   
 cursor3 = collection3.find()
 piaofen_df = pd.DataFrame(list(cursor3))
-print (piaofen_df)
+#print (piaofen_df)
 content=[]
 
 
@@ -177,8 +177,8 @@ def text_reply(msg):
                    # print(c)
                 zhao= re.search(c,string[i])
                 if zhao:                 
-                      shoucun=int(cun_df.astype(str).loc[j,'shoufu'].strip())+shou
-                      chucun=int(cun_df.astype(str).loc[j,'chufu'].strip())+chu           
+                      shoucun=int(cun_df.astype(str).loc[j,'shoucun'].strip())+shou
+                      chucun=int(cun_df.astype(str).loc[j,'chucun'].strip())+chu           
                       break
          if shoucun!=0:
                  shoucun=1
@@ -195,8 +195,8 @@ def text_reply(msg):
                    # print(c)
                 zhao= re.search(c,string[i])
                 if zhao:                 
-                      shouli=int(li_df.astype(str).loc[j,'shoufu'].strip())+shou
-                      chuli=int(li_df.astype(str).loc[j,'chufu'].strip())+chu           
+                      shouli=int(li_df.astype(str).loc[j,'shouli'].strip())+shou
+                      chuli=int(li_df.astype(str).loc[j,'chuli'].strip())+chu           
                       break
          if shouli!=0:
                  shouli=1

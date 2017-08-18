@@ -159,8 +159,8 @@ def text_reply(msg):
                    # print(c)
                 zhao= re.search(c,string[i])
                 if zhao:                 
-                      shoucun=int(cun_df.astype(str).loc[j,'shoufu'].strip())+shou
-                      chucun=int(cun_df.astype(str).loc[j,'chufu'].strip())+chu           
+                      shoufu=int(fu_df.astype(str).loc[j,'shoufu'].strip())+shoufu
+                      chufu=int(fu_df.astype(str).loc[j,'chufu'].strip())+chufu           
                       break
          if shoufu!=0:
              shoufu=1
@@ -177,8 +177,8 @@ def text_reply(msg):
                    # print(c)
                 zhao= re.search(c,string[i])
                 if zhao:                 
-                      shoucun=int(cun_df.astype(str).loc[j,'shoucun'].strip())+shou
-                      chucun=int(cun_df.astype(str).loc[j,'chucun'].strip())+chu           
+                      shoucun=int(cun_df.astype(str).loc[j,'shoucun'].strip())+shoucun
+                      chucun=int(cun_df.astype(str).loc[j,'chucun'].strip())+chucun           
                       break
          if shoucun!=0:
                  shoucun=1
@@ -195,8 +195,8 @@ def text_reply(msg):
                    # print(c)
                 zhao= re.search(c,string[i])
                 if zhao:                 
-                      shouli=int(li_df.astype(str).loc[j,'shouli'].strip())+shou
-                      chuli=int(li_df.astype(str).loc[j,'chuli'].strip())+chu           
+                      shouli=int(li_df.astype(str).loc[j,'shouli'].strip())+shouli
+                      chuli=int(li_df.astype(str).loc[j,'chuli'].strip())+chuli           
                       break
          if shouli!=0:
                  shouli=1

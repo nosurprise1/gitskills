@@ -34,7 +34,7 @@ db = client.fu
 collection = db.fu  #http://www.jb51.net/article/77537.htm
 cursor = collection.find()
 fu_df= pd.DataFrame(list(cursor))
-fu_df=fu_df[['xuhao','ci','shoucun','chucun']]
+fu_df=fu_df[['xuhao','ci','shoufu','chufu']]
 fu_df=fu_df.set_index('xuhao')
 fu_df=fu_df.sort_index(ascending=True)
 
@@ -43,7 +43,7 @@ db = client.li
 collection = db.li  #http://www.jb51.net/article/77537.htm
 cursor = collection.find()
 li_df= pd.DataFrame(list(cursor))
-li_df=li_df[['xuhao','ci','shoucun','chucun']]
+li_df=li_df[['xuhao','ci','shouli','chuli']]
 li_df=li_df.set_index('xuhao')
 li_df=li_df.sort_index(ascending=True)
 

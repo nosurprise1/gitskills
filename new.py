@@ -285,6 +285,8 @@ def text_reply(msg):
                     for i in range(0,a-1):
                        print(piaofen_df.ix[a-1-i,'content'])
                        print(piaofen_df.ix[a-1-i,'hanglei2'])
+                       print(piaofen_df.ix[a-1-i,'shou'])
+                       print(guang)
                        if piaofen_df.ix[a-1-i,'shou']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s:%s'%(piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)

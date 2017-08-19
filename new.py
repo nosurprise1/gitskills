@@ -58,12 +58,7 @@ bank_df=bank_df.set_index('xuhao')
 bank_df=bank_df.sort_index(ascending=True)
 
 
-#从数据导入piaofen
-db3 = client.piaofen
-collection3 = db3.piaofen   
-cursor3 = collection3.find()
-piaofen_df = pd.DataFrame(list(cursor3))
-#print (piaofen_df)
+
 content=[]
 
 
@@ -77,6 +72,15 @@ itchatmp.update_config(itchatmp.WechatConfig(
 #分析订阅号文本信息
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
+    #从数据导入piaofen
+     db3 = client.piaofen
+     collection3 = db3.piaofen   
+     cursor3 = collection3.find()
+     piaofen_df = pd.DataFrame(list(cursor3))
+    #print (piaofen_df)
+    
+    
+    
      global content
      guang=[]
      count=0
@@ -284,7 +288,7 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1     
-                           if (count==8) or(i==100):
+                           if (count==8) or(i>=100):
                                print(i)
                                return(huifu)
                                break
@@ -297,7 +301,7 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i==100):
+                           if (count==8) or(i>=100):
                                print(i)
                                return(huifu)
                                break
@@ -309,7 +313,7 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>100):
+                           if (count==8) or(i>=100):
                                print(i)
                                return(huifu)
                                break
@@ -321,7 +325,7 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i==100):
+                           if (count==8) or(i>=100):
                                print(i)
                                return(huifu)
                                break
@@ -335,7 +339,7 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i==100):
+                           if (count==8) or(i>=100):
                                print(i)
                                return(huifu)
                                break
@@ -347,7 +351,7 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i==100):
+                           if (count==8) or(i>=100):
                                print(i)
                                return(huifu)
                                break
@@ -362,7 +366,7 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i==100):
+                           if (count==8) or(i>=100):
                                print(i)
                                return(huifu)
                                break
@@ -374,7 +378,7 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i==100):
+                           if (count==8) or(i>=100):
                                print(i)
                                return(huifu)
                                break
@@ -389,7 +393,7 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i==100):
+                           if (count==8) or(i>=100):
                                print(i)
                                return(huifu)
                                break
@@ -401,7 +405,7 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i==100):
+                           if (count==8) or(i>=100):
                                print(i)
                                return(huifu)
                                break

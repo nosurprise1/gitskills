@@ -251,7 +251,7 @@ def text_reply(msg):
                               'hanglei2':[hanglei2],
                               'hanglei3':[hanglei3],
                               'hanglei1':[hanglei1],
-                              'nickname':[''],
+                              'nickname':['none'],
                               'shou':[shou],
                               'chu':[chu],
                               'shoudai':[shoudai],
@@ -280,7 +280,7 @@ def text_reply(msg):
                     for i in range(0,a-1):
                        if piaofen_df.ix[a-1-i,'shou']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s:%s'%(piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
-                           huifu=('%s\r\n*******\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1     
@@ -293,11 +293,11 @@ def text_reply(msg):
                    for i in range(0,a-1):
                        if piaofen_df.ix[a-1-i,'chu']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s:%s'%(piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
-                           huifu=('%s\r\n*******%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>100):
+                           if (count==8) or(i==100):
                                print(i)
                                return(huifu)
                                break
@@ -305,7 +305,7 @@ def text_reply(msg):
                    for i in range(0,a-1):
                        if piaofen_df.ix[a-1-i,'chudai']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s:%s'%(piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
-                           huifu=('%s\r\n*******%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
@@ -317,11 +317,11 @@ def text_reply(msg):
                    for i in range(0,a-1):
                        if piaofen_df.ix[a-1-i,'shoudai']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s:%s'%(piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
-                           huifu=('%s\r\n*******%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>100):
+                           if (count==8) or(i==100):
                                print(i)
                                return(huifu)
                                break
@@ -331,11 +331,11 @@ def text_reply(msg):
                    for i in range(0,a-1):
                        if piaofen_df.ix[a-1-i,'shoufu']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s:%s'%(piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
-                           huifu=('%s*******\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>100):
+                           if (count==8) or(i==100):
                                print(i)
                                return(huifu)
                                break
@@ -343,11 +343,11 @@ def text_reply(msg):
                    for i in range(0,a-1):
                        if piaofen_df.ix[a-1-i,'chufu']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s:%s'%(piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
-                           huifu=('%s*******\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>100):
+                           if (count==8) or(i==100):
                                print(i)
                                return(huifu)
                                break
@@ -358,7 +358,7 @@ def text_reply(msg):
                    for i in range(0,a-1):
                        if piaofen_df.ix[a-1-i,'chuli']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s:%s'%(piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
-                           huifu=('%s*******\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
@@ -370,11 +370,11 @@ def text_reply(msg):
                    for i in range(0,a-1):
                        if piaofen_df.ix[a-1-i,'shouli']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s:%s'%(piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
-                           huifu=('%s*******\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>100):
+                           if (count==8) or(i==100):
                                print(i)
                                return(huifu)
                                break
@@ -385,11 +385,11 @@ def text_reply(msg):
                    for i in range(0,a-1):         
                        if piaofen_df.ix[a-1-i,'chucun']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s:%s'%(piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
-                           huifu=('%s*******\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>100):
+                           if (count==8) or(i==100):
                                print(i)
                                return(huifu)
                                break
@@ -397,11 +397,11 @@ def text_reply(msg):
                    for i in range(0,a-1):
                        if piaofen_df.ix[a-1-i,'shoucun']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s:%s'%(piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
-                           huifu=('%s*******\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>100):
+                           if (count==8) or(i==100):
                                print(i)
                                return(huifu)
                                break

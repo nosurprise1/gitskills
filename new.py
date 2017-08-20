@@ -79,7 +79,12 @@ itchatmp.update_config(itchatmp.WechatConfig(
 #分析订阅号文本信息
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
-
+    #从数据导入piaofen
+     db3 = client.piaofen
+     collection3 = db3.piaofen   
+     cursor3 = collection3.find()
+     piaofen_df = pd.DataFrame(list(cursor3))
+     print (piaofen_df)
     
      global content
      guang=[]
@@ -283,16 +288,14 @@ def text_reply(msg):
                
                if shou==0 and chu==1 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0:
                     for i in range(0,a-1):
-                       print(piaofen_df.ix[a-1-i,'content'])
-                       print(piaofen_df.ix[a-1-i,'hanglei2'])
-                       print(piaofen_df.ix[a-1-i,'shou'])
-                       print(guang)
+                       
                        if piaofen_df.ix[a-1-i,'shou']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
-                           count+=1     
+                           count+=1 
+                           print(piaofen_df.ix[a-1-i,'content'])
                            if (count==8) or(i>=100):
                                print(i)
                                return(huifu)

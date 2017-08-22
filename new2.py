@@ -313,10 +313,10 @@ def text_reply(msg):
                            
                            if (count==8) or(i>=100):
                                print(i)
-                               return(huifu)
+                               #return(huifu)
                                break
                         
-                       #print(huifu)     
+                       print(huifu)     
              
 
 

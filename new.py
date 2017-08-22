@@ -10,7 +10,7 @@ import numpy as np
 from pandas import DataFrame
 from pymongo import MongoClient
 #client = MongoClient()
-client = MongoClient('139.196.79.93', 27017)
+client=MongoClient('mongodb://root:' + '5768116' + '@139.196.79.93')
 #从数据导入piao
 db = client.piao
 collection = db.piao  #http://www.jb51.net/article/77537.htm

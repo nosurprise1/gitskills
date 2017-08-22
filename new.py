@@ -315,6 +315,7 @@ def text_reply(msg):
                                print(i)
                                return(huifu)
                                break
+                   print(huifu)
                elif shou==0 and chu==0 and shoudai==1 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0:
                    for i in range(0,a-1):
                        if piaofen_df.ix[a-1-i,'chudai']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  

@@ -228,27 +228,27 @@ def text_reply(msg):
                # else:
                       if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-1]:
                            hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
-                           hanglei2=bank_df.astype(str).loc[j2,'fenlei2'].strip()
+                           hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
                            hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                            break
                       else:
                             if num-2>=0:
                                 if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-2]:
                                      hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
-                                     hanglei2=bank_df.astype(str).loc[j2,'fenlei2'].strip()
+                                     hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break
                                 else:
                                      if num-3>=0:
                                           if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-3]:
                                                hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
-                                               hanglei2=bank_df.astype(str).loc[j2,'fenlei2'].strip()
+                                               hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
                                                hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                                break
                                           else:
                                                  if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[0]:
                                                          hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
-                                                         hanglei2=bank_df.astype(str).loc[j2,'fenlei2'].strip()
+                                                         hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
                                                          hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                                          break
            #name=msg['nickname']    #ActualNickName换成nickname
@@ -302,7 +302,7 @@ def text_reply(msg):
                 
                if shou==0 and chu==1 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0:
                     for i in range(0,a-1):
-                       if (int(piaofen_df.ix[a-1-i,'shou'])==1) and int((piaofen_df.ix[a-1-i,'hanglei2'])==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
+                       if (int(piaofen_df.ix[a-1-i,'shou'])==1) and (int(piaofen_df.ix[a-1-i,'hanglei2'])==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            print(i)
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            print(huifu0)

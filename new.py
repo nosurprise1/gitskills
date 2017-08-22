@@ -227,29 +227,29 @@ def text_reply(msg):
                     #   break
                # else:
                       if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-1]:
-                           hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
-                           hanglei2=bank_df.astype(str).loc[j2,'fenlei2'].strip()
-                           hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
+                           hanglei1=int(bank_df.astype(str).loc[j2,'fenlei1'].strip())
+                           hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
+                           hanglei3=int(bank_df.astype(str).loc[j2,'fenlei3'].strip())
                            break
                       else:
                             if num-2>=0:
                                 if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-2]:
-                                     hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
-                                     hanglei2=bank_df.astype(str).loc[j2,'fenlei2'].strip()
-                                     hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
+                                     hanglei1=int(bank_df.astype(str).loc[j2,'fenlei1'].strip())
+                                     hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
+                                     hanglei3=int(bank_df.astype(str).loc[j2,'fenlei3'].strip())
                                      break
                                 else:
                                      if num-3>=0:
                                           if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-3]:
-                                               hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
-                                               hanglei2=bank_df.astype(str).loc[j2,'fenlei2'].strip()
-                                               hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
+                                               hanglei1=int(bank_df.astype(str).loc[j2,'fenlei1'].strip())
+                                               hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
+                                               hanglei3=int(bank_df.astype(str).loc[j2,'fenlei3'].strip())
                                                break
                                           else:
                                                  if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[0]:
-                                                         hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
-                                                         hanglei2=bank_df.astype(str).loc[j2,'fenlei2'].strip()
-                                                         hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
+                                                         hanglei1=int(bank_df.astype(str).loc[j2,'fenlei1'].strip())
+                                                         hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
+                                                         hanglei3=int(bank_df.astype(str).loc[j2,'fenlei3'].strip())
                                                          break
            #name=msg['nickname']    #ActualNickName换成nickname
            shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))

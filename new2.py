@@ -285,6 +285,11 @@ def text_reply(msg):
          
                a=len(piaofen_df)
                print(a)
+               print(piaofen_df.ix[a-1,'shou']),
+               print(piaofen_df.ix[a-1,'hanglei2']),
+               print(piaofen_df.ix[a-1,'content'])
+               print('----------------------')
+            
                print(piaofen_df.ix[a-1-1,'shou']),
                print(piaofen_df.ix[a-1-1,'hanglei2']),
                print(piaofen_df.ix[a-1-1,'content'])

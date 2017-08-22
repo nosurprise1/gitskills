@@ -287,6 +287,8 @@ def text_reply(msg):
                print(a)
                print(type(piaofen_df.ix[a-1-1,'shou']))
                print(type(piaofen_df.ix[a-50,'shou']))
+               print(type(piaofen_df.ix[a-1-1,'hanglei2']))
+               print(type(piaofen_df.ix[a-50,'hanglei2']))
                print(piaofen_df.ix[a-1,'shou']),
                print(piaofen_df.ix[a-1,'hanglei2']),
                print(piaofen_df.ix[a-1,'content'])

@@ -123,7 +123,7 @@ def text_reply(msg):
      #chucunfa=0
      #shouhuifa=0
      #chuhuifa=0
-     huifu=''
+     huifu='对应广告：'
      string=re.split(u'；|。|？|！|~~|，| |…',msg['Content'])   #将字符串分割，中午字符串分割需要用u
      num=len(string)     #计量列表长度
      if num<=30:      #为防止数量太大占内存          
@@ -314,7 +314,7 @@ def text_reply(msg):
                            if (count==8) or(i>=100):
                                print(i)
                                print(huifu)
-                                #return(huifu)
+                               return(str(huifu))
                                break
                                
                             

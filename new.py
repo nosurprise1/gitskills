@@ -66,7 +66,8 @@ db3 = client.piaofen
 collection3 = db3.piaofen   
 cursor3 = collection3.find()
 piaofen_df = pd.DataFrame(list(cursor3))
-
+piaofen_df=piaofen_df.set_index('xuhao')
+piaofen_df=piaofen_df.sort_index(ascending=True)
 
 #连接订阅号
 itchatmp.update_config(itchatmp.WechatConfig(

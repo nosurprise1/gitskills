@@ -57,21 +57,8 @@ bank_df=bank_df[['xuhao','yinhang','fenlei1','fenlei2','fenlei3']]
 bank_df=bank_df.set_index('xuhao')
 bank_df=bank_df.sort_index(ascending=True)
 
-    #从数据导入piaofen
-db3 = client.piaofen
-collection3 = db3.piaofen   
-cursor3 = collection3.find()
-piaofen_df = pd.DataFrame(list(cursor3))
-print (piaofen_df)
-    
-    
 
-content=[]
-db3 = client.piaofen
-collection3 = db3.piaofen   
-cursor3 = collection3.find()
-piaofen_df = pd.DataFrame(list(cursor3))
-     #print (piaofen_df)
+
     
 
 #连接订阅号
@@ -84,7 +71,14 @@ itchatmp.update_config(itchatmp.WechatConfig(
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
     #从数据导入piaofen
-     
+         #从数据导入piaofen
+     db3 = client.piaofen
+     collection3 = db3.piaofen   
+     cursor3 = collection3.find()
+     piaofen_df = pd.DataFrame(list(cursor3))
+     print (piaofen_df)
+    
+    
      global content
      guang=[]
      count=0

@@ -388,9 +388,9 @@ def text_reply(msg):
                                print(i)
                                return(huifu)
                                break             
-              print( content)
-              if  msg['Content'] not in content:
-              data=pd.DataFrame({'time':[shijian1],
+           print( content)
+           if hanglei2!=0 and (msg['Content'] not in content):
+                  data=pd.DataFrame({'time':[shijian1],
                               'time2':[shijian2],
                               'hanglei2':[hanglei2],
                               'hanglei3':[hanglei3],

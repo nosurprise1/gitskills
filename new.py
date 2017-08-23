@@ -255,6 +255,34 @@ def text_reply(msg):
             
             
            if (hanglei2!=0) :
+               data=pd.DataFrame({'time':[shijian1],
+                              'time2':[shijian2],
+                              'hanglei2':[hanglei2],
+                              'hanglei3':[hanglei3],
+                              'hanglei1':[hanglei1],
+                              'nickname':['none'],
+                              'shou':[shou],
+                              'chu':[chu],
+                              'shoudai':[shoudai],
+                              'chudai':[chudai],
+                              'shouhui':[shouhui],
+                              'chuhui':[chuhui],
+                              'shoufu':[shoufu],
+                              'chufu':[chufu],
+                              'shouli':[shouli],
+                              'chuli':[chuli],
+                              'shoucun':[shoucun],
+                              'chucun':[chucun],
+                              'content':[msg['Content']],
+                              'leixing':['1']
+                              })
+                     print(data)      
+                     records = json.loads(data.T.to_json()).values()
+                     collection3.insert(records)
+            
+            
+            
+            
                
                a=len(piaofen_df)               
                if shou==0 and chu==1 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0:
@@ -391,32 +419,9 @@ def text_reply(msg):
                                print(i)
                                return(huifu)
                                break
-           if msg['Content'] not in content:
+           #if msg['Content'] not in content:
                 
-                     data=pd.DataFrame({'time':[shijian1],
-                              'time2':[shijian2],
-                              'hanglei2':[hanglei2],
-                              'hanglei3':[hanglei3],
-                              'hanglei1':[hanglei1],
-                              'nickname':['none'],
-                              'shou':[shou],
-                              'chu':[chu],
-                              'shoudai':[shoudai],
-                              'chudai':[chudai],
-                              'shouhui':[shouhui],
-                              'chuhui':[chuhui],
-                              'shoufu':[shoufu],
-                              'chufu':[chufu],
-                              'shouli':[shouli],
-                              'chuli':[chuli],
-                              'shoucun':[shoucun],
-                              'chucun':[chucun],
-                              'content':[msg['Content']],
-                              'leixing':['1']
-                              })
-                     print(data)      
-                     records = json.loads(data.T.to_json()).values()
-                     collection3.insert(records)
+                     
 
 
 itchatmp.run()

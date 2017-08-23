@@ -264,7 +264,7 @@ def text_reply(msg):
                               'leixing':['1']
                               })
                print(data)      
-               
+               a=len(piaofen_df)
                records = json.loads(data.T.to_json()).values()
                collection3.insert(records)
    

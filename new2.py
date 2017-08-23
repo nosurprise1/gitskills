@@ -209,13 +209,15 @@ def text_reply(msg):
          ####   
          if (yepiao+yefu+yeli+yecun)!=0:
            content.append(msg['Content'])  
-           return msg['Content'] 
+           print(num)
            for j2 in range(1,326):
                       if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-1]:
                            hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
                            hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
                            hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
+                           return msg['Content'] 
                            break
+                            
                       else:
                             if num-2>=0:
                                 if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-2]:

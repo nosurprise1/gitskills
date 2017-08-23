@@ -314,7 +314,7 @@ def text_reply(msg):
                            if (count==8) or(i>=100):
                                print(i)
                                print(huifu)
-                               return msg['content']
+                               return msg['Content']
                                break
                                
                             

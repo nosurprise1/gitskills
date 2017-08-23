@@ -66,14 +66,13 @@ db3 = client.piaofen
 collection3 = db3.piaofen   
 cursor3 = collection3.find()
 piaofen_df = pd.DataFrame(list(cursor3))
-print (piaofen_df)
 
 
 #连接订阅号
 itchatmp.update_config(itchatmp.WechatConfig(
     token='123456',
-    appId = 'wx7860b4c7296dcbdf',
-    appSecret = 'a8db85056d55d3e74d662667b9b015ea'))
+    appId = 'wxdca1daea0b4961c4',
+    appSecret = '4ff455b4b94a7f32e0f3eb04cd29c304'))
 
 
 
@@ -163,7 +162,6 @@ def text_reply(msg):
          for i in range(0,num): 
             for j in range(1,74):
                 c=fu_df.astype(str).loc[j,'ci'].strip()
-                   # print(c)
                 zhao= re.search(c,string[i])
                 if zhao:                 
                       shoufu=int(fu_df.astype(str).loc[j,'shoufu'].strip())+shoufu
@@ -282,7 +280,6 @@ def text_reply(msg):
 
 
                a=len(piaofen_df)
-               print(a)
                
                if shou==0 and chu==1 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0:
                     for i in range(0,a-1):

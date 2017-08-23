@@ -404,10 +404,10 @@ def text_reply(msg):
                               'content':[msg['Content']],
                               'leixing':['1']
                               })
-               print(data)      
-               a=len(piaofen_df)
-               records = json.loads(data.T.to_json()).values()
-               collection3.insert(records)
+                print(data)      
+                a=len(piaofen_df)
+                records = json.loads(data.T.to_json()).values()
+                collection3.insert(records)
 
 itchatmp.run()
 

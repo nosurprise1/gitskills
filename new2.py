@@ -150,7 +150,7 @@ def text_reply(msg):
              chuhui=1
             # shouhuifa=1
          yepiao=shou+chu+shoudai+chudai+shouhui+chuhui
-         return msg['Content']    
+           
         #分析福费廷
          for i in range(0,num): 
             for j in range(1,74):
@@ -206,7 +206,7 @@ def text_reply(msg):
          yeli=shouli+chuli                               
                
             
-            
+         return msg['Content']     
          if (yepiao+yefu+yeli+yecun)!=0:
            content.append(msg['Content'])             
            for j2 in range(1,326):

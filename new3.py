@@ -245,6 +245,10 @@ def text_reply(msg):
            shijian2=time.strftime('%H:%M',time.localtime(time.time()))
            if hanglei2!=0:
                
+                
+                
+                
+                
                a=len(piaofen_df)
                
                if shou==0 and chu==1 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0:
@@ -384,9 +388,9 @@ def text_reply(msg):
                                print(i)
                                return(huifu)
                                break             
-               print( content)
-               if  msg['Content'] not in content:
-                  data=pd.DataFrame({'time':[shijian1],
+              print( content)
+              if  msg['Content'] not in content:
+              data=pd.DataFrame({'time':[shijian1],
                               'time2':[shijian2],
                               'hanglei2':[hanglei2],
                               'hanglei3':[hanglei3],

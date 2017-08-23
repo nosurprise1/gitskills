@@ -57,7 +57,7 @@ bank_df=bank_df[['xuhao','yinhang','fenlei1','fenlei2','fenlei3']]
 bank_df=bank_df.set_index('xuhao')
 bank_df=bank_df.sort_index(ascending=True)
 
-
+content=[]
 
     
 

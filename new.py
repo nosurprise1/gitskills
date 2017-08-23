@@ -251,7 +251,7 @@ def text_reply(msg):
            #name=msg['nickname']    #ActualNickName换成nickname
            shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
            shijian2=time.strftime('%H:%M',time.localtime(time.time()))
-           if hanglei2!=0:
+           if (hanglei2!=0) and ((msg['Content']) not in content):
                data=pd.DataFrame({'time':[shijian1],
                               'time2':[shijian2],
                               'hanglei2':[hanglei2],

@@ -60,13 +60,13 @@ bank_df=bank_df.sort_index(ascending=True)
 content=[]
 
 
-def reflash():
+
 #从数据导入piaofen
-    db3 = client.piaofen
-    collection3 = db3.piaofen   
-    cursor3 = collection3.find()
-    piaofen_df = pd.DataFrame(list(cursor3))
-    print (piaofen_df)
+db3 = client.piaofen
+collection3 = db3.piaofen   
+cursor3 = collection3.find()
+piaofen_df = pd.DataFrame(list(cursor3))
+print (piaofen_df)
 
 
 #连接订阅号
@@ -82,7 +82,7 @@ itchatmp.update_config(itchatmp.WechatConfig(
 #分析订阅号文本信息
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
-     reflash()
+
      
      global content
      guang=[]

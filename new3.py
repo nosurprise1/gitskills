@@ -78,8 +78,9 @@ piaofen_df = pd.DataFrame(list(cursor3))
 #连接订阅号
 itchatmp.update_config(itchatmp.WechatConfig(
     token='123456',
-    appId = 'wx7860b4c7296dcbdf',
-    appSecret = 'a8db85056d55d3e74d662667b9b015ea'))
+    appId = 'wxdca1daea0b4961c4',
+    appSecret = '4ff455b4b94a7f32e0f3eb04cd29c304'))
+
 
 #分析订阅号文本信息
 @itchatmp.msg_register(itchatmp.content.TEXT)

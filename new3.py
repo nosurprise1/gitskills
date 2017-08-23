@@ -209,7 +209,7 @@ def text_reply(msg):
             
          ####   
          if (yepiao+yefu+yeli+yecun)!=0:
-           content.append(msg['Content'])  
+            
            print(num)
            for j2 in range(1,326):
                       if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-1]:
@@ -408,6 +408,6 @@ def text_reply(msg):
                 print(data)      
                 records = json.loads(data.T.to_json()).values()
                 collection3.insert(records)
-
+                content.append(msg['Content']) 
 itchatmp.run()
 

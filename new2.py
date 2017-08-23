@@ -208,14 +208,9 @@ def text_reply(msg):
             
          ####   
          if (yepiao+yefu+yeli+yecun)!=0:
-           content.append(msg['Content'])             
+           content.append(msg['Content'])  
+           return msg['Content'] 
            for j2 in range(1,326):
-                #if bank_df.astype(str).loc[j2,'yinhang'].strip() in (msg['NickName']): 
-                 #      hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
-                  #     hanglei2=bank_df.astype(str).loc[j2,'fenlei2'].strip()
-                   #    hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
-                    #   break
-               # else:
                       if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-1]:
                            hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
                            hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
@@ -241,7 +236,7 @@ def text_reply(msg):
                                                          hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
                                                          hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                                          break
-           return msg['Content']  #name=msg['nickname']    #ActualNickName换成nickname
+            #name=msg['nickname']    #ActualNickName换成nickname
            shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
            shijian2=time.strftime('%H:%M',time.localtime(time.time()))
            if hanglei2!=0:

@@ -112,16 +112,7 @@ def text_reply(msg):
      yecun=0
      shoufa=0
      chufa=0
-     #shoudaifa=0
-     #chudaifa=0
-     #shoufufa=0
-     #chufufa=0
-     #shoulifa=0
-     #chulifa=0
-     #shoucunfa=0
-     #chucunfa=0
-     #shouhuifa=0
-     #chuhuifa=0
+    
      huifu='对应广告：'
      string=re.split(u'；|。|？|！|~~|，| |…',msg['Content'])   #将字符串分割，中午字符串分割需要用u
      num=len(string)     #计量列表长度
@@ -276,29 +267,10 @@ def text_reply(msg):
                               'leixing':['1']
                               })
                print(data)      
+               return msg['Content']   
                records = json.loads(data.T.to_json()).values()
                collection3.insert(records)
-       
-  
-
-         
-               a=len(piaofen_df)
-               print(a)
-               print(type(piaofen_df.ix[a-1-1,'shou']))
-               print(type(piaofen_df.ix[a-50,'shou']))
-               print(type(piaofen_df.ix[a-1-1,'hanglei2']))
-               print(type(piaofen_df.ix[a-50,'hanglei2']))
-               print(piaofen_df.ix[a-1,'shou']),
-               print(piaofen_df.ix[a-1,'hanglei2']),
-               print(piaofen_df.ix[a-1,'content'])
-               print(piaofen_df.ix[a-1,'time2'])
-               print('----------------------')
-            
-               print(piaofen_df.ix[a-1-1,'shou']),
-               print(piaofen_df.ix[a-1-1,'hanglei2']),
-               print(piaofen_df.ix[a-1-1,'content'])
-               print(piaofen_df.ix[a-2,'time2'])
-                
+   
                if shou==0 and chu==1 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0:
                     for i in range(0,a-1):
                        if (int(piaofen_df.ix[a-1-i,'shou'])==1) and (int(piaofen_df.ix[a-1-i,'hanglei2'])==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
@@ -313,7 +285,7 @@ def text_reply(msg):
                            if (count==8) or(i>=100):
                                print(i)
                                print(huifu)
-                               return msg['Content']
+                               
                                break
                                
                             

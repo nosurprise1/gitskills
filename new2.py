@@ -84,7 +84,7 @@ itchatmp.update_config(itchatmp.WechatConfig(
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
     #从数据导入piaofen
-     return msg['Content']  
+     
      global content
      guang=[]
      count=0
@@ -267,7 +267,7 @@ def text_reply(msg):
                               'leixing':['1']
                               })
                print(data)      
-                
+               return msg['Content']    
                records = json.loads(data.T.to_json()).values()
                collection3.insert(records)
    

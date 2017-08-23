@@ -276,9 +276,9 @@ def text_reply(msg):
                               'content':[msg['Content']],
                               'leixing':['1']
                               })
-                     print(data)      
-                     records = json.loads(data.T.to_json()).values()
-                     collection3.insert(records)
+               print(data)      
+               records = json.loads(data.T.to_json()).values()
+               collection3.insert(records)
             
             
             

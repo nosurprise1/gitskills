@@ -60,6 +60,7 @@ bank_df=bank_df.sort_index(ascending=True)
 content=[]
     #从数据导入piaofen
 def genxing():
+    global piaofen_df
     db3 = client.piaofen
     collection3 = db3.piaofen   
     cursor3 = collection3.find()
@@ -89,9 +90,11 @@ def timer1():
         #sched模块不是循环的，一次调度被执行后就Over了，如果想再执行，可以使用while循环的方式不停的调用该方法  
         time.sleep(60)  
         run_function()  
-        text_reply(msg)
+       
 
-
+itchatmp.run()
+if __name__ == "__main__":  
+    timer1()  
 
 
 
@@ -453,7 +456,5 @@ def text_reply(msg):
                                return(huifu)
                                break             
 
-itchatmp.run()
-if __name__ == "__main__":  
-    timer1()  
+
 

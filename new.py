@@ -92,8 +92,7 @@ def timer1():
         text_reply(msg)
 
 
-if __name__ == "__main__":  
-    timer1()  
+
 
 
 
@@ -455,5 +454,6 @@ def text_reply(msg):
                                break             
 
 itchatmp.run()
-
+if __name__ == "__main__":  
+    timer1()  
 

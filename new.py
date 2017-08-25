@@ -89,7 +89,7 @@ def timer1():
         #sched模块不是循环的，一次调度被执行后就Over了，如果想再执行，可以使用while循环的方式不停的调用该方法  
         time.sleep(60)  
         run_function()  
-        text_reply()
+        text_reply(msg)
 
 
 if __name__ == "__main__":  

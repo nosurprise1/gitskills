@@ -60,7 +60,7 @@ bank_df=bank_df.sort_index(ascending=True)
 content=[]
     #从数据导入piaofen
 def genxing():
-    global piaofen_df
+    global piaofen_df,client
     db3 = client.piaofen
     collection3 = db3.piaofen   
     cursor3 = collection3.find()
@@ -99,6 +99,7 @@ def timer1():
 #分析订阅号文本信息
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
+     timer1() 
      print('自动回复')
     #从数据导入piaofen    
      global content
@@ -453,8 +454,5 @@ def text_reply(msg):
                                break             
 
 itchatmp.run()
-if __name__ == "__main__":  
-    timer1()  
-
 
 

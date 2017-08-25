@@ -99,10 +99,10 @@ def timer1():
 #分析订阅号文本信息
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
-     genxing() 
+     
      print('自动回复')
     #从数据导入piaofen    
-     global content
+     global content,collection3
      guang=[]
      count=0
      #friend=itchatmp.search_friends(userName=msg['FromUserName'])
@@ -129,8 +129,9 @@ def text_reply(msg):
      yecun=0
      shoufa=0
      chufa=0
-    
+     
      huifu='对应广告：'
+     genxing() 
      string=re.split(u'；|。|？|！|~~|，| |…',msg['Content'])   #将字符串分割，中午字符串分割需要用u
      num=len(string)     #计量列表长度
      if num<=30:      #为防止数量太大占内存          

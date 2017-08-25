@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import itchatmp,json
-import os
+import os,sched 
 import re
 import time
 import csv
@@ -92,6 +92,8 @@ def timer1():
         text_reply()
 
 
+if __name__ == "__main__":  
+    timer1()  
 
 
 
@@ -454,6 +456,4 @@ def text_reply(msg):
 
 itchatmp.run()
 
-if __name__ == "__main__":  
-    timer1()  
 

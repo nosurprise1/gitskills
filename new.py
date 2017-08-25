@@ -91,7 +91,7 @@ def timer1():
         time.sleep(60)  
         run_function()  
         @itchatmp.msg_register(itchatmp.content.TEXT)
-        def text_reply(msg)
+        text_reply()
 
 
 

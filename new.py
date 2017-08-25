@@ -99,7 +99,7 @@ def timer1():
 #分析订阅号文本信息
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
-     timer1() 
+     genxing() 
      print('自动回复')
     #从数据导入piaofen    
      global content

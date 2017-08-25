@@ -60,7 +60,7 @@ bank_df=bank_df.sort_index(ascending=True)
 content=[]
     #从数据导入piaofen
 def genxing():
-    global piaofen_df,client
+    global piaofen_df,client,collection3
     db3 = client.piaofen
     collection3 = db3.piaofen   
     cursor3 = collection3.find()

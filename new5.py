@@ -64,15 +64,9 @@ cursor3 = collection3.find()
 piaofen_df = pd.DataFrame(list(cursor3))
 piaofen_df=piaofen_df.set_index('xuhao')
 piaofen_df=piaofen_df.sort_index(ascending=True)
-    
-    
-
+ 
 content=[]
-db3 = client.piaofen
-collection3 = db3.piaofen   
-cursor3 = collection3.find()
-piaofen_df = pd.DataFrame(list(cursor3))
-     #print (piaofen_df)
+
     
 
 #连接订阅号
@@ -302,7 +296,6 @@ def text_reply(msg):
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
                            if (count==8) or(i>=100):
-                               print(i)
                                return(huifu)
                                break
             
@@ -316,7 +309,6 @@ def text_reply(msg):
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
                            if (count==8) or(i>=100):
-                               print(i)
                                return(huifu)
                                break
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==1:
@@ -329,7 +321,6 @@ def text_reply(msg):
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
                            if (count==8) or(i>=100):
-                               print(i)
                                return(huifu)
                                break    
                elif shou==0 and chu==0 and shoudai==1 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
@@ -341,7 +332,6 @@ def text_reply(msg):
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
                            if (count==8) or(i>=100):
-                               print(i)
                                return(huifu)
                                break
                elif shou==0 and chu==0 and shoudai==0 and chudai==1 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
@@ -354,7 +344,6 @@ def text_reply(msg):
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
                            if (count==8) or(i>=100):
-                               print(i)
                                return(huifu)
                                break
                         
@@ -368,7 +357,6 @@ def text_reply(msg):
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
                            if (count==8) or(i>=100):
-                               print(i)
                                return(huifu)
                                break
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==1 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
@@ -380,7 +368,6 @@ def text_reply(msg):
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
                            if (count==8) or(i>=100):
-                               print(i)
                                return(huifu)
                                break
 
@@ -395,7 +382,6 @@ def text_reply(msg):
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
                            if (count==8) or(i>=100):
-                               print(i)
                                return(huifu)
                                break
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==1 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
@@ -407,7 +393,6 @@ def text_reply(msg):
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
                            if (count==8) or(i>=100):
-                               print(i)
                                return(huifu)
                                break
 
@@ -422,7 +407,6 @@ def text_reply(msg):
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
                            if (count==8) or(i>=100):
-                               print(i)
                                return(huifu)
                                break
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==1 and shouhui==0 and chuhui==0:
@@ -434,7 +418,6 @@ def text_reply(msg):
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
                            if (count==8) or(i>=100):
-                               print(i)
                                return(huifu)
                                break             
 

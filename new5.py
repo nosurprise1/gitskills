@@ -56,13 +56,20 @@ bank_df = pd.DataFrame(list(cursor2))
 bank_df=bank_df[['xuhao','yinhang','fenlei1','fenlei2','fenlei3']]
 bank_df=bank_df.set_index('xuhao')
 bank_df=bank_df.sort_index(ascending=True)
-
+content=[]
     #从数据导入piaofen
 db3 = client.piaofen
 collection3 = db3.piaofen   
 cursor3 = collection3.find()
 piaofen_df = pd.DataFrame(list(cursor3))
+piaofen_df=piaofen_df.set_index('xuhao')
+piaofen_df=piaofen_df.sort_index(ascending=True)
+ 
 
+db3 = client.piaofen
+collection3 = db3.piaofen   
+cursor3 = collection3.find()
+piaofen_df = pd.DataFrame(list(cursor3))
 print (piaofen_df)
     
 

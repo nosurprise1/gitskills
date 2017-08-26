@@ -246,12 +246,12 @@ def text_reply(msg):
                a=len(piaofen_df)
                if shou==0 and chu==1 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
                     for i in range(0,a-1):
-                       if (int(piaofen_df.ix[a-1-i,'shou'])==1) and (int(piaofen_df.ix[a-1-i,'hanglei2'])==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
+                       if (int(piaofen_df.loc[a-1-i,'shou'])==1) and (int(piaofen_df.loc[a-1-i,'hanglei2'])==1 ) and (piaofen_df.loc[a-1-i,'content'] not in guang):                  
                            #print(i)
-                           huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
+                           huifu0=('%s,%s,%s:%s'%(piaofen_df.loc[a-1-i,'time'],piaofen_df.loc[a-1-i,'time2'],piaofen_df.loc[a-1-i,'nickname'],piaofen_df.loc[a-1-i,'content']))
                            #print(huifu0)
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
-                           guang.append(piaofen_df.ix[a-1-i,'content'])      
+                           guang.append(piaofen_df.loc[a-1-i,'content'])      
                            count+=1 
                            if (count==8) or(i>=100):
                                return huifu 

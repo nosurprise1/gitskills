@@ -87,7 +87,7 @@ itchatmp.update_config(itchatmp.WechatConfig(
 def text_reply(msg):
     #从数据导入piaofen
      
-     global content
+     global content,collection3
      guang=[]
      count=0
      #friend=itchatmp.search_friends(userName=msg['FromUserName'])

@@ -58,7 +58,17 @@ bank_df=bank_df.set_index('xuhao')
 bank_df=bank_df.sort_index(ascending=True)
 content=[]
     #从数据导入piaofen
+db3 = client.piaofen
+collection3 = db3.piaofen   
+cursor3 = collection3.find()
+piaofen_df = pd.DataFrame(list(cursor3))
 
+
+#piaofen_df=piaofen_df.set_index('xuhao')
+#piaofen_df=piaofen_df.sort_index(ascending=True)
+ 
+
+print (piaofen_df)
     
 
 #连接订阅号
@@ -72,17 +82,7 @@ itchatmp.update_config(itchatmp.WechatConfig(
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
     #从数据导入piaofen
-     db3 = client.piaofen
-     collection3 = db3.piaofen   
-     cursor3 = collection3.find()
-     piaofen_df = pd.DataFrame(list(cursor3))
-
-
-#piaofen_df=piaofen_df.set_index('xuhao')
-#piaofen_df=piaofen_df.sort_index(ascending=True)
- 
-
-     print (piaofen_df)
+     
      global content,collection3
      guang=[]
      count=0
@@ -110,7 +110,6 @@ def text_reply(msg):
      yecun=0
      shoufa=0
      chufa=0
-    
      huifu='对应广告：'
      string=re.split(u'；|。|？|！|~~|，| |…',msg['Content'])   #将字符串分割，中午字符串分割需要用u
      num=len(string)     #计量列表长度

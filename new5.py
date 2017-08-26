@@ -64,8 +64,8 @@ cursor3 = collection3.find()
 piaofen_df = pd.DataFrame(list(cursor3))
 
 
-piaofen_df=piaofen_df.set_index('xuhao')
-piaofen_df=piaofen_df.sort_index(ascending=True)
+#piaofen_df=piaofen_df.set_index('xuhao')
+#piaofen_df=piaofen_df.sort_index(ascending=True)
  
 
 print (piaofen_df)

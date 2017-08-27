@@ -74,6 +74,15 @@ itchatmp.update_config(itchatmp.WechatConfig(
 #分析订阅号文本信息
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
+     if msg['Content']=='111111':
+        db3 = client.piaofen
+        collection3 = db3.piaofen   
+        cursor3 = collection3.find({"$or":[{'time':'2017-08-25'},{'time':'2017-08-24'}]})
+        piaofen_df = pd.DataFrame(list(cursor3))
+                  #piaofen_df=piaofen_df.set_index('xuhao')
+                  #piaofen_df=piaofen_df.sort_index(ascending=True)
+        a=len(piaofen_df)
+        print(piaofen_df)  
      global content,collection3,piaofen_df
      guang=[]
      count=0
@@ -387,14 +396,6 @@ def text_reply(msg):
                            if (count==8) or(i>=100):
                                return(huifu)
                                break             
-     if msg('Content')=='111111':
-        db3 = client.piaofen
-        collection3 = db3.piaofen   
-        cursor3 = collection3.find({"$or":[{'time':'2017-08-25'},{'time':'2017-08-24'}]})
-        piaofen_df = pd.DataFrame(list(cursor3))
-                  #piaofen_df=piaofen_df.set_index('xuhao')
-                  #piaofen_df=piaofen_df.sort_index(ascending=True)
-        a=len(piaofen_df)
-        print(piaofen_df)  
+     
 itchatmp.run()
 

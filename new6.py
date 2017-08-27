@@ -12,8 +12,8 @@ collection = db.piao  #http://www.jb51.net/article/77537.htm
 cursor = collection.find()
 piao_df= pd.DataFrame(list(cursor))
 piao_df=piao_df[['xuhao','ci','shou','chu','shoudai','chudai','shouhui','chuhui']]
-piao_df=piao_df.set_index('xuhao')
-piao_df=piao_df.sort_index(ascending=True)
+#piao_df=piao_df.set_index('xuhao')
+#piao_df=piao_df.sort_index(ascending=True)
 
 #从数据导入cun
 db = client.cun
@@ -55,10 +55,10 @@ bank_df=bank_df.sort_index(ascending=True)
     #从数据导入piaofen
 db3 = client.piaofen
 collection3 = db3.piaofen   
-cursor3 = collection3.find({'time':'2017-08-25'})
+cursor3 = collection3.find({"$or":[{'time':'2017-08-25'},{'time':'2017-08-24'}]})
 piaofen_df = pd.DataFrame(list(cursor3))
-piaofen_df=piaofen_df.set_index('xuhao')
-piaofen_df=piaofen_df.sort_index(ascending=True)
+#piaofen_df=piaofen_df.set_index('xuhao')
+#piaofen_df=piaofen_df.sort_index(ascending=True)
     
 content=[]
 print('collection3')

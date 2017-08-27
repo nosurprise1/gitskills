@@ -59,12 +59,10 @@ cursor3 = collection3.find({"$or":[{'time':'2017-08-25'},{'time':'2017-08-24'}]}
 piaofen_df = pd.DataFrame(list(cursor3))
 #piaofen_df=piaofen_df.set_index('xuhao')
 #piaofen_df=piaofen_df.sort_index(ascending=True)
-    
+a=len(piaofen_df)
+print(piaofen_df)  
 content=[]
-print('collection3')
-print(collection3)
 
-    
 
 #连接订阅号
 itchatmp.update_config(itchatmp.WechatConfig(
@@ -243,8 +241,7 @@ def text_reply(msg):
                   print('collection3')
                   print(collection3)
            if hanglei2!=0:
-               a=len(piaofen_df)
-               print(piaofen_df)
+               
                if shou==0 and chu==1 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
                     for i in range(0,a-1):
                        if (piaofen_df.loc[a-1-i,'shou']==1) and (piaofen_df.loc[a-1-i,'hanglei2']==1 ) and (piaofen_df.loc[a-1-i,'content'] not in guang):                  

@@ -74,7 +74,7 @@ itchatmp.update_config(itchatmp.WechatConfig(
 #分析订阅号文本信息
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
-     global content,collection3
+     global content,collection3,piaofen_df
      guang=[]
      count=0
      shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))

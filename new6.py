@@ -238,7 +238,7 @@ def text_reply(msg):
                   content.append(msg['Content'])  
 
            if hanglei2!=0:
-               
+               a=len(piaofen_df)
                if shou==0 and chu==1 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
                     for i in range(0,a-1):
                        if (piaofen_df.loc[a-1-i,'shou']==1) and (piaofen_df.loc[a-1-i,'hanglei2']==1 ) and (piaofen_df.loc[a-1-i,'content'] not in guang):                  

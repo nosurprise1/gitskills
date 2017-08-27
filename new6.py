@@ -12,8 +12,8 @@ collection = db.piao  #http://www.jb51.net/article/77537.htm
 cursor = collection.find()
 piao_df= pd.DataFrame(list(cursor))
 piao_df=piao_df[['xuhao','ci','shou','chu','shoudai','chudai','shouhui','chuhui']]
-#piao_df=piao_df.set_index('xuhao')
-#piao_df=piao_df.sort_index(ascending=True)
+piao_df=piao_df.set_index('xuhao')
+piao_df=piao_df.sort_index(ascending=True)
 
 #从数据导入cun
 db = client.cun

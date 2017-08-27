@@ -55,7 +55,7 @@ bank_df=bank_df.sort_index(ascending=True)
     #从数据导入piaofen
 db3 = client.piaofen
 collection3 = db3.piaofen   
-cursor3 = collection3.find()
+cursor3 = collection3.find({'time':'2017-08-25'})
 piaofen_df = pd.DataFrame(list(cursor3))
 piaofen_df=piaofen_df.set_index('xuhao')
 piaofen_df=piaofen_df.sort_index(ascending=True)

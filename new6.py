@@ -53,7 +53,14 @@ bank_df=bank_df.set_index('xuhao')
 bank_df=bank_df.sort_index(ascending=True)
 
     #从数据导入piaofen
-
+db3 = client.piaofen
+collection3 = db3.piaofen   
+cursor3 = collection3.find({"$or":[{'time':'2017-08-25'},{'time':'2017-08-24'}]})
+piaofen_df = pd.DataFrame(list(cursor3))
+                  #piaofen_df=piaofen_df.set_index('xuhao')
+                  #piaofen_df=piaofen_df.sort_index(ascending=True)
+a=len(piaofen_df)
+print(piaofen_df)  
 content=[]
 
 
@@ -225,14 +232,7 @@ def text_reply(msg):
                               'content':[msg['Content']],
                               'leixing':['1']
                               })    
-                  db3 = client.piaofen
-                  collection3 = db3.piaofen   
-                  cursor3 = collection3.find({"$or":[{'time':'2017-08-25'},{'time':'2017-08-24'}]})
-                  piaofen_df = pd.DataFrame(list(cursor3))
-                  #piaofen_df=piaofen_df.set_index('xuhao')
-                  #piaofen_df=piaofen_df.sort_index(ascending=True)
-                  a=len(piaofen_df)
-                  print(piaofen_df)  
+                  
                   records = json.loads(data.T.to_json()).values()
                   collection3.insert(records)
                   content.append(msg['Content'])  
@@ -386,6 +386,14 @@ def text_reply(msg):
                            if (count==8) or(i>=100):
                                return(huifu)
                                break             
-
+     if msg('Content')=='111111':
+        db3 = client.piaofen
+        collection3 = db3.piaofen   
+        cursor3 = collection3.find({"$or":[{'time':'2017-08-25'},{'time':'2017-08-24'}]})
+        piaofen_df = pd.DataFrame(list(cursor3))
+                  #piaofen_df=piaofen_df.set_index('xuhao')
+                  #piaofen_df=piaofen_df.sort_index(ascending=True)
+        a=len(piaofen_df)
+        print(piaofen_df)  
 itchatmp.run()
 

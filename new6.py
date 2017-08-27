@@ -53,14 +53,7 @@ bank_df=bank_df.set_index('xuhao')
 bank_df=bank_df.sort_index(ascending=True)
 
     #从数据导入piaofen
-db3 = client.piaofen
-collection3 = db3.piaofen   
-cursor3 = collection3.find({"$or":[{'time':'2017-08-25'},{'time':'2017-08-24'}]})
-piaofen_df = pd.DataFrame(list(cursor3))
-#piaofen_df=piaofen_df.set_index('xuhao')
-#piaofen_df=piaofen_df.sort_index(ascending=True)
-a=len(piaofen_df)
-print(piaofen_df)  
+
 content=[]
 
 
@@ -77,7 +70,6 @@ def text_reply(msg):
      global content
      guang=[]
      count=0
-     #friend=itchatmp.search_friends(userName=msg['FromUserName'])
      shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
      shijian2=time.strftime('%H:%M',time.localtime(time.time()))
      hanglei2=0
@@ -108,7 +100,6 @@ def text_reply(msg):
          for i in range(0,num): 
             for j in range(1,163):
                 c=piao_df.astype(str).loc[j,'ci'].strip()
-                   # print(c)
                 zhaop= re.search(c,string[i])
                 if zhaop:            
                       shou=int(piao_df.astype(str).loc[j,'shou'].strip())+shou
@@ -187,7 +178,6 @@ def text_reply(msg):
                            hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
                            hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
                            hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
-                           
                            break
                             
                       else:
@@ -235,11 +225,18 @@ def text_reply(msg):
                               'content':[msg['Content']],
                               'leixing':['1']
                               })    
+                  db3 = client.piaofen
+                  collection3 = db3.piaofen   
+                  cursor3 = collection3.find({"$or":[{'time':'2017-08-25'},{'time':'2017-08-24'}]})
+                  piaofen_df = pd.DataFrame(list(cursor3))
+                  #piaofen_df=piaofen_df.set_index('xuhao')
+                  #piaofen_df=piaofen_df.sort_index(ascending=True)
+                  a=len(piaofen_df)
+                  print(piaofen_df)  
                   records = json.loads(data.T.to_json()).values()
                   collection3.insert(records)
                   content.append(msg['Content'])  
-                  print('collection3')
-                  print(collection3)
+
            if hanglei2!=0:
                
                if shou==0 and chu==1 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:

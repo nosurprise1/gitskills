@@ -70,23 +70,30 @@ itchatmp.update_config(itchatmp.WechatConfig(
     appId = 'wxdca1daea0b4961c4',
     appSecret = '4ff455b4b94a7f32e0f3eb04cd29c304'))
 
-
+shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+shijian0=shijian1-datetime.timedelta(days=1)
+shijian-1=shijian1-datetime.timedelta(days=2)
+shijian-2=shijian1-datetime.timedelta(days=3)
+print(shijian1)
+print(shijian0)
+print(shijian-1)
+print(shijian-2)
 #分析订阅号文本信息
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
      if msg['Content']=='111111':
         db3 = client.piaofen
         collection3 = db3.piaofen   
-        cursor3 = collection3.find({"$or":[{'time':'2017-08-28'},{'time':'2017-08-29'}]})
+        cursor3 = collection3.find({"$or":[{'time':str(shijian1)},{'time':str(shijian0)},{'time':str(shijian-1)},{'time':str(shijian-2)}]})
         piaofen_df = pd.DataFrame(list(cursor3))
                   #piaofen_df=piaofen_df.set_index('xuhao')
                   #piaofen_df=piaofen_df.sort_index(ascending=True)
         a=len(piaofen_df)
         print(piaofen_df)  
-     global content,collection3,piaofen_df
+     global content,collection3,piaofen_df,shijian1
      guang=[]
      count=0
-     shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+     
      shijian2=time.strftime('%H:%M',time.localtime(time.time()))
      hanglei2=0
      hanglei3=0

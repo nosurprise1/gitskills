@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-import matplotlib.pyplot as plt
-from matplotlib.font_manager import FontProperties  
-font_set = FontProperties(fname=r"c:\windows\fonts\simsun.ttc", size=15)  
 import itchatmp,json,os,re,time
 from itchatmp.content import *
 import pandas as pd

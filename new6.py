@@ -54,7 +54,7 @@ bank_df=bank_df.sort_index(ascending=True)
 
 global content,collection3,piaofen_df,shijian1
 shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-shijian1 = datetime.datetime.strptime(shijian1, "%y-%m-%d")
+shijian1 = datetime.datetime.strptime(shijian1, "%Y-%m-%d")
 shijian0=shijian1-datetime.timedelta(days=1)
 shijian01=shijian1-datetime.timedelta(days=2)
 shijian02=shijian1-datetime.timedelta(days=3)

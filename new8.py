@@ -109,7 +109,7 @@ def text_reply(msg):
      shijian2=time.strftime('%H:%M',time.localtime(time.time()))
      hanglei2=0
      hanglei3=0
-     hanglei1=0
+     hanglei1='中介'
      shou=0
      chu=0
      shoudai=0

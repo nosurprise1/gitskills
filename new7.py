@@ -85,30 +85,6 @@ def text_reply(msg):
         piaofen_df = pd.DataFrame(list(cursor3))
         a=len(piaofen_df)
         print(piaofen_df)  
-     if msg['Content']=='222222':
-        shijian=time.strftime('%Y-%m-%d  %H:%M',time.localtime(time.time()))
-        
-        db3 = client.piaofen
-        collection3 = db3.piaofen   
-        cursor3 = collection3.find({'time':'2017-08-28'})
-        huatudata = pd.DataFrame(list(cursor3))
-        huatudata=huatudata.drop_duplicates(['content'])
-        huatudata3=huatudata[['hanglei1','shou','chu','shoudai','chudai']]
-        huatudata4=huatudata3.groupby(['hanglei1']).sum()
-        print(huatudata4)
-        huatudata2=huatudata.groupby(['hanglei2']).cumsum(0)
-        huatudata=huatudata.rename(columns={"shou":"shou2", "chu": "chu2"}) 
-        result = pd.concat([huatudata2, huatudata], axis=1)
-        #bounds=[-1,0,1,2]                   #print result
-        plt.scatter(y=result['shou'],x=result['chu'],c=result['hanglei2'],marker ='+',edgecolors='face',s=20)  #制作散点图
-
-        plt.xlabel(u'卖票广告计数',fontproperties=font_set)
-        plt.ylabel(u'收票广告计数',fontproperties=font_set)
-        plt.title(u'收票卖票比（黄色为银行，紫色为中介）%s'%shijian, fontproperties=font_set) 
-
-        #cbar=plt.colorbar(boundaries=[-1,0.5,2],orientation='horizontal')
-        print(len(result))
-        plt.show()
      guang=[]
      count=0
      shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))

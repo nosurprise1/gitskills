@@ -7,20 +7,20 @@ from pandas import DataFrame
 from pymongo import MongoClient
 client=MongoClient('mongodb://root:' + '5768116' + '@139.196.79.93')
 
-global content,collection3,piaofen_df,shijian1
-shijian1=time.strftime('%y-%m-%d',time.localtime(time.time()))
-shijian1 = datetime.datetime.strptime(shijian1, "%y-%m-%d")
+global content,collection3,piaofen_df
+shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
 shijian0=shijian1-datetime.timedelta(days=1)
 shijian01=shijian1-datetime.timedelta(days=2)
 shijian02=shijian1-datetime.timedelta(days=3)
-shijian1=shijian1.strftime("%Y-%m-%d")  
+shijian11=shijian11.strftime("%Y-%m-%d")  
 shijian0=shijian0.strftime("%Y-%m-%d")
 shijian01=shijian01.strftime("%Y-%m-%d")  
 shijian02=shijian02.strftime("%Y-%m-%d")  
 
 
 
-print(shijian1)
+print(shijian11)
 print(shijian0)
 print(shijian01)
 print(shijian02)
@@ -75,7 +75,7 @@ bank_df=bank_df.sort_index(ascending=True)
     #从数据导入piaofen
 db3 = client.piaofen
 collection3 = db3.piaofen   
-cursor3 = collection3.find({"$or":[{'time':str(shijian0)},{'time':str(shijian01)}]})
+cursor3 = collection3.find({"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]})
 #cursor3 = collection3.find({"$or":[{'time':'2017-08-28'},{'time':'2017-08-29'}]})
 piaofen_df = pd.DataFrame(list(cursor3))
                   #piaofen_df=piaofen_df.set_index('xuhao')

@@ -58,6 +58,13 @@ shijian1 = datetime.datetime.strptime(shijian1, "%y-%m-%d")
 shijian0=shijian1-datetime.timedelta(days=1)
 shijian01=shijian1-datetime.timedelta(days=2)
 shijian02=shijian1-datetime.timedelta(days=3)
+shijian1=shijian1.strftime("%Y-%m-%d")  
+shijian0=shijian0.strftime("%Y-%m-%d")
+shijian01=shijian01.strftime("%Y-%m-%d")  
+shijian02=shijian02.strftime("%Y-%m-%d")  
+
+
+
 print(shijian1)
 print(shijian0)
 print(shijian01)

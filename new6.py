@@ -235,7 +235,7 @@ def text_reply(msg):
                                                          hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
                                                          hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                                          break
-           shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+           
            shijian2=time.strftime('%H:%M',time.localtime(time.time()))
            print(content)
            if hanglei2!=0 and (msg['Content'] not in content):

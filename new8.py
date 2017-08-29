@@ -278,7 +278,7 @@ def text_reply(msg):
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            guang.append(piaofen_df.loc[a-1-i,'content'])      
                            count+=1 
-                           if (count==3) or(i>=100):
+                           if (count==7) or(i>=100):
                                print(huifu)
                                return huifu 
                                break

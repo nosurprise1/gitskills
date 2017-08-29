@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import itchatmp,json,os,re,time
+import itchatmp,json,os,re,time,datetime
 from itchatmp.content import *
 import pandas as pd
 import numpy as np
@@ -52,10 +52,21 @@ bank_df=bank_df[['xuhao','yinhang','fenlei1','fenlei2','fenlei3']]
 bank_df=bank_df.set_index('xuhao')
 bank_df=bank_df.sort_index(ascending=True)
 
+global content,collection3,piaofen_df,shijian1
+shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+shijian0=shijian1-datetime.timedelta(days=1)
+shijian01=shijian1-datetime.timedelta(days=2)
+shijian02=shijian1-datetime.timedelta(days=3)
+print(shijian1)
+print(shijian0)
+print(shijian01)
+print(shijian02)
+
+
     #从数据导入piaofen
 db3 = client.piaofen
 collection3 = db3.piaofen   
-cursor3 = collection3.find({"$or":[{'time':'2017-08-28'},{'time':'2017-08-29'}]})
+cursor3 = collection3.find({"$or":[{'time':str(shijian1)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]})
 piaofen_df = pd.DataFrame(list(cursor3))
                   #piaofen_df=piaofen_df.set_index('xuhao')
                   #piaofen_df=piaofen_df.sort_index(ascending=True)
@@ -70,14 +81,7 @@ itchatmp.update_config(itchatmp.WechatConfig(
     appId = 'wxdca1daea0b4961c4',
     appSecret = '4ff455b4b94a7f32e0f3eb04cd29c304'))
 
-shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-shijian0=shijian1-datetime.timedelta(days=1)
-shijian01=shijian1-datetime.timedelta(days=2)
-shijian02=shijian1-datetime.timedelta(days=3)
-print(shijian1)
-print(shijian0)
-print(shijian-1)
-print(shijian-2)
+
 #分析订阅号文本信息
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):

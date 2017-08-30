@@ -278,7 +278,7 @@ def text_reply(msg):
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            guang.append(piaofen_df.loc[a-1-i,'content'])      
                            count+=1 
-                           if (count==6) or(i>=200):
+                           if (count==6) or(i>=100):
                                return huifu
                                print('已发送')
                                break
@@ -292,7 +292,7 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==6) or(i>=200):
+                           if (count==6) or(i>=100):
                                return huifu
                                print('已发送')
                                break

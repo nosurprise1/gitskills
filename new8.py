@@ -7,7 +7,7 @@ from pandas import DataFrame
 from pymongo import MongoClient
 client=MongoClient('mongodb://root:' + '5768116' + '@139.196.79.93')
 
-global content,collection3,piaofen_df
+global content,collection3,piaofen_df,shijian11,shijian0,shijian01,shijian02
 shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
 shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
 shijian0=shijian11-datetime.timedelta(days=1)
@@ -95,8 +95,18 @@ itchatmp.update_config(itchatmp.WechatConfig(
 #分析订阅号文本信息
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
-     global content,collection3,piaofen_df
+     global content,collection3,piaofen_df,shijian11,shijian0,shijian01,shijian02
      if msg['Content']=='111111':
+        shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+        shijian0=shijian11-datetime.timedelta(days=1)
+        shijian01=shijian11-datetime.timedelta(days=2)
+        shijian02=shijian11-datetime.timedelta(days=3)
+        shijian11=shijian11.strftime("%Y-%m-%d")  
+        shijian0=shijian0.strftime("%Y-%m-%d")
+        shijian01=shijian01.strftime("%Y-%m-%d")  
+        shijian02=shijian02.strftime("%Y-%m-%d")  
+
+
         db3 = client.piaofen
         collection3 = db3.piaofen   
         cursor3 = collection3.find({"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]})

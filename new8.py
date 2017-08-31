@@ -97,6 +97,7 @@ itchatmp.update_config(itchatmp.WechatConfig(
 def text_reply(msg):
      global content,collection3,piaofen_df,shijian11,shijian0,shijian01,shijian02
      if msg['Content']=='111111':
+        shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
         shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
         shijian0=shijian11-datetime.timedelta(days=1)
         shijian01=shijian11-datetime.timedelta(days=2)

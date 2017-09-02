@@ -73,10 +73,6 @@ bank_df=bank_df.set_index('xuhao')
 bank_df=bank_df.sort_index(ascending=True)
 
     #从数据导入piaofen
-db3 = client.piaofen
-collection3 = db3.piaofen   
-cursor3 = collection3.find({"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]})
-piaofen_df = pd.DataFrame(list(cursor3))
 content=[]
 
 #连接订阅号
@@ -284,7 +280,6 @@ def text_reply(msg):
                    piaofen_df = pd.DataFrame(list(cursor3))
                    print(piaofen_df)
                    a=len(piaofen_df)
-                   #return('1111')
                    for i in range(0,a-1):
                        if (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
@@ -298,94 +293,228 @@ def text_reply(msg):
                                print('已发送')
                                break
                elif shou==1 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
-                    for i in range(0,a-1):
-                       if piaofen_df.ix[a-1-i,'chu']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
-                           
+                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+                   shijian0=shijian11-datetime.timedelta(days=1)
+                   shijian01=shijian11-datetime.timedelta(days=2)
+                   shijian02=shijian11-datetime.timedelta(days=3)
+                   shijian11=shijian11.strftime("%Y-%m-%d")  
+                   shijian0=shijian0.strftime("%Y-%m-%d")
+                   shijian01=shijian01.strftime("%Y-%m-%d")  
+                   shijian02=shijian02.strftime("%Y-%m-%d")  
+                   db3 = client.piaofen
+                   collection3 = db3.piaofen   
+                   cursor3 = collection3.find({"$and":[
+                                                   {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]},
+                                                   {'chu':1},
+                                                   {'hanglei2':1},
+                                                    ]})
+                   piaofen_df = pd.DataFrame(list(cursor3))
+                   print(piaofen_df)
+                   a=len(piaofen_df)
+                   for i in range(0,a-1):
+                       if (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            #print(huifu0)
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==6) or(i>=200):
+                           if (count==6):
                                return huifu
                                print('已发送')
                                break
-            
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==1 and chuhui==0:
-                    for i in range(0,a-1):
-                       if piaofen_df.ix[a-1-i,'chuhui']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                                             
+                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+                   shijian0=shijian11-datetime.timedelta(days=1)
+                   shijian01=shijian11-datetime.timedelta(days=2)
+                   shijian02=shijian11-datetime.timedelta(days=3)
+                   shijian11=shijian11.strftime("%Y-%m-%d")  
+                   shijian0=shijian0.strftime("%Y-%m-%d")
+                   shijian01=shijian01.strftime("%Y-%m-%d")  
+                   shijian02=shijian02.strftime("%Y-%m-%d")  
+                   db3 = client.piaofen
+                   collection3 = db3.piaofen   
+                   cursor3 = collection3.find({"$and":[
+                                                   {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]},
+                                                   {'chuhui':1},
+                                                   {'hanglei2':1},
+                                                    ]})
+                   piaofen_df = pd.DataFrame(list(cursor3))
+                   print(piaofen_df)
+                   a=len(piaofen_df)
+                   for i in range(0,a-1):
+                       if (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            #print(huifu0)
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==6) or(i>=200):
+                           if (count==6):
                                return huifu
                                print('已发送')
                                break
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==1:
-                    for i in range(0,a-1):
-                       if piaofen_df.ix[a-1-i,'shouhui']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                                             
+                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+                   shijian0=shijian11-datetime.timedelta(days=1)
+                   shijian01=shijian11-datetime.timedelta(days=2)
+                   shijian02=shijian11-datetime.timedelta(days=3)
+                   shijian11=shijian11.strftime("%Y-%m-%d")  
+                   shijian0=shijian0.strftime("%Y-%m-%d")
+                   shijian01=shijian01.strftime("%Y-%m-%d")  
+                   shijian02=shijian02.strftime("%Y-%m-%d")  
+                   db3 = client.piaofen
+                   collection3 = db3.piaofen   
+                   cursor3 = collection3.find({"$and":[
+                                                   {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]},
+                                                   {'shouhui':1},
+                                                   {'hanglei2':1},
+                                                    ]})
+                   piaofen_df = pd.DataFrame(list(cursor3))
+                   print(piaofen_df)
+                   a=len(piaofen_df)
+                   for i in range(0,a-1):
+                       if (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            #print(huifu0)
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==6) or(i>=200):
+                           if (count==6):
                                return huifu
                                print('已发送')
                                break
                elif shou==0 and chu==0 and shoudai==1 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
-                    for i in range(0,a-1):
-                       if piaofen_df.ix[a-1-i,'chudai']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
+                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+                   shijian0=shijian11-datetime.timedelta(days=1)
+                   shijian01=shijian11-datetime.timedelta(days=2)
+                   shijian02=shijian11-datetime.timedelta(days=3)
+                   shijian11=shijian11.strftime("%Y-%m-%d")  
+                   shijian0=shijian0.strftime("%Y-%m-%d")
+                   shijian01=shijian01.strftime("%Y-%m-%d")  
+                   shijian02=shijian02.strftime("%Y-%m-%d")  
+                   db3 = client.piaofen
+                   collection3 = db3.piaofen   
+                   cursor3 = collection3.find({"$and":[
+                                                   {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]},
+                                                   {'chudai':1},
+                                                   {'hanglei2':1},
+                                                    ]})
+                   piaofen_df = pd.DataFrame(list(cursor3))
+                   print(piaofen_df)
+                   a=len(piaofen_df)
+                   for i in range(0,a-1):
+                       if (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
+                           #print(huifu0)
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==6) or(i>=200):
+                           if (count==6):
                                return huifu
                                print('已发送')
                                break
                elif shou==0 and chu==0 and shoudai==0 and chudai==1 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
-                    for i in range(0,a-1):
-                       if piaofen_df.ix[a-1-i,'shoudai']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
-                           
+                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+                   shijian0=shijian11-datetime.timedelta(days=1)
+                   shijian01=shijian11-datetime.timedelta(days=2)
+                   shijian02=shijian11-datetime.timedelta(days=3)
+                   shijian11=shijian11.strftime("%Y-%m-%d")  
+                   shijian0=shijian0.strftime("%Y-%m-%d")
+                   shijian01=shijian01.strftime("%Y-%m-%d")  
+                   shijian02=shijian02.strftime("%Y-%m-%d")  
+                   db3 = client.piaofen
+                   collection3 = db3.piaofen   
+                   cursor3 = collection3.find({"$and":[
+                                                   {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]},
+                                                   {'shoudai':1},
+                                                   {'hanglei2':1},
+                                                    ]})
+                   piaofen_df = pd.DataFrame(list(cursor3))
+                   print(piaofen_df)
+                   a=len(piaofen_df)
+                   for i in range(0,a-1):
+                       if (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
+                           #print(huifu0)
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==6) or(i>=200):
+                           if (count==6):
                                return huifu
                                print('已发送')
                                break
                         
       #福费廷
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==1 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
-                    for i in range(0,a-1):
-                       if piaofen_df.ix[a-1-i,'shoufu']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
+                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+                   shijian0=shijian11-datetime.timedelta(days=1)
+                   shijian01=shijian11-datetime.timedelta(days=2)
+                   shijian02=shijian11-datetime.timedelta(days=3)
+                   shijian11=shijian11.strftime("%Y-%m-%d")  
+                   shijian0=shijian0.strftime("%Y-%m-%d")
+                   shijian01=shijian01.strftime("%Y-%m-%d")  
+                   shijian02=shijian02.strftime("%Y-%m-%d")  
+                   db3 = client.piaofen
+                   collection3 = db3.piaofen   
+                   cursor3 = collection3.find({"$and":[
+                                                   {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]},
+                                                   {'shoufu':1},
+                                                   {'hanglei2':1},
+                                                    ]})
+                   piaofen_df = pd.DataFrame(list(cursor3))
+                   print(piaofen_df)
+                   a=len(piaofen_df)
+                   for i in range(0,a-1):
+                       if (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
+                           #print(huifu0)
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==6) or(i>=200):
+                           if (count==6):
                                return huifu
                                print('已发送')
                                break
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==1 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
-                    for i in range(0,a-1):
-                       if piaofen_df.ix[a-1-i,'chufu']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
+                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+                   shijian0=shijian11-datetime.timedelta(days=1)
+                   shijian01=shijian11-datetime.timedelta(days=2)
+                   shijian02=shijian11-datetime.timedelta(days=3)
+                   shijian11=shijian11.strftime("%Y-%m-%d")  
+                   shijian0=shijian0.strftime("%Y-%m-%d")
+                   shijian01=shijian01.strftime("%Y-%m-%d")  
+                   shijian02=shijian02.strftime("%Y-%m-%d")  
+                   db3 = client.piaofen
+                   collection3 = db3.piaofen   
+                   cursor3 = collection3.find({"$and":[
+                                                   {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]},
+                                                   {'chufu':1},
+                                                   {'hanglei2':1},
+                                                    ]})
+                   piaofen_df = pd.DataFrame(list(cursor3))
+                   print(piaofen_df)
+                   a=len(piaofen_df)
+                   for i in range(0,a-1):
+                       if (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
+                           #print(huifu0)
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==6) or(i>=200):
+                           if (count==6):
                                return huifu
                                print('已发送')
                                break
@@ -393,52 +522,132 @@ def text_reply(msg):
                         
                         
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==1 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
-                    for i in range(0,a-1):
-                       if piaofen_df.ix[a-1-i,'chuli']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
+                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+                   shijian0=shijian11-datetime.timedelta(days=1)
+                   shijian01=shijian11-datetime.timedelta(days=2)
+                   shijian02=shijian11-datetime.timedelta(days=3)
+                   shijian11=shijian11.strftime("%Y-%m-%d")  
+                   shijian0=shijian0.strftime("%Y-%m-%d")
+                   shijian01=shijian01.strftime("%Y-%m-%d")  
+                   shijian02=shijian02.strftime("%Y-%m-%d")  
+                   db3 = client.piaofen
+                   collection3 = db3.piaofen   
+                   cursor3 = collection3.find({"$and":[
+                                                   {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]},
+                                                   {'chuli':1},
+                                                   {'hanglei2':1},
+                                                    ]})
+                   piaofen_df = pd.DataFrame(list(cursor3))
+                   print(piaofen_df)
+                   a=len(piaofen_df)
+                   for i in range(0,a-1):
+                       if (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
+                           #print(huifu0)
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==6) or(i>=200):
+                           if (count==6):
                                return huifu
                                print('已发送')
                                break
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==1 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
-                    for i in range(0,a-1):
-                       if piaofen_df.ix[a-1-i,'shouli']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
+                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+                   shijian0=shijian11-datetime.timedelta(days=1)
+                   shijian01=shijian11-datetime.timedelta(days=2)
+                   shijian02=shijian11-datetime.timedelta(days=3)
+                   shijian11=shijian11.strftime("%Y-%m-%d")  
+                   shijian0=shijian0.strftime("%Y-%m-%d")
+                   shijian01=shijian01.strftime("%Y-%m-%d")  
+                   shijian02=shijian02.strftime("%Y-%m-%d")  
+                   db3 = client.piaofen
+                   collection3 = db3.piaofen   
+                   cursor3 = collection3.find({"$and":[
+                                                   {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]},
+                                                   {'shouli':1},
+                                                   {'hanglei2':1},
+                                                    ]})
+                   piaofen_df = pd.DataFrame(list(cursor3))
+                   print(piaofen_df)
+                   a=len(piaofen_df)
+                   for i in range(0,a-1):
+                       if (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
+                           #print(huifu0)
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==6) or(i>=200):
+                           if (count==6):
                                return huifu
                                print('已发送')
                                break
 
                         
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==1 and chucun==0 and shouhui==0 and chuhui==0:
-                    for i in range(0,a-1):         
-                       if piaofen_df.ix[a-1-i,'chucun']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
+                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+                   shijian0=shijian11-datetime.timedelta(days=1)
+                   shijian01=shijian11-datetime.timedelta(days=2)
+                   shijian02=shijian11-datetime.timedelta(days=3)
+                   shijian11=shijian11.strftime("%Y-%m-%d")  
+                   shijian0=shijian0.strftime("%Y-%m-%d")
+                   shijian01=shijian01.strftime("%Y-%m-%d")  
+                   shijian02=shijian02.strftime("%Y-%m-%d")  
+                   db3 = client.piaofen
+                   collection3 = db3.piaofen   
+                   cursor3 = collection3.find({"$and":[
+                                                   {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]},
+                                                   {'chucun':1},
+                                                   {'hanglei2':1},
+                                                    ]})
+                   piaofen_df = pd.DataFrame(list(cursor3))
+                   print(piaofen_df)
+                   a=len(piaofen_df)
+                   for i in range(0,a-1):
+                       if (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
+                           #print(huifu0)
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==6) or(i>=200):
+                           if (count==6):
                                return huifu
                                print('已发送')
                                break
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==1 and shouhui==0 and chuhui==0:
-                    for i in range(0,a-1):
-                       if piaofen_df.ix[a-1-i,'shoucun']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
+                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+                   shijian0=shijian11-datetime.timedelta(days=1)
+                   shijian01=shijian11-datetime.timedelta(days=2)
+                   shijian02=shijian11-datetime.timedelta(days=3)
+                   shijian11=shijian11.strftime("%Y-%m-%d")  
+                   shijian0=shijian0.strftime("%Y-%m-%d")
+                   shijian01=shijian01.strftime("%Y-%m-%d")  
+                   shijian02=shijian02.strftime("%Y-%m-%d")  
+                   db3 = client.piaofen
+                   collection3 = db3.piaofen   
+                   cursor3 = collection3.find({"$and":[
+                                                   {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]},
+                                                   {'shoucun':1},
+                                                   {'hanglei2':1},
+                                                    ]})
+                   piaofen_df = pd.DataFrame(list(cursor3))
+                   print(piaofen_df)
+                   a=len(piaofen_df)
+                   for i in range(0,a-1):
+                       if (piaofen_df.ix[a-1-i,'content'] not in guang):                  
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
+                           #print(huifu0)
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==6) or(i>=200):
+                           if (count==6):
                                return huifu
                                print('已发送')
                                break

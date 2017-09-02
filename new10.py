@@ -278,8 +278,8 @@ def text_reply(msg):
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[
                                                    {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]},
-                                                   {"shou":1},
-                                                   {"hanglei2":2},
+                                                   {'shou':1},
+                                                   {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
                    print(piaofen_df)

@@ -278,14 +278,25 @@ def text_reply(msg):
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[
                                                    {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]},
-                                                   {"shou":"1"},
-                                                   {"hanglei2":"2"},
+                                                   {"shou":1},
+                                                   {"hanglei2":2},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
                    print(piaofen_df)
                    a=len(piaofen_df)
-                   return('1111')
-                  
+                   #return('1111')
+                   for i in range(0,a-1):
+                       if (piaofen_df.ix[a-1-i,'content'] not in guang):                  
+                           huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
+                           #print(huifu0)
+                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
+                           #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
+                           guang.append(piaofen_df.ix[a-1-i,'content'])      
+                           count+=1
+                           if (count==6):
+                               return huifu
+                               print('已发送')
+                               break
                elif shou==1 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
                     for i in range(0,a-1):
                        if piaofen_df.ix[a-1-i,'chu']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  

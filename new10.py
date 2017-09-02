@@ -294,7 +294,7 @@ def text_reply(msg):
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
                            if (count==6)or (i>=a):
-                               return huifu
+                               return('111')
                                print('已发送')
                                break
                elif shou==1 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:

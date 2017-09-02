@@ -1,11 +1,31 @@
 # -*- coding: utf-8 -*-
-import itchatmp,json,os,re,time
+import itchatmp,json,os,re,time,datetime
 from itchatmp.content import *
 import pandas as pd
 import numpy as np
 from pandas import DataFrame
 from pymongo import MongoClient
 client=MongoClient('mongodb://root:' + '5768116' + '@139.196.79.93')
+
+global content,collection3,piaofen_df,shijian11,shijian0,shijian01,shijian02
+shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+shijian0=shijian11-datetime.timedelta(days=1)
+shijian01=shijian11-datetime.timedelta(days=2)
+shijian02=shijian11-datetime.timedelta(days=3)
+shijian11=shijian11.strftime("%Y-%m-%d")  
+shijian0=shijian0.strftime("%Y-%m-%d")
+shijian01=shijian01.strftime("%Y-%m-%d")  
+shijian02=shijian02.strftime("%Y-%m-%d")  
+
+
+
+print(shijian11)
+print(shijian0)
+print(shijian01)
+print(shijian02)
+
+
 #从数据导入piao
 db = client.piao
 collection = db.piao  #http://www.jb51.net/article/77537.htm
@@ -55,14 +75,9 @@ bank_df=bank_df.sort_index(ascending=True)
     #从数据导入piaofen
 db3 = client.piaofen
 collection3 = db3.piaofen   
-cursor3 = collection3.find({"$or":[{'time':'2017-08-28'},{'time':'2017-08-25'}]})
+cursor3 = collection3.find({"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]})
 piaofen_df = pd.DataFrame(list(cursor3))
-                  #piaofen_df=piaofen_df.set_index('xuhao')
-                  #piaofen_df=piaofen_df.sort_index(ascending=True)
-
-print(piaofen_df)  
 content=[]
-
 
 #连接订阅号
 itchatmp.update_config(itchatmp.WechatConfig(
@@ -74,21 +89,20 @@ itchatmp.update_config(itchatmp.WechatConfig(
 #分析订阅号文本信息
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
-     global content,collection3,piaofen_df
-     if msg['Content']=='111111':
-        db3 = client.piaofen
-        collection3 = db3.piaofen   
-        cursor3 = collection3.find({"$or":[{'time':'2017-08-28'},{'time':'2017-08-25'}]})
-        piaofen_df = pd.DataFrame(list(cursor3))
-        a=len(piaofen_df)
-        print(piaofen_df)  
+     global content,collection3,piaofen_df,shijian11,shijian0,shijian01,shijian02
+#只看某几个银行
+
+     if '只看工行' in msg['Content']: 
+         kanhang='工行'
+         cursor4=collection3.find
+        
      guang=[]
      count=0
      shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
      shijian2=time.strftime('%H:%M',time.localtime(time.time()))
      hanglei2=0
      hanglei3=0
-     hanglei1=0
+     hanglei1='中介'
      shou=0
      chu=0
      shoudai=0
@@ -243,21 +257,43 @@ def text_reply(msg):
                   records = json.loads(data.T.to_json()).values()
                   collection3.insert(records)
                   content.append(msg['Content'])  
-
+                  print(data)
+                
+                
+                
+#回复广告                
            if hanglei2!=0:
-               
                a=len(piaofen_df)
                if shou==0 and chu==1 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
-                    for i in range(0,a-1):
-                       if (piaofen_df.loc[a-1-i,'shou']==1) and (piaofen_df.loc[a-1-i,'hanglei2']==1 ) and (piaofen_df.loc[a-1-i,'content'] not in guang):                  
-                           #print(i)
+                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+                   shijian0=shijian11-datetime.timedelta(days=1)
+                   shijian01=shijian11-datetime.timedelta(days=2)
+                   shijian02=shijian11-datetime.timedelta(days=3)
+                   shijian11=shijian11.strftime("%Y-%m-%d")  
+                   shijian0=shijian0.strftime("%Y-%m-%d")
+                   shijian01=shijian01.strftime("%Y-%m-%d")  
+                   shijian02=shijian02.strftime("%Y-%m-%d")  
+                   db3 = client.piaofen
+                   collection3 = db3.piaofen   
+                   cursor3 = collection3.find({"$and":[
+                                                   {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}],
+                                                   {"shou":1},
+                                                   {"hanglei2":2},
+                       })
+                   piaofen_df = pd.DataFrame(list(cursor3))
+                   a=len(piaofen_df)
+                   for i in range(0,a-1):
+                       if(piaofen_df.loc[a-1-i,'content'] not in guang):                  
+                          
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.loc[a-1-i,'time'],piaofen_df.loc[a-1-i,'time2'],piaofen_df.loc[a-1-i,'nickname'],piaofen_df.loc[a-1-i,'content']))
-                           #print(huifu0)
+
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            guang.append(piaofen_df.loc[a-1-i,'content'])      
                            count+=1 
-                           if (count==8) or(i>=100):
-                               return huifu 
+                           if (count==6):
+                               return huifu
+                               print('已发送')
                                break
                elif shou==1 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
                     for i in range(0,a-1):
@@ -269,8 +305,9 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>=100):
-                               return(huifu)
+                           if (count==6) or(i>=200):
+                               return huifu
+                               print('已发送')
                                break
             
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==1 and chuhui==0:
@@ -282,8 +319,9 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>=100):
-                               return(huifu)
+                           if (count==6) or(i>=200):
+                               return huifu
+                               print('已发送')
                                break
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==1:
                     for i in range(0,a-1):
@@ -294,9 +332,10 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>=100):
-                               return(huifu)
-                               break    
+                           if (count==6) or(i>=200):
+                               return huifu
+                               print('已发送')
+                               break
                elif shou==0 and chu==0 and shoudai==1 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
                     for i in range(0,a-1):
                        if piaofen_df.ix[a-1-i,'chudai']==1 and (piaofen_df.ix[a-1-i,'hanglei2']==1 ) and (piaofen_df.ix[a-1-i,'content'] not in guang):                  
@@ -305,8 +344,9 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>=100):
-                               return(huifu)
+                           if (count==6) or(i>=200):
+                               return huifu
+                               print('已发送')
                                break
                elif shou==0 and chu==0 and shoudai==0 and chudai==1 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
                     for i in range(0,a-1):
@@ -317,8 +357,9 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>=100):
-                               return(huifu)
+                           if (count==6) or(i>=200):
+                               return huifu
+                               print('已发送')
                                break
                         
       #福费廷
@@ -330,8 +371,9 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>=100):
-                               return(huifu)
+                           if (count==6) or(i>=200):
+                               return huifu
+                               print('已发送')
                                break
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==1 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
                     for i in range(0,a-1):
@@ -341,8 +383,9 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>=100):
-                               return(huifu)
+                           if (count==6) or(i>=200):
+                               return huifu
+                               print('已发送')
                                break
 
                         
@@ -355,8 +398,9 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>=100):
-                               return(huifu)
+                           if (count==6) or(i>=200):
+                               return huifu
+                               print('已发送')
                                break
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==1 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
                     for i in range(0,a-1):
@@ -366,10 +410,10 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>=100):
-                               return(huifu)
+                           if (count==6) or(i>=200):
+                               return huifu
+                               print('已发送')
                                break
-
 
                         
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==1 and chucun==0 and shouhui==0 and chuhui==0:
@@ -380,8 +424,9 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>=100):
-                               return(huifu)
+                           if (count==6) or(i>=200):
+                               return huifu
+                               print('已发送')
                                break
                elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==1 and shouhui==0 and chuhui==0:
                     for i in range(0,a-1):
@@ -391,9 +436,9 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            guang.append(piaofen_df.ix[a-1-i,'content'])      
                            count+=1
-                           if (count==8) or(i>=100):
-                               return(huifu)
-                               break             
-     
+                           if (count==6) or(i>=200):
+                               return huifu
+                               print('已发送')
+                               break
 itchatmp.run()
 

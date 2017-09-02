@@ -73,6 +73,11 @@ bank_df=bank_df.set_index('xuhao')
 bank_df=bank_df.sort_index(ascending=True)
 
     #从数据导入piaofen
+db3 = client.piaofen
+collection3 = db3.piaofen   
+#cursor3 = collection3.find({"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]})
+#cursor3 = collection3.find({"$or":[{'time':'2017-08-28'},{'time':'2017-08-29'}]})
+#piaofen_df = pd.DataFrame(list(cursor3))
 content=[]
 
 #连接订阅号

@@ -77,7 +77,9 @@ db3 = client.piaofen
 collection3 = db3.piaofen   
 cursor3 = collection3.find({"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]})
 piaofen_df = pd.DataFrame(list(cursor3))
+print(piaofen_df)  
 content=[]
+
 
 #连接订阅号
 itchatmp.update_config(itchatmp.WechatConfig(
@@ -90,12 +92,24 @@ itchatmp.update_config(itchatmp.WechatConfig(
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
      global content,collection3,piaofen_df,shijian11,shijian0,shijian01,shijian02
-#只看某几个银行
+     if msg['Content']=='111111':
+        shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+        shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+        shijian0=shijian11-datetime.timedelta(days=1)
+        shijian01=shijian11-datetime.timedelta(days=2)
+        shijian02=shijian11-datetime.timedelta(days=3)
+        shijian11=shijian11.strftime("%Y-%m-%d")  
+        shijian0=shijian0.strftime("%Y-%m-%d")
+        shijian01=shijian01.strftime("%Y-%m-%d")  
+        shijian02=shijian02.strftime("%Y-%m-%d")  
 
-     if '只看工行' in msg['Content']: 
-         kanhang='工行'
-         cursor4=collection3.find
-        
+
+        db3 = client.piaofen
+        collection3 = db3.piaofen   
+        cursor3 = collection3.find({"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]})
+        piaofen_df = pd.DataFrame(list(cursor3))
+        a=len(piaofen_df)
+        print(piaofen_df)  
      guang=[]
      count=0
      shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
@@ -258,40 +272,20 @@ def text_reply(msg):
                   collection3.insert(records)
                   content.append(msg['Content'])  
                   print(data)
-                
-                
-                
-#回复广告                
            if hanglei2!=0:
+               
                a=len(piaofen_df)
+               print(a)
                if shou==0 and chu==1 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
-                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
-                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
-                   shijian0=shijian11-datetime.timedelta(days=1)
-                   shijian01=shijian11-datetime.timedelta(days=2)
-                   shijian02=shijian11-datetime.timedelta(days=3)
-                   shijian11=shijian11.strftime("%Y-%m-%d")  
-                   shijian0=shijian0.strftime("%Y-%m-%d")
-                   shijian01=shijian01.strftime("%Y-%m-%d")  
-                   shijian02=shijian02.strftime("%Y-%m-%d")  
-                   db3 = client.piaofen
-                   collection3 = db3.piaofen   
-                   cursor3 = collection3.find({"$and":[
-                                                   {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}],
-                                                   {"shou":1},
-                                                   {"hanglei2":2},
-                       })
-                   piaofen_df = pd.DataFrame(list(cursor3))
-                   a=len(piaofen_df)
-                   for i in range(0,a-1):
-                       if(piaofen_df.loc[a-1-i,'content'] not in guang):                  
+                    for i in range(0,a-1):
+                       if (piaofen_df.loc[a-1-i,'shou']==1) and (piaofen_df.loc[a-1-i,'hanglei2']==1 ) and (piaofen_df.loc[a-1-i,'content'] not in guang):                  
                           
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.loc[a-1-i,'time'],piaofen_df.loc[a-1-i,'time2'],piaofen_df.loc[a-1-i,'nickname'],piaofen_df.loc[a-1-i,'content']))
-
+                         
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            guang.append(piaofen_df.loc[a-1-i,'content'])      
                            count+=1 
-                           if (count==6):
+                           if (count==6) or(i>=200):
                                return huifu
                                print('已发送')
                                break

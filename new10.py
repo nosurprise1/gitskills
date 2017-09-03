@@ -274,7 +274,7 @@ def text_reply(msg):
                   
                   print(data)     
                 
-#回复广告                
+#回复广告  因为回复方式是return 所以回复必须放在最后一位。                
            if hanglei2!=0:
                print('shou,%s'%shou)
                print('chu,%s'%chu)

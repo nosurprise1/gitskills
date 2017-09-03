@@ -280,7 +280,7 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
-                   return(huifu)
+                   return(huifu0)
                elif shou==1 and chu==0 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
                    shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
                    shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")

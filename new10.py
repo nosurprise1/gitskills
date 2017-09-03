@@ -634,7 +634,10 @@ def text_reply(msg):
                            count+=1
                    print(huifu)
                    return(huifu)
-             
+           
+        
+           print(shijian11)
+           print(shijian1) 
            piaofen_df=piaofen_df.set_index('time')
            piaofen_df=piaofen_df.ix[shijian1]
            contentyy=piaofen_df['content'].tolist()
@@ -644,8 +647,7 @@ def text_reply(msg):
    
   #             df2 = pd.DataFrame(list(cursor))
    #            contentyy=df2['content'].tolist()
-           print(shijian11)
-           print(shijian1)
+           
            print(piaofen_df)
            if (hanglei2!=0) and (msg['Content'] not in contentyy):
                   data=pd.DataFrame({'time':[shijian1],

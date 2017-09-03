@@ -635,7 +635,9 @@ def text_reply(msg):
                    print(huifu)
                    return(huifu0)
              
-            
+               piaofen_df=piaofen_df.set_index('time')
+               piaofen_df=piaofen_df.ix[shijian11]
+               contentyy=piaofen_df['content'].tolist()
              #  db3=client.piaofen
              #  collection3=db3.piaofen
               # cursor = collection3.find({'time':str(shijian11)})
@@ -643,34 +645,34 @@ def text_reply(msg):
   #             df2 = pd.DataFrame(list(cursor))
    #            contentyy=df2['content'].tolist()
             
-            
-    #           if msg['Content'] not in contentyy:
-     #             data=pd.DataFrame({'time':[shijian1],
-      #                        'time2':[shijian2],
-       #                       'hanglei2':[hanglei2],
-        #                      'hanglei3':[hanglei3],
-         #                     'hanglei1':[hanglei1],
-          #                    'nickname':['none'],
-           #                   'shou':[shou],
-            #                  'chu':[chu],
-             #                 'shoudai':[shoudai],
-              #                'chudai':[chudai],
-               #               'shouhui':[shouhui],
-                #              'chuhui':[chuhui],
-                 #             'shoufu':[shoufu],
-                  #            'chufu':[chufu],
-                   #           'shouli':[shouli],
-                    #          'chuli':[chuli],
-                     #         'shoucun':[shoucun],
-                      #        'chucun':[chucun],
-                       #       'content':[msg['Content']],
-                        #      'leixing':['1']
-                         #     })    
+               print(piaofen_df)
+               if msg['Content'] not in contentyy:
+                  data=pd.DataFrame({'time':[shijian1],
+                              'time2':[shijian2],
+                              'hanglei2':[hanglei2],
+                              'hanglei3':[hanglei3],
+                              'hanglei1':[hanglei1],
+                              'nickname':['none'],
+                              'shou':[shou],
+                              'chu':[chu],
+                              'shoudai':[shoudai],
+                              'chudai':[chudai],
+                              'shouhui':[shouhui],
+                              'chuhui':[chuhui],
+                              'shoufu':[shoufu],
+                              'chufu':[chufu],
+                              'shouli':[shouli],
+                              'chuli':[chuli],
+                              'shoucun':[shoucun],
+                              'chucun':[chucun],
+                              'content':[msg['Content']],
+                              'leixing':['1']
+                              })    
                   
-               #   records = json.loads(data.T.to_json()).values()
-                #  collection3.insert(records)
+                  records = json.loads(data.T.to_json()).values()
+                  collection3.insert(records)
                   
-                 # print(data)
+                  print(data)
                 
         
         

@@ -635,9 +635,9 @@ def text_reply(msg):
                    print(huifu)
                    return(huifu)
              
-               piaofen_df=piaofen_df.set_index('time')
-               piaofen_df=piaofen_df.ix[shijian11]
-               contentyy=piaofen_df['content'].tolist()
+           piaofen_df=piaofen_df.set_index('time')
+           piaofen_df=piaofen_df.ix[shijian11]
+           contentyy=piaofen_df['content'].tolist()
              #  db3=client.piaofen
              #  collection3=db3.piaofen
               # cursor = collection3.find({'time':str(shijian11)})
@@ -645,8 +645,8 @@ def text_reply(msg):
   #             df2 = pd.DataFrame(list(cursor))
    #            contentyy=df2['content'].tolist()
             
-               print(piaofen_df)
-               if msg['Content'] not in contentyy:
+           print(piaofen_df)
+           if (hanglei2!=0) and (msg['Content'] not in contentyy):
                   data=pd.DataFrame({'time':[shijian1],
                               'time2':[shijian2],
                               'hanglei2':[hanglei2],

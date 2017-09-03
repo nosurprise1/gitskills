@@ -245,7 +245,7 @@ def text_reply(msg):
            df2 = pd.DataFrame(list(cursor))
            contentyy=df2['content'].tolist()
            
-           print(piaofen_df)
+           print(df2)
            if (hanglei2!=0) and (msg['Content'] not in contentyy):
                   data=pd.DataFrame({'time':[shijian1],
                               'time2':[shijian2],

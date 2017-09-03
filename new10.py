@@ -287,8 +287,8 @@ def text_reply(msg):
                    a=len(piaofen_df)
                    piaofen_df=piaofen_df.drop_duplicates(['content'])
                    a=len(piaofen_df)
-                   len=min(a,6)
-                   for i in range(0,len):       
+                   len0=min(a,6)
+                   for i in range(0,len0):       
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            #print(huifu0)
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)

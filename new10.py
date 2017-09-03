@@ -233,7 +233,47 @@ def text_reply(msg):
            shijian2=time.strftime('%H:%M',time.localtime(time.time()))
 
           
-                
+           print('111111111')
+           print(shijian11)
+           print(shijian1) 
+           piaofen_df=piaofen_df.set_index('time')
+           piaofen_df=piaofen_df.ix[shijian1]
+           contentyy=piaofen_df['content'].tolist()
+             #  db3=client.piaofen
+             #  collection3=db3.piaofen
+              # cursor = collection3.find({'time':str(shijian11)})
+   
+  #             df2 = pd.DataFrame(list(cursor))
+   #            contentyy=df2['content'].tolist()
+           
+           print(piaofen_df)
+           if (hanglei2!=0) and (msg['Content'] not in contentyy):
+                  data=pd.DataFrame({'time':[shijian1],
+                              'time2':[shijian2],
+                              'hanglei2':[hanglei2],
+                              'hanglei3':[hanglei3],
+                              'hanglei1':[hanglei1],
+                              'nickname':['none'],
+                              'shou':[shou],
+                              'chu':[chu],
+                              'shoudai':[shoudai],
+                              'chudai':[chudai],
+                              'shouhui':[shouhui],
+                              'chuhui':[chuhui],
+                              'shoufu':[shoufu],
+                              'chufu':[chufu],
+                              'shouli':[shouli],
+                              'chuli':[chuli],
+                              'shoucun':[shoucun],
+                              'chucun':[chucun],
+                              'content':[msg['Content']],
+                              'leixing':['1']
+                              })    
+                  
+                  records = json.loads(data.T.to_json()).values()
+                  collection3.insert(records)
+                  
+                  print(data)     
                 
 #回复广告                
            if hanglei2!=0:
@@ -635,47 +675,7 @@ def text_reply(msg):
                    print(huifu)
                    return(huifu)
            
-        
-           print(shijian11)
-           print(shijian1) 
-           piaofen_df=piaofen_df.set_index('time')
-           piaofen_df=piaofen_df.ix[shijian1]
-           contentyy=piaofen_df['content'].tolist()
-             #  db3=client.piaofen
-             #  collection3=db3.piaofen
-              # cursor = collection3.find({'time':str(shijian11)})
-   
-  #             df2 = pd.DataFrame(list(cursor))
-   #            contentyy=df2['content'].tolist()
            
-           print(piaofen_df)
-           if (hanglei2!=0) and (msg['Content'] not in contentyy):
-                  data=pd.DataFrame({'time':[shijian1],
-                              'time2':[shijian2],
-                              'hanglei2':[hanglei2],
-                              'hanglei3':[hanglei3],
-                              'hanglei1':[hanglei1],
-                              'nickname':['none'],
-                              'shou':[shou],
-                              'chu':[chu],
-                              'shoudai':[shoudai],
-                              'chudai':[chudai],
-                              'shouhui':[shouhui],
-                              'chuhui':[chuhui],
-                              'shoufu':[shoufu],
-                              'chufu':[chufu],
-                              'shouli':[shouli],
-                              'chuli':[chuli],
-                              'shoucun':[shoucun],
-                              'chucun':[chucun],
-                              'content':[msg['Content']],
-                              'leixing':['1']
-                              })    
-                  
-                  records = json.loads(data.T.to_json()).values()
-                  collection3.insert(records)
-                  
-                  print(data)
                 
         
         

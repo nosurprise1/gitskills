@@ -631,8 +631,8 @@ def text_reply(msg):
                                braek
              
             
-            db_piaofen=client.piaofen
-            collection3=db_piaofen.piaofen
+            db3=client.piaofen
+            collection3=db3.piaofen
             cursor = collection3.find({'time':str(shijian11)})
     #cursor = collection3.find({'time':'2017-09-01'})
             df2 = pd.DataFrame(list(cursor))

@@ -236,15 +236,14 @@ def text_reply(msg):
            print('111111111')
            print(shijian11)
            print(shijian1) 
-           piaofen_df=piaofen_df.set_index('time')
-           piaofen_df=piaofen_df.ix[shijian1]
-           contentyy=piaofen_df['content'].tolist()
-             #  db3=client.piaofen
-             #  collection3=db3.piaofen
-              # cursor = collection3.find({'time':str(shijian11)})
-   
-  #             df2 = pd.DataFrame(list(cursor))
-   #            contentyy=df2['content'].tolist()
+           #piaofen_df=piaofen_df.set_index('time')
+          # piaofen_df=piaofen_df.ix[shijian1]
+           #contentyy=piaofen_df['content'].tolist()
+           db3=client.piaofen
+           collection3=db3.piaofen
+           cursor = collection3.find({'time':str(shijian11)})
+           df2 = pd.DataFrame(list(cursor))
+           contentyy=df2['content'].tolist()
            
            print(piaofen_df)
            if (hanglei2!=0) and (msg['Content'] not in contentyy):

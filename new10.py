@@ -231,40 +231,12 @@ def text_reply(msg):
                                                          break
            shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
            shijian2=time.strftime('%H:%M',time.localtime(time.time()))
-           print(content)
-           if hanglei2!=0 and (msg['Content'] not in content):
-                  data=pd.DataFrame({'time':[shijian1],
-                              'time2':[shijian2],
-                              'hanglei2':[hanglei2],
-                              'hanglei3':[hanglei3],
-                              'hanglei1':[hanglei1],
-                              'nickname':['none'],
-                              'shou':[shou],
-                              'chu':[chu],
-                              'shoudai':[shoudai],
-                              'chudai':[chudai],
-                              'shouhui':[shouhui],
-                              'chuhui':[chuhui],
-                              'shoufu':[shoufu],
-                              'chufu':[chufu],
-                              'shouli':[shouli],
-                              'chuli':[chuli],
-                              'shoucun':[shoucun],
-                              'chucun':[chucun],
-                              'content':[msg['Content']],
-                              'leixing':['1']
-                              })    
-                  
-                  records = json.loads(data.T.to_json()).values()
-                  collection3.insert(records)
-                  content.append(msg['Content'])  
-                  print(data)
-                
+
+          
                 
                 
 #回复广告                
            if hanglei2!=0:
-               
                if shou==0 and chu==1 and shoudai==0 and chudai==0 and shoufu==0 and chufu==0 and shouli==0 and chuli==0 and shoucun==0 and chucun==0 and shouhui==0 and chuhui==0:
                    shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
                    shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
@@ -656,6 +628,46 @@ def text_reply(msg):
                            if (count==6)or (i>=a):
                                return huifu
                                print('已发送')
-                               break
+                               braek
+             
+            
+            db_piaofen=client.piaofen
+            collection3=db_piaofen.piaofen
+            cursor = collection3.find({'time':str(shijian11)})
+    #cursor = collection3.find({'time':'2017-09-01'})
+            df2 = pd.DataFrame(list(cursor))
+            contentyy=df2['content'].tolist()
+            
+            
+            if msg['Content'] not in contentyy:
+                  data=pd.DataFrame({'time':[shijian1],
+                              'time2':[shijian2],
+                              'hanglei2':[hanglei2],
+                              'hanglei3':[hanglei3],
+                              'hanglei1':[hanglei1],
+                              'nickname':['none'],
+                              'shou':[shou],
+                              'chu':[chu],
+                              'shoudai':[shoudai],
+                              'chudai':[chudai],
+                              'shouhui':[shouhui],
+                              'chuhui':[chuhui],
+                              'shoufu':[shoufu],
+                              'chufu':[chufu],
+                              'shouli':[shouli],
+                              'chuli':[chuli],
+                              'shoucun':[shoucun],
+                              'chucun':[chucun],
+                              'content':[msg['Content']],
+                              'leixing':['1']
+                              })    
+                  
+                  records = json.loads(data.T.to_json()).values()
+                  collection3.insert(records)
+                  
+                  print(data)
+                
+        
+        
 itchatmp.run()
 

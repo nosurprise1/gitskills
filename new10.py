@@ -631,15 +631,15 @@ def text_reply(msg):
                                braek
              
             
-            db3=client.piaofen
-            collection3=db3.piaofen
-            cursor = collection3.find({'time':str(shijian11)})
+               db3=client.piaofen
+               collection3=db3.piaofen
+               cursor = collection3.find({'time':str(shijian11)})
     #cursor = collection3.find({'time':'2017-09-01'})
-            df2 = pd.DataFrame(list(cursor))
-            contentyy=df2['content'].tolist()
+               df2 = pd.DataFrame(list(cursor))
+               contentyy=df2['content'].tolist()
             
             
-            if msg['Content'] not in contentyy:
+               if msg['Content'] not in contentyy:
                   data=pd.DataFrame({'time':[shijian1],
                               'time2':[shijian2],
                               'hanglei2':[hanglei2],

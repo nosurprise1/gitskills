@@ -93,9 +93,9 @@ def text_reply(msg):
      global content,collection3,piaofen_df,shijian11,shijian0,shijian01,shijian02
 #只看某几个银行
 
-     if '只看工行' in msg['Content']: 
-         kanhang='工行'
-         cursor4=collection3.find
+    # if '只看工行' in msg['Content']: 
+     #    kanhang='工行'
+      #   cursor4=collection3.find
         
      guang=[]
      count=0

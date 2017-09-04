@@ -234,7 +234,7 @@ def text_reply(msg):
            cursor = collection3.find({'time':str(shijian11)})
            df2 = pd.DataFrame(list(cursor))
            contentyy=df2['content'].tolist()
-           if(hanglei2=0):
+           if(hanglei2==0):
               return('请您务必广告最后带上所在银行及联系方式，否者不能获得交易助手的广告。')
            else：
                if (msg['Content'] not in contentyy):

@@ -278,20 +278,8 @@ def text_reply(msg):
                   print(data)     
                 
 #回复广告  因为回复方式是return 所以回复必须放在最后一位。                
-           if hanglei2!=0:
-               print('shou,%s'%shou)
-               print('chu,%s'%chu)
-               print('shouhui,%s'%shouhui)
-               print('chuhui,%s'%chuhui)
-               print('shoudai,%s'%shoudai)
-               print('chudai,%s'%chudai)
-               print('shoucun,%s'%shoucun)
-               print('chucun,%s'%chucun)
-               print('shoufu,%s'%shoufu)
-               print('chufu,%s'%chufu)
-               print('shouli,%s'%shouli)
-               print('chuli,%s'%chuli)
-               return('1111111')
+
+     return('1111111')
                 
         
         

@@ -124,8 +124,8 @@ def text_reply(msg):
      chufa=0
      huifu='对应广告：'
      string=re.split('；|。|？|！|~~|，| |…',msg['Content'])   #将字符串分割，中午字符串分割需要用u
-     num=len(string)     #计量列表长度
-     if num<=30:      #为防止数量太大占内存          
+     num=len(string)     #计量列表长
+     if num<=10:      #为防止数量太大占内存          
          for i in range(0,num): 
             for j in range(1,163):
                 c=piao_df.astype(str).loc[j,'ci'].strip()
@@ -138,6 +138,33 @@ def text_reply(msg):
                       shouhui=int(piao_df.astype(str).loc[j,'shouhui'].strip())+shouhui
                       chuhui=int(piao_df.astype(str).loc[j,'chuhui'].strip())+chuhui                    
                       break
+                        
+                        
+            for j in range(1,76):
+                c=fu_df.astype(str).loc[j,'ci'].strip()
+                zhao= re.search(c,string[i])
+                if zhao:                 
+                      shoufu=int(fu_df.astype(str).loc[j,'shoufu'].strip())+shoufu
+                      chufu=int(fu_df.astype(str).loc[j,'chufu'].strip())+chufu           
+                      break           
+            
+            for j in range(1,75):
+                c=cun_df.astype(str).loc[j,'ci'].strip()
+                   # print(c)
+                zhao= re.search(c,string[i])
+                if zhao:                 
+                      shoucun=int(cun_df.astype(str).loc[j,'shoucun'].strip())+shoucun
+                      chucun=int(cun_df.astype(str).loc[j,'chucun'].strip())+chucun           
+                      break 
+            
+            for j in range(1,40):
+                c=li_df.astype(str).loc[j,'ci'].strip()
+                zhao= re.search(c,string[i])
+                if zhao:                 
+                      shouli=int(li_df.astype(str).loc[j,'shouli'].strip())+shouli
+                      chuli=int(li_df.astype(str).loc[j,'chuli'].strip())+chuli           
+                      break
+                      
          if shou!=0:
              shou=1
          if chu!=0:
@@ -153,14 +180,7 @@ def text_reply(msg):
          yepiao=shou+chu+shoudai+chudai+shouhui+chuhui
            
         #分析福费廷
-         for i in range(0,num): 
-            for j in range(1,74):
-                c=fu_df.astype(str).loc[j,'ci'].strip()
-                zhao= re.search(c,string[i])
-                if zhao:                 
-                      shoufu=int(fu_df.astype(str).loc[j,'shoufu'].strip())+shoufu
-                      chufu=int(fu_df.astype(str).loc[j,'chufu'].strip())+chufu           
-                      break
+
          if shoufu!=0:
              shoufu=1
          if chufu!=0:
@@ -168,15 +188,6 @@ def text_reply(msg):
          yefu=shoufu+chufu
          
         #分析存单
-         for i in range(0,num): 
-            for j in range(1,75):
-                c=cun_df.astype(str).loc[j,'ci'].strip()
-                   # print(c)
-                zhao= re.search(c,string[i])
-                if zhao:                 
-                      shoucun=int(cun_df.astype(str).loc[j,'shoucun'].strip())+shoucun
-                      chucun=int(cun_df.astype(str).loc[j,'chucun'].strip())+chucun           
-                      break
          if shoucun!=0:
                  shoucun=1
          if chucun!=0:
@@ -184,14 +195,6 @@ def text_reply(msg):
          yecun=shoucun+chucun
             
          #分析理财
-         for i in range(0,num): 
-            for j in range(1,39):
-                c=li_df.astype(str).loc[j,'ci'].strip()
-                zhao= re.search(c,string[i])
-                if zhao:                 
-                      shouli=int(li_df.astype(str).loc[j,'shouli'].strip())+shouli
-                      chuli=int(li_df.astype(str).loc[j,'chuli'].strip())+chuli           
-                      break
          if shouli!=0:
                  shouli=1
          if chuli!=0:
@@ -202,7 +205,7 @@ def text_reply(msg):
          ####   
          if (yepiao+yefu+yeli+yecun)!=0: 
            print(num)
-           for j2 in range(1,326):
+           for j2 in range(1,327):
                       if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-1]:
                            hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
                            hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())

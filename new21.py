@@ -126,9 +126,9 @@ def text_reply(msg):
      string=re.split('；|。|？|！|~~|，| |…',msg['Content'])   #将字符串分割，中午字符串分割需要用u
      num=len(string)     #计量列表长
      if num>2:
-        return('请输入仅输入两段广告，用一个“，”隔开，例如“收9月到期票，工行***0571-88888888”')#为防止数量太大占内存          
+         return('请输入仅输入两段广告，用一个“，”隔开，例如“收9月到期票，工行***0571-88888888”')#为防止数量太大占内存          
      else:
-        for i in range(0,num): 
+         for i in range(0,num): 
             for j in range(1,163):
                 c=piao_df.astype(str).loc[j,'ci'].strip()
                 zhaop= re.search(c,string[i])

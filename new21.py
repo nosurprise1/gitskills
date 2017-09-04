@@ -205,7 +205,7 @@ def text_reply(msg):
          ####   
          if (yepiao+yefu+yeli+yecun)!=1:
            return('欢迎您使用汇票交易发送广告：1.每次只发送一个交易方向的广告，我会回复您对应业务方向的最多6条广告。')
-         else：       
+         else:       
            for j2 in range(1,327):
                       if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-1]:
                            hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()

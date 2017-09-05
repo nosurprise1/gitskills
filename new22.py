@@ -125,7 +125,7 @@ def text_reply(msg):
      num=len(string)     #计量列表长
      print(num)
      if num>8:
-         return('欢迎您使用汇票交易发送广告：1.每次只发送一个交易方向的广告，我会回复您对应业务方向的最多6条广告。2.广告编辑请勿输入过多短句，造成分析时间过长')#为防止数量太大占内存          
+         return('欢迎您使用汇票交易发送广告，我提供票据、福费廷、存单、理财四种广告对接业务。为了提高效率，您在发送给我广告时，请勿输入过多短句，请控制在8个句子以内。')#为防止数量太大占内存          
      else:
             
 #以下一段分析票据
@@ -171,7 +171,8 @@ def text_reply(msg):
                                      hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break
-                                
+         else:
+            return('欢迎您使用汇票交易发送广告，我提供票据、福费廷、存单、理财四种广告对接业务。广告1换6！注意：如果您想别人能及时联系到您，发送广告务必带上联系方式！如有疑问请联系微信号：18969901812。')
          shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
          shijian2=time.strftime('%H:%M',time.localtime(time.time()))
          print(shijian11)
@@ -182,7 +183,7 @@ def text_reply(msg):
          df2 = pd.DataFrame(list(cursor))
          contentyy=df2['content'].tolist()
          if(hanglei2==0):
-               return('请您务必广告最后带上所在银行及联系方式，否者不能获得交易助手的广告。')
+               return('请您务必广告最后带上所在银行及联系方式。')
          else:
                if (co not in contentyy):
                   data=pd.DataFrame({'time':[shijian1],
@@ -450,6 +451,8 @@ def text_reply(msg):
                                      hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break   #是否要跳出二层循环
+         else:
+            return('欢迎您使用汇票交易发送广告，我提供票据、福费廷、存单、理财四种广告对接业务。广告1换6！注意：如果您想别人能及时联系到您，发送广告务必带上联系方式！如有疑问请联系微信号：18969901812。')
          shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
          shijian2=time.strftime('%H:%M',time.localtime(time.time()))
          print(shijian11)
@@ -460,7 +463,7 @@ def text_reply(msg):
          df2 = pd.DataFrame(list(cursor))
          contentyy=df2['content'].tolist()
          if(hanglei2==0):
-               return('请您务必广告最后带上所在银行及联系方式，否者不能获得交易助手的广告。')
+               return('请您务必广告最后带上所在银行及联系方式。')
          else:
                if (co not in contentyy):
                   data=pd.DataFrame({'time':[shijian1],
@@ -600,6 +603,8 @@ def text_reply(msg):
                                      hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break   #是否要跳出二层循环
+         else:
+            return('欢迎您使用汇票交易发送广告，我提供票据、福费廷、存单、理财四种广告对接业务。广告1换6！注意：如果您想别人能及时联系到您，发送广告务必带上联系方式！如有疑问请联系微信号：18969901812。')
          shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
          shijian2=time.strftime('%H:%M',time.localtime(time.time()))
          print(shijian11)
@@ -610,7 +615,7 @@ def text_reply(msg):
          df2 = pd.DataFrame(list(cursor))
          contentyy=df2['content'].tolist()
          if(hanglei2==0):
-               return('请您务必广告最后带上所在银行及联系方式，否者不能获得交易助手的广告。')
+               return('请您务必广告最后带上所在银行及联系方式。')
          else:
                if (co not in contentyy):
                   data=pd.DataFrame({'time':[shijian1],
@@ -749,6 +754,8 @@ def text_reply(msg):
                                      hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break   #是否要跳出二层循环
+         else:
+            return('欢迎您使用汇票交易发送广告，我提供票据、福费廷、存单、理财四种广告对接业务。广告1换6！注意：如果您想别人能及时联系到您，发送广告务必带上联系方式。如有疑问请联系微信号：18969901812。')
          shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
          shijian2=time.strftime('%H:%M',time.localtime(time.time()))
          print(shijian11)
@@ -759,7 +766,7 @@ def text_reply(msg):
          df2 = pd.DataFrame(list(cursor))
          contentyy=df2['content'].tolist()
          if(hanglei2==0):
-               return('请您务必广告最后带上所在银行及联系方式，否者不能获得交易助手的广告。')
+               return('请您务必广告最后带上所在银行及联系方式。')
          else:
                if (co not in contentyy):
                   data=pd.DataFrame({'time':[shijian1],
@@ -879,7 +886,7 @@ def text_reply(msg):
                 
                 
        else:
-           return('请在您的广告前面加上“票据。”、“福费廷。”、“存单。”、“理财。”，业务方向四选一。例如“票据。收各期限国股承兑电银，工行***0571-88888888”')
+           return('欢迎您使用汇票交易发送广告，我提供票据、福费廷、存单、理财四种广告对接业务。请在您想要发送的广告前面加上“票据。”，“福费廷。”，“存单。”或“理财。”，选择一个业务方向，我才能为您对接广告。例如“票据。收各期限国股承兑电银，工行***0571-88888888”，注意：如果您想别人能及时联系到您，发送广告务必带上联系方式！')
          
 
        

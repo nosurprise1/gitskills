@@ -117,7 +117,9 @@ def text_reply(msg):
      shoufa=0
      chufa=0
      huifu='对应广告：'
-     string=re.split('；|。|？|！|~~|，| |…',msg['Content'])   #将字符串分割，中午字符串分割需要用u
+     co=re.compile(u'[\U00010000-\U0010ffff]')
+     co=co.sub(u'',msg['Content'])
+     string=re.split('；|。|？|！|~~|，| |…',co)   #将字符串分割，中午字符串分割需要用u
      while '' in string:
         string.remove('')
      num=len(string)     #计量列表长
@@ -182,7 +184,7 @@ def text_reply(msg):
          if(hanglei2==0):
                return('请您务必广告最后带上所在银行及联系方式，否者不能获得交易助手的广告。')
          else:
-               if (msg['Content'] not in contentyy):
+               if (co not in contentyy):
                   data=pd.DataFrame({'time':[shijian1],
                               'time2':[shijian2],
                               'hanglei2':[hanglei2],
@@ -201,7 +203,7 @@ def text_reply(msg):
                               'chuli':[chuli],
                               'shoucun':[shoucun],
                               'chucun':[chucun],
-                              'content':[msg['Content']],
+                              'content':[co],
                               'leixing':['1']
                               })    
                   
@@ -460,7 +462,7 @@ def text_reply(msg):
          if(hanglei2==0):
                return('请您务必广告最后带上所在银行及联系方式，否者不能获得交易助手的广告。')
          else:
-               if (msg['Content'] not in contentyy):
+               if (co not in contentyy):
                   data=pd.DataFrame({'time':[shijian1],
                               'time2':[shijian2],
                               'hanglei2':[hanglei2],
@@ -479,7 +481,7 @@ def text_reply(msg):
                               'chuli':[chuli],
                               'shoucun':[shoucun],
                               'chucun':[chucun],
-                              'content':[msg['Content']],
+                              'content':[co],
                               'leixing':['1']
                               })    
                   
@@ -610,7 +612,7 @@ def text_reply(msg):
          if(hanglei2==0):
                return('请您务必广告最后带上所在银行及联系方式，否者不能获得交易助手的广告。')
          else:
-               if (msg['Content'] not in contentyy):
+               if (co not in contentyy):
                   data=pd.DataFrame({'time':[shijian1],
                               'time2':[shijian2],
                               'hanglei2':[hanglei2],
@@ -629,7 +631,7 @@ def text_reply(msg):
                               'chuli':[chuli],
                               'shoucun':[shoucun],
                               'chucun':[chucun],
-                              'content':[msg['Content']],
+                              'content':[co],
                               'leixing':['1']
                               })    
                   
@@ -759,7 +761,7 @@ def text_reply(msg):
          if(hanglei2==0):
                return('请您务必广告最后带上所在银行及联系方式，否者不能获得交易助手的广告。')
          else:
-               if (msg['Content'] not in contentyy):
+               if (co not in contentyy):
                   data=pd.DataFrame({'time':[shijian1],
                               'time2':[shijian2],
                               'hanglei2':[hanglei2],
@@ -778,7 +780,7 @@ def text_reply(msg):
                               'chuli':[chuli],
                               'shoucun':[shoucun],
                               'chucun':[chucun],
-                              'content':[msg['Content']],
+                              'content':[co],
                               'leixing':['1']
                               })    
                   

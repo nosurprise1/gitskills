@@ -575,7 +575,7 @@ def text_reply(msg):
 #以下一段分析理财                        
        elif string[0]=='理财':     
          for i in range(0,num): 
-           for j in range(1,39):
+           for j in range(1,40):
                 c=li_df.astype(str).loc[j,'ci'].strip()
                 zhao= re.search(c,string[i])
                 if zhao:                 
@@ -726,7 +726,7 @@ def text_reply(msg):
 #以下一段分析存单                        
        elif string[0]=='存单':     
          for i in range(0,num): 
-           for j in range(1,78):
+           for j in range(1,75):
                 c=cun_df.astype(str).loc[j,'ci'].strip()
                 zhao= re.search(c,string[i])
                 if zhao:                 

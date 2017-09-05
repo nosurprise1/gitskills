@@ -118,6 +118,8 @@ def text_reply(msg):
      chufa=0
      huifu='对应广告：'
      string=re.split('；|。|？|！|~~|，| |…',msg['Content'])   #将字符串分割，中午字符串分割需要用u
+     while '' in string:
+        string.remove('')
      num=len(string)     #计量列表长
      print(num)
      if num>8:
@@ -880,7 +882,7 @@ def text_reply(msg):
                 
                 
        else:
-           return('请在您的广告前面加上“票据：”、“福费廷：”、“存单：”、“理财：”，业务方向四选一。例如“票据：收各期限国股承兑电银，工行***0571-88888888”')
+           return('请在您的广告前面加上“票据。”、“福费廷。”、“存单。”、“理财。”，业务方向四选一。例如“票据：收各期限国股承兑电银，工行***0571-88888888”')
          
 
        

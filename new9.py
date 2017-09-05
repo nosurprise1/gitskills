@@ -123,7 +123,7 @@ def text_reply(msg):
      num=len(string)     #计量列表长
      print(num)
      if num>8:
-         return('欢迎您使用汇票交易发送广告：1.每次只发送一个交易方向的广告，我会回复您对应业务方向的最多6条广告。2.广告编辑请仅输入两段文字，用一个“；”隔开，例如“收9月到期票，工行***0571-88888888”')#为防止数量太大占内存          
+         return('欢迎您使用汇票交易发送广告：1.每次只发送一个交易方向的广告，我会回复您对应业务方向的最多6条广告。2.广告编辑请勿输入过多短句，造成分析时间过长')#为防止数量太大占内存          
      else:
             
 #以下一段分析票据
@@ -414,11 +414,6 @@ def text_reply(msg):
                    print(huifu)
                    return(huifu)     
                         
-                        
-                        
-                   
-                
-                
                 
                 
                 
@@ -721,7 +716,7 @@ def text_reply(msg):
                    print(huifu)
                    return(huifu)  
                 
-#以下一段分析理财                        
+#以下一段分析存单                        
        elif string[0]=='存单':     
          for i in range(0,num): 
            for j in range(1,78):

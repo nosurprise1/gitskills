@@ -223,7 +223,7 @@ def text_reply(msg):
                print('chufu,%s'%chufu)
                print('shouli,%s'%shouli)
                print('chuli,%s'%chuli)               
-               if shou==0 and chu==1 and shoudai==0 and chudai==0 and shouhui==0 and chuhui==0:
+               if chu==1:
                    shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
                    shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
                    shijian0=shijian11-datetime.timedelta(days=1)
@@ -255,7 +255,7 @@ def text_reply(msg):
                            count+=1
                    print(huifu)
                    return(huifu)
-               elif shou==1 and chu==0 and shoudai==0 and chudai==0  and shouhui==0 and chuhui==0:
+               elif shou==1:
                    shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
                    shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
                    shijian0=shijian11-datetime.timedelta(days=1)
@@ -287,7 +287,7 @@ def text_reply(msg):
                            count+=1
                    print(huifu)
                    return(huifu)
-               elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shouhui==1 and chuhui==0:
+               elif shouhui==1:
                    shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
                    shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
                    shijian0=shijian11-datetime.timedelta(days=1)
@@ -319,7 +319,7 @@ def text_reply(msg):
                            count+=1
                    print(huifu)
                    return(huifu)
-               elif shou==0 and chu==0 and shoudai==0 and chudai==0 and shouhui==0 and chuhui==1:
+               elif chuhui==1:
                    shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
                    shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
                    shijian0=shijian11-datetime.timedelta(days=1)
@@ -351,7 +351,7 @@ def text_reply(msg):
                            count+=1
                    print(huifu)
                    return(huifu)
-               elif shou==0 and chu==0 and shoudai==1 and chudai==0 and shouhui==0 and chuhui==0:
+               elif shoudai==1:
                    shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
                    shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
                    shijian0=shijian11-datetime.timedelta(days=1)
@@ -383,7 +383,7 @@ def text_reply(msg):
                            count+=1
                    print(huifu)
                    return(huifu)
-               elif shou==0 and chu==0 and shoudai==0 and chudai==1 and shouhui==0 and chuhui==0:
+               elif  chudai==1:
                    shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
                    shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
                    shijian0=shijian11-datetime.timedelta(days=1)

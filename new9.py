@@ -165,18 +165,18 @@ def text_reply(msg):
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break
                                 
-           shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-           shijian2=time.strftime('%H:%M',time.localtime(time.time()))
-           print(shijian11)
-           print(shijian1) 
-           db3=client.piaofen
-           collection3=db3.piaofen
-           cursor = collection3.find({'time':str(shijian11)})
-           df2 = pd.DataFrame(list(cursor))
-           contentyy=df2['content'].tolist()
-           if(hanglei2==0):
+         shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+         shijian2=time.strftime('%H:%M',time.localtime(time.time()))
+         print(shijian11)
+         print(shijian1) 
+         db3=client.piaofen
+         collection3=db3.piaofen
+         cursor = collection3.find({'time':str(shijian11)})
+         df2 = pd.DataFrame(list(cursor))
+         contentyy=df2['content'].tolist()
+         if(hanglei2==0):
                return('请您务必广告最后带上所在银行及联系方式，否者不能获得交易助手的广告。')
-           else:
+         else:
                if (msg['Content'] not in contentyy):
                   data=pd.DataFrame({'time':[shijian1],
                               'time2':[shijian2],

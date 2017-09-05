@@ -466,7 +466,7 @@ def text_reply(msg):
                  chuli=1    
             yeli=shouli+chuli               
                         
-       else：
+       else:
            return('请在您的广告前面加上“票据：”、“福费廷：”、“存单：”、“理财：”，业务方向四选一。例如“票据：收各期限国股承兑电银，工行***0571-88888888”')
          
 

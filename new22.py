@@ -158,7 +158,7 @@ def text_reply(msg):
          if chuhui!=0:
              chuhui=1           
          if (shou+chu+shoudai+chudai+shouhui+chuhui)!=0:
-             for j2 in range(1,327):
+             for j2 in range(1,336):
                       if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-1]:
                            hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
                            hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
@@ -438,7 +438,7 @@ def text_reply(msg):
              chufu=1
          yefu=shoufu+chufu
          if yefu!=0:
-             for j2 in range(1,327):
+             for j2 in range(1,336):
                       if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-1]:
                            hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
                            hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
@@ -579,8 +579,8 @@ def text_reply(msg):
                 c=li_df.astype(str).loc[j,'ci'].strip()
                 zhao= re.search(c,string[i])
                 if zhao:                 
-                      shouli=int(li_df.astype(str).loc[j,'shoufu'].strip())+shouli
-                      chuli=int(li_df.astype(str).loc[j,'chufu'].strip())+chuli           
+                      shouli=int(li_df.astype(str).loc[j,'shouli'].strip())+shouli
+                      chuli=int(li_df.astype(str).loc[j,'chuli'].strip())+chuli           
                       break   
            if (shouli+chuli)>0:
                 break
@@ -590,7 +590,7 @@ def text_reply(msg):
              chuli=1
          yeli=shouli+chuli
          if yeli!=0:
-             for j2 in range(1,327):
+             for j2 in range(1,336):
                       if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-1]:
                            hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
                            hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())
@@ -730,8 +730,8 @@ def text_reply(msg):
                 c=cun_df.astype(str).loc[j,'ci'].strip()
                 zhao= re.search(c,string[i])
                 if zhao:                 
-                      shoucun=int(cun_df.astype(str).loc[j,'shoufu'].strip())+shoucun
-                      chucun=int(cun_df.astype(str).loc[j,'chufu'].strip())+chucun          
+                      shoucun=int(cun_df.astype(str).loc[j,'shoucun'].strip())+shoucun
+                      chucun=int(cun_df.astype(str).loc[j,'chucun'].strip())+chucun          
                       break   
            if (shoucun+chucun)>0:
                 break
@@ -741,7 +741,7 @@ def text_reply(msg):
              chucun=1
          yecun=shoucun+chucun
          if yecun!=0:
-             for j2 in range(1,327):
+             for j2 in range(1,336):
                       if bank_df.astype(str).loc[j2,'yinhang'].strip() in string[num-1]:
                            hanglei1=bank_df.astype(str).loc[j2,'fenlei1'].strip()
                            hanglei2=int(bank_df.astype(str).loc[j2,'fenlei2'].strip())

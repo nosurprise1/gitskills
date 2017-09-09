@@ -132,7 +132,7 @@ def text_reply(msg):
             
        if string[0]=='票据':
          for i in range(0,num): 
-            for j in range(1,163):
+            for j in range(1,164):
                 c=piao_df.astype(str).loc[j,'ci'].strip()
                 zhaop= re.search(c,string[i])
                 if zhaop:            

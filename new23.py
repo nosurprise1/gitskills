@@ -138,9 +138,10 @@ def text_reply(msg):
                     #做表
           huatudata3=piaofen_df[['hanglei1','shou','chu','shoudai','chudai','shouhui','chuhui']]
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
-          print(huatudata4)
-          return
-
+              
+          for i in range(0, len(huatudata4)):
+                huifu0=('%s,%s,%s:%s'%(huatudata4.ix[i,'hanglei1'],huatudata4.ix[i,'shou'],huatudata4.ix[i,'chu'],huatudata4.ix[i,'shoudai']))
+                print(huifu0)
         
         
 #以下一段分析票据

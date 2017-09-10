@@ -141,7 +141,7 @@ def text_reply(msg):
           huatudata4=huatudata4.reset_index(drop = False)
     #     
           huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shou': '收', 'chu': '出', 'shoudai': '收代', 'chudai': '出代', 'shouhui':'收代',  'chuhui':'出回'}) 
-          huatudata4=huatudata4.ix[机构] 
+          huatudata4=huatudata4.ix['机构'] 
       
 #          huatudata4=DataFrame(huatudata4,columns=['收','出','收代','出代','收回','出回'])
           print(huatudata4)

@@ -141,7 +141,7 @@ def text_reply(msg):
           
           huifu00='机构  收票  出票  收代持  出代持  收回购  出代持'              
           for i in range(0, 2):
-                huifu0=('中介  %s    %s     %s     %s     %s     %s'%(huatudata4.ix[i,'shou'],huatudata4.ix[i,'chu'],huatudata4.ix[i,'shoudai'],huatudata4.ix[i,'chudai'],huatudata4.ix[i,'shouhui'],huatudata4.ix[i,'chuhui']))
+                huifu0=('中介  %s    %s      %s      %s      %s      %s'%(huatudata4.ix[i,'shou'],huatudata4.ix[i,'chu'],huatudata4.ix[i,'shoudai'],huatudata4.ix[i,'chudai'],huatudata4.ix[i,'shouhui'],huatudata4.ix[i,'chuhui']))
                 print(huifu00)
                 print(huifu0)
         

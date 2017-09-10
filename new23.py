@@ -138,7 +138,7 @@ def text_reply(msg):
                     #做表
           huatudata3=piaofen_df[['hanglei1','shou','chu','shoudai','chudai','shouhui','chuhui']]
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
-          huatudata4=huatudata4.reset_index(drop = True)
+          huatudata4=huatudata4.reset_index(drop = False)
     #      print(huatudata4)
           huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shou': '收', 'chu': '出', 'shoudai': '收代', 'chudai': '出代', 'shouhui':'收代',  'chuhui':'出回'}) 
          # df.rename(index=str, columns={"A": "a", "C": "c"})

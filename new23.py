@@ -139,16 +139,58 @@ def text_reply(msg):
           huatudata3=piaofen_df[['hanglei1','shou','chu','shoudai','chudai','shouhui','chuhui']]
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
           huatudata4=huatudata4.reset_index(drop = False)
-    #     
-          huatudata4=huatudata4.rename(columns={'hanglei1': 'bank', 'shou': '收', 'chu': '出', 'shoudai': '收代', 'chudai': '出代', 'shouhui':'收代',  'chuhui':'出回'}) 
-          huatudata4=huatudata4.set_index('bank')
-      
-#          huatudata4=DataFrame(huatudata4,columns=['收','出','收代','出代','收回','出回'])
+          huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shou': '收', 'chu': '出', 'shoudai': '收代', 'chudai': '出代', 'shouhui':'收代',  'chuhui':'出回'}) 
+          huatudata4=huatudata4.set_index('机构')
           print(huatudata4)
           return(str(huatudata4))
-                   
-          
-        
+       if string[0]=='福费廷分析':
+          shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+          db3 = client.piaofen
+          collection3 = db3.piaofen   
+          cursor3 = collection3.find({
+                                                 'time':'2017-09-08'
+                                                 })
+          piaofen_df = pd.DataFrame(list(cursor3))
+                    #做表
+          huatudata3=piaofen_df[['hanglei1','shoufu','chufu']]
+          huatudata4=huatudata3.groupby(['hanglei1']).sum()
+          huatudata4=huatudata4.reset_index(drop = False)
+          huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shoufu': '收', 'chufu': '出'}) 
+          huatudata4=huatudata4.set_index('机构')
+          print(huatudata4)
+          return(str(huatudata4))            
+       if string[0]=='存单分析':
+          shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+          db3 = client.piaofen
+          collection3 = db3.piaofen   
+          cursor3 = collection3.find({
+                                                 'time':'2017-09-08'
+                                                 })
+          piaofen_df = pd.DataFrame(list(cursor3))
+                    #做表
+          huatudata3=piaofen_df[['hanglei1','shoucun','chucun']]
+          huatudata4=huatudata3.groupby(['hanglei1']).sum()
+          huatudata4=huatudata4.reset_index(drop = False)
+          huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shoucun': '收', 'chucun': '出'}) 
+          huatudata4=huatudata4.set_index('机构')
+          print(huatudata4)
+          return(str(huatudata4))     
+       if string[0]=='理财分析':
+          shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+          db3 = client.piaofen
+          collection3 = db3.piaofen   
+          cursor3 = collection3.find({
+                                                 'time':'2017-09-08'
+                                                 })
+          piaofen_df = pd.DataFrame(list(cursor3))
+                    #做表
+          huatudata3=piaofen_df[['hanglei1','shouli','chuli']]
+          huatudata4=huatudata3.groupby(['hanglei1']).sum()
+          huatudata4=huatudata4.reset_index(drop = False)
+          huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shouli': '收', 'chuli': '出'}) 
+          huatudata4=huatudata4.set_index('机构')
+          print(huatudata4)
+          return(str(huatudata4))     
         
 #以下一段分析票据
             

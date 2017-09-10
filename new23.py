@@ -135,7 +135,9 @@ def text_reply(msg):
                                                  'time':str(shijian2)
                                                  })
           piaofen_df = pd.DataFrame(list(cursor3))
-                    #做表
+          if piaofen_df.empty:
+            return('暂无当日数据，请稍后再试。')
+        #做表
           huatudata3=piaofen_df[['hanglei1','shou','chu','shoudai','chudai','shouhui','chuhui']]
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
           huatudata4=huatudata4.reset_index(drop = False)
@@ -151,7 +153,8 @@ def text_reply(msg):
                                                  'time':str(shijian2)
                                                  })
           piaofen_df = pd.DataFrame(list(cursor3))
-                    #做表
+          if piaofen_df.empty:
+            return('暂无当日数据，请稍后再试。')          #做表
           huatudata3=piaofen_df[['hanglei1','shoufu','chufu']]
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
           huatudata4=huatudata4.reset_index(drop = False)
@@ -167,7 +170,8 @@ def text_reply(msg):
                                                  'time':str(shijian2)
                                                  })
           piaofen_df = pd.DataFrame(list(cursor3))
-                    #做表
+          if piaofen_df.empty:
+            return('暂无当日数据，请稍后再试。')          #做表
           huatudata3=piaofen_df[['hanglei1','shoucun','chucun']]
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
           huatudata4=huatudata4.reset_index(drop = False)
@@ -183,7 +187,8 @@ def text_reply(msg):
                                                  'time':str(shijian2)
                                                  })
           piaofen_df = pd.DataFrame(list(cursor3))
-                    #做表
+          if piaofen_df.empty:
+            return('暂无当日数据，请稍后再试。')          #做表
           huatudata3=piaofen_df[['hanglei1','shouli','chuli']]
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
           huatudata4=huatudata4.reset_index(drop = False)

@@ -132,7 +132,7 @@ def text_reply(msg):
           db3 = client.piaofen
           collection3 = db3.piaofen   
           cursor3 = collection3.find({
-                                                 'time':'2017-09-08'
+                                                 'time':str(shijian2)
                                                  })
           piaofen_df = pd.DataFrame(list(cursor3))
                     #做表
@@ -148,7 +148,7 @@ def text_reply(msg):
           db3 = client.piaofen
           collection3 = db3.piaofen   
           cursor3 = collection3.find({
-                                                 'time':'2017-09-08'
+                                                 'time':str(shijian2)
                                                  })
           piaofen_df = pd.DataFrame(list(cursor3))
                     #做表
@@ -164,7 +164,7 @@ def text_reply(msg):
           db3 = client.piaofen
           collection3 = db3.piaofen   
           cursor3 = collection3.find({
-                                                 'time':'2017-09-08'
+                                                 'time':str(shijian2)
                                                  })
           piaofen_df = pd.DataFrame(list(cursor3))
                     #做表
@@ -180,7 +180,7 @@ def text_reply(msg):
           db3 = client.piaofen
           collection3 = db3.piaofen   
           cursor3 = collection3.find({
-                                                 'time':'2017-09-08'
+                                                 'time':str(shijian2)
                                                  })
           piaofen_df = pd.DataFrame(list(cursor3))
                     #做表

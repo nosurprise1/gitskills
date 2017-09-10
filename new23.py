@@ -140,7 +140,7 @@ def text_reply(msg):
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
               
           for i in range(0, len(huatudata4)):
-                huifu0=('%s,%s,%s:%s'%(huatudata4.ix[i,'hanglei1'],huatudata4.ix[i,'shou'],huatudata4.ix[i,'chu'],huatudata4.ix[i,'shoudai']))
+                huifu0=('%s,%s,%s,%s'%(huatudata4.ix[i,'shou'],huatudata4.ix[i,'chu'],huatudata4.ix[i,'shoudai'],huatudata4.ix[i,'chudai']))
                 print(huifu0)
         
         

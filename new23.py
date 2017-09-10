@@ -127,7 +127,7 @@ def text_reply(msg):
      if num>8:
          return('欢迎您使用汇票交易发送广告，我提供票据、福费廷、存单、理财四种广告对接业务。\n为了提高效率，您在发送给我广告时，请勿输入过多短句，请控制在8个句子以内。')#为防止数量太大占内存          
      else:
-       if sting[0]='票据分析':
+       if sting[0]=='票据分析':
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.piaofen
                    collection3 = db3.piaofen   

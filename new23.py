@@ -130,15 +130,15 @@ def text_reply(msg):
        if sting[0]=='票据分析':
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.piaofen
-                   collection3 = db3.piaofen   
-                   cursor3 = collection3.find({
+          collection3 = db3.piaofen   
+          cursor3 = collection3.find({
                                                  'time':'2017-09-08'
                                                  })
-                   piaofen_df = pd.DataFrame(list(cursor3))
+          piaofen_df = pd.DataFrame(list(cursor3))
                     #做表
-                   huatudata3=piaofen_df[['hanglei1','shou','chu','shoudai','chudai','shouhui','chuhui']]
-                   huatudata4=huatudata3.groupby(['hanglei1']).sum()
-                   return(huatudata4)
+          huatudata3=piaofen_df[['hanglei1','shou','chu','shoudai','chudai','shouhui','chuhui']]
+          huatudata4=huatudata3.groupby(['hanglei1']).sum()
+          return(huatudata4)
 
         
         

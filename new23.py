@@ -145,7 +145,7 @@ def text_reply(msg):
           huatudata4=huatudata4.set_index('机构')
           print(huatudata4)
           return(str(huatudata4))
-       if string[0]=='福费廷分析':
+       elif string[0]=='福费廷分析':
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.piaofen
           collection3 = db3.piaofen   
@@ -162,7 +162,7 @@ def text_reply(msg):
           huatudata4=huatudata4.set_index('机构')
           print(huatudata4)
           return(str(huatudata4))            
-       if string[0]=='存单分析':
+       elif string[0]=='存单分析':
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.piaofen
           collection3 = db3.piaofen   
@@ -179,7 +179,7 @@ def text_reply(msg):
           huatudata4=huatudata4.set_index('机构')
           print(huatudata4)
           return(str(huatudata4))     
-       if string[0]=='理财分析':
+       elif string[0]=='理财分析':
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.piaofen
           collection3 = db3.piaofen   
@@ -199,7 +199,7 @@ def text_reply(msg):
         
 #以下一段分析票据
             
-       if string[0]=='票据':
+       elif string[0]=='票据':
          for i in range(0,num): 
             for j in range(1,164):
                 c=piao_df.astype(str).loc[j,'ci'].strip()

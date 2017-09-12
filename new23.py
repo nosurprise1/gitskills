@@ -119,7 +119,7 @@ def text_reply(msg):
      huifu='对应广告：'
      co=re.compile(u'[\U00010000-\U0010ffff]')
      co=co.sub(u'',msg['Content'])
-     string=re.split('；|。|？|！|~~|，| |…',co)   #将字符串分割，中午字符串分割需要用u
+     string=re.split('；|：|。|？|！|~~|，| |…',co)   #将字符串分割，中午字符串分割需要用u
      while '' in string:
         string.remove('')
      num=len(string)     #计量列表长
@@ -241,7 +241,7 @@ def text_reply(msg):
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break
          else:
-            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。\n如有疑问请联系微信号：18969901812。')
+            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。例如“票据。收跨年票，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
          shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
          shijian2=time.strftime('%H:%M',time.localtime(time.time()))
          print(shijian11)
@@ -521,7 +521,7 @@ def text_reply(msg):
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break   #是否要跳出二层循环
          else:
-            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。\n如有疑问请联系微信号：18969901812。')
+            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。例如“福费廷。收证，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
          shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
          shijian2=time.strftime('%H:%M',time.localtime(time.time()))
          print(shijian11)
@@ -673,7 +673,7 @@ def text_reply(msg):
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break   #是否要跳出二层循环
          else:
-            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。\n如有疑问请联系微信号：18969901812。')
+            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。例如“理财。收非保本理财，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
          shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
          shijian2=time.strftime('%H:%M',time.localtime(time.time()))
          print(shijian11)
@@ -824,7 +824,7 @@ def text_reply(msg):
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break   #是否要跳出二层循环
          else:
-            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。\n如有疑问请联系微信号：18969901812。')
+            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。例如“存单。收3个月存单，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
          shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
          shijian2=time.strftime('%H:%M',time.localtime(time.time()))
          print(shijian11)

@@ -130,7 +130,7 @@ def text_reply(msg):
        
     
     
-       if string[0]=='资讯'
+       if string[0]=='资讯':
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.zixun
           collection3 = db3.zixun   

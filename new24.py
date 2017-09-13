@@ -148,8 +148,8 @@ def text_reply(msg):
                            print(huifu0)
                            zixun=('%s\r\n***************\r\n%s')%(zixun,huifu0)
                            count+=1
-          print(huifu)
-          return(huifu)
+          print(zixun)
+          return(zixun)
     
     
        elif string[0]=='票据分析':

@@ -139,8 +139,8 @@ def text_reply(msg):
                                                    {'爬取时间':str(shijian0)},
                                                     ]})    
           zixun_df = pd.DataFrame(list(cursor3))
-          len0=len(zixun_df)
-          len0=min(len0,10)
+          a=len(zixun_df)
+          len0=min(a,10)
           print(len0)
           for i in range(0,len0):       
                            huifu0=('%s,%s,%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'链接']))

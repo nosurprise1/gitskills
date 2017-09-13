@@ -117,6 +117,7 @@ def text_reply(msg):
      shoufa=0
      chufa=0
      huifu='对应广告：'
+     zixun='最新资讯：'
      co=re.compile(u'[\U00010000-\U0010ffff]')
      co=co.sub(u'',msg['Content'])
      string=re.split('；|：|。|？|！|~~|，| |…',co)   #将字符串分割，中午字符串分割需要用u

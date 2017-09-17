@@ -160,8 +160,8 @@ def text_reply(msg):
           db3 = client.zixun
           collection3 = db3.zixun   
           cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},
-                                             "$or":[{'爬取日期':str(shijian2)},{'爬取时间':str(shijian0)}]
-                                              }]})    
+                                             {"$or":[{'爬取日期':str(shijian2)},{'爬取时间':str(shijian0)}]}
+                                              ]})    
           zixun_df = pd.DataFrame(list(cursor3))
           a=len(zixun_df)
           for i in range(0,len(zixun_df)):

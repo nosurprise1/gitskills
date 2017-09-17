@@ -165,7 +165,7 @@ def text_reply(msg):
           zixun_df = pd.DataFrame(list(cursor3))
           a=len(zixun_df)
           for i in range(0,len(zixun_df)):
-               if sting[1] == str(zixun_df.ix[a-1-i,'获取号']):
+               if string[1] == str(zixun_df.ix[a-1-i,'获取号']):
                    print('zhaodaole')
                    return(zixun_df.ix[a-1-i,'链接'])
                    

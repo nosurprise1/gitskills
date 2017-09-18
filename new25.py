@@ -144,12 +144,12 @@ def text_reply(msg):
         
         
           a=len(zixun_df)
-          len0=min(a,21)
+          len0=min(a,19)
           print(len0)
           for i in range(0,len0):       
-                           huifu0=('%s;获取号：%s'%(zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           huifu0=('%S,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
                            print(huifu0)
-                           zixun=('%s\r\n***************\r\n%s')%(zixun,huifu0)
+                           zixun=('%s\r\n————\r\n%s')%(zixun,huifu0)
                            count+=1
           print(zixun)
           return(zixun)

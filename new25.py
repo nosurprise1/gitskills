@@ -235,7 +235,9 @@ def text_reply(msg):
                                              {'爬取日期':str(shijian2)}
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
+              zixun_df=zixun_df[['时间','标题','获取号']]
               zixun_df = zixun_df.sort_values(by='时间', ascending=True)
+              
               print(zixun_df)
               a=len(zixun_df)
               len0=min(a,18)

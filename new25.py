@@ -144,6 +144,7 @@ def text_reply(msg):
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
               zixun_df = zixun_df.sort_values(by='时间', ascending=True)
+              zixun_df =  zixun_df.reset_index(drop=True)  
               a=len(zixun_df)
               len0=min(a,18)
               print(len0)
@@ -162,6 +163,7 @@ def text_reply(msg):
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
               zixun_df = zixun_df.sort_values(by='时间', ascending=True)
+              zixun_df =  zixun_df.reset_index(drop=True)  
               a=len(zixun_df)
               len0=min(a,18)
               print(len0)
@@ -180,6 +182,7 @@ def text_reply(msg):
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
               zixun_df = zixun_df.sort_values(by='时间', ascending=True)
+              zixun_df =  zixun_df.reset_index(drop=True)  
               a=len(zixun_df)
               len0=min(a,18)
               print(len0)
@@ -199,6 +202,7 @@ def text_reply(msg):
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
               zixun_df = zixun_df.sort_values(by='时间', ascending=True)
+              zixun_df =  zixun_df.reset_index(drop=True)  
               a=len(zixun_df)
               len0=min(a,18)
               print(len0)
@@ -217,6 +221,7 @@ def text_reply(msg):
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
               zixun_df = zixun_df.sort_values(by='时间', ascending=True)
+              zixun_df =  zixun_df.reset_index(drop=True)  
               a=len(zixun_df)
               len0=min(a,18)
               print(len0)
@@ -237,7 +242,7 @@ def text_reply(msg):
               zixun_df = pd.DataFrame(list(cursor3))
               zixun_df=zixun_df[['时间','标题','获取号']]
               zixun_df = zixun_df.sort_values(by='时间', ascending=True)
-              
+              zixun_df =  zixun_df.reset_index(drop=True)    #在排序后如果要按照新的顺序必须把原来的索引删除
               print(zixun_df)
               a=len(zixun_df)
               len0=min(a,18)

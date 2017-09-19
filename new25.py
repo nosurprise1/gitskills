@@ -134,6 +134,7 @@ def text_reply(msg):
        if co=='资讯':
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           shijiand=time.strftime('%H:%M:%S',time.localtime(time.time()))  
+          print(shijiand)
           if  shijiand <='8:00:00':  #早间新闻
               db3 = client.zixun
               collection3 = db3.zixun   

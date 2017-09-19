@@ -117,7 +117,7 @@ def text_reply(msg):
      shoufa=0
      chufa=0
      huifu='对应广告：'
-     zixun='最新资讯：'
+     zixun='最新资讯：\r'
      co=re.compile(u'[\U00010000-\U0010ffff]')
      co=co.sub(u'',msg['Content'])
      string=re.split('；|：|。|？|！|~~|，| |…',co)   #将字符串分割，中午字符串分割需要用u
@@ -150,7 +150,7 @@ def text_reply(msg):
               for i in range(0,len0):       
                            huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
                            print(huifu0)
-                           zixun=('%s\r\n————\r\n%s')%(zixun,huifu0)
+                           zixun=('%s\r%s')%(zixun,huifu0)
                            count+=1
               print(zixun)
               return(zixun)
@@ -168,7 +168,7 @@ def text_reply(msg):
               for i in range(0,len0):       
                            huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
                            print(huifu0)
-                           zixun=('%s\r\n————\r\n%s')%(zixun,huifu0)
+                           zixun=('%s\r%s')%(zixun,huifu0)
                            count+=1
               print(zixun)
               return(zixun) 
@@ -186,7 +186,7 @@ def text_reply(msg):
               for i in range(0,len0):       
                            huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
                            print(huifu0)
-                           zixun=('%s\r\n————\r\n%s')%(zixun,huifu0)
+                           zixun=('%s\r%s')%(zixun,huifu0)
                            count+=1
               print(zixun)
               return(zixun) 
@@ -205,7 +205,7 @@ def text_reply(msg):
               for i in range(0,len0):       
                            huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
                            print(huifu0)
-                           zixun=('%s\r\n————\r\n%s')%(zixun,huifu0)
+                           zixun=('%s\r%s')%(zixun,huifu0)
                            count+=1
               print(zixun)
               return(zixun)  
@@ -223,7 +223,7 @@ def text_reply(msg):
               for i in range(0,len0):       
                            huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
                            print(huifu0)
-                           zixun=('%s\r\n————\r\n%s')%(zixun,huifu0)
+                           zixun=('%s\r%s')%(zixun,huifu0)
                            count+=1
               print(zixun)
               return(zixun)                                          
@@ -241,7 +241,7 @@ def text_reply(msg):
               for i in range(0,len0):       
                            huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
                            print(huifu0)
-                           zixun=('%s\r%s')%(zixun,huifu0)
+                           zixun=('%s\r\n%s')%(zixun,huifu0)
                            count+=1
               print(zixun)
               return(zixun)                                            

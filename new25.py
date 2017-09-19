@@ -228,6 +228,7 @@ def text_reply(msg):
               print(zixun)
               return(zixun)                                          
           elif  shijiand >'15:00:00' :  #看15点的新闻
+              print('晚间新闻')
               db3 = client.zixun
               collection3 = db3.zixun   
               cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},

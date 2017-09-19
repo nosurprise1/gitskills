@@ -154,7 +154,7 @@ def text_reply(msg):
                            count+=1
               print(zixun)
               return(zixun)
-          elif  shijiand >'8:00:00'  and  shijian <='10:00:00':  #6点到8点的新闻
+          elif  shijiand >'8:00:00'  and  shijiand <='10:00:00':  #6点到8点的新闻
               db3 = client.zixun
               collection3 = db3.zixun   
               cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$lte':'08:00:00'}},
@@ -172,7 +172,7 @@ def text_reply(msg):
                            count+=1
               print(zixun)
               return(zixun) 
-          elif  shijiand >'10:00:00'  and  shijian <='12:00:00':  #8点到9点的新闻
+          elif  shijiand >'10:00:00'  and  shijiand <='12:00:00':  #8点到9点的新闻
               db3 = client.zixun
               collection3 = db3.zixun   
               cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$lte':'09:00:00'}},
@@ -191,7 +191,7 @@ def text_reply(msg):
               print(zixun)
               return(zixun) 
                                                   
-          elif  shijiand >'12:00:00'  and  shijian <='14:00:00':  #
+          elif  shijiand >'12:00:00'  and  shijiand <='14:00:00':  #
               db3 = client.zixun
               collection3 = db3.zixun   
               cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$lte':'11:00:00'}},
@@ -209,7 +209,7 @@ def text_reply(msg):
                            count+=1
               print(zixun)
               return(zixun)  
-          elif  shijiand >'14:00:00'  and  shijian <='15:00:00':  #11点到15点的新闻
+          elif  shijiand >'14:00:00'  and  shijiand <='15:00:00':  #11点到15点的新闻
               db3 = client.zixun
               collection3 = db3.zixun   
               cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$lte':'15:00:00'}},

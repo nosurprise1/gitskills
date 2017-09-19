@@ -132,35 +132,125 @@ def text_reply(msg):
     
     
        if co=='资讯':
-        #  if sting[1]=='':
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-          db3 = client.zixun
-          collection3 = db3.zixun   
-          cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},
-                                             {"$or":[{'爬取日期':str(shijian2)},{'爬取时间':str(shijian0)}]}
+          shijiand=time.strftime('%H:%M:%S',time.localtime(time.time()))  
+          if  shijiand <='8:00:00':  #早间新闻
+              db3 = client.zixun
+              collection3 = db3.zixun   
+              cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$it':'06:00:00'}},
+                                             {'爬取日期':str(shijian2)}
                                               ]})    
-          zixun_df = pd.DataFrame(list(cursor3))
-          
-        
-        
-          a=len(zixun_df)
-          len0=min(a,18)
-          print(len0)
-          for i in range(0,len0):       
+              zixun_df = pd.DataFrame(list(cursor3))
+              zixun_df = zixun_df.sort_values(by='时间', ascending=False)
+              a=len(zixun_df)
+              len0=min(a,18)
+              print(len0)
+              for i in range(0,len0):       
                            huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
                            print(huifu0)
                            zixun=('%s\r\n————\r\n%s')%(zixun,huifu0)
                            count+=1
-          print(zixun)
-          return(zixun)
-        
-        
+              print(zixun)
+              return(zixun)
+          elif  shijiand >'8:00:00'  and  shijian <='10:00:00':  #6点到8点的新闻
+              db3 = client.zixun
+              collection3 = db3.zixun   
+              cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$it':'08:00:00'}},
+                                             {'爬取日期':str(shijian2)}
+                                              ]})    
+              zixun_df = pd.DataFrame(list(cursor3))
+              zixun_df = zixun_df.sort_values(by='时间', ascending=False)
+              a=len(zixun_df)
+              len0=min(a,18)
+              print(len0)
+              for i in range(0,len0):       
+                           huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           print(huifu0)
+                           zixun=('%s\r\n————\r\n%s')%(zixun,huifu0)
+                           count+=1
+              print(zixun)
+              return(zixun) 
+          elif  shijiand >'10:00:00'  and  shijian <='12:00:00':  #8点到9点的新闻
+              db3 = client.zixun
+              collection3 = db3.zixun   
+              cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$gt':'09:00:00'}},
+                                             {'爬取日期':str(shijian2)}
+                                              ]})    
+              zixun_df = pd.DataFrame(list(cursor3))
+              zixun_df = zixun_df.sort_values(by='时间', ascending=False)
+              a=len(zixun_df)
+              len0=min(a,18)
+              print(len0)
+              for i in range(0,len0):       
+                           huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           print(huifu0)
+                           zixun=('%s\r\n————\r\n%s')%(zixun,huifu0)
+                           count+=1
+              print(zixun)
+              return(zixun) 
+                                                  
+          elif  shijiand >'12:00:00'  and  shijian <='14:00:00':  #
+              db3 = client.zixun
+              collection3 = db3.zixun   
+              cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$gt':'11:00:00'}},
+                                             {'爬取日期':str(shijian2)}
+                                              ]})    
+              zixun_df = pd.DataFrame(list(cursor3))
+              zixun_df = zixun_df.sort_values(by='时间', ascending=False)
+              a=len(zixun_df)
+              len0=min(a,18)
+              print(len0)
+              for i in range(0,len0):       
+                           huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           print(huifu0)
+                           zixun=('%s\r\n————\r\n%s')%(zixun,huifu0)
+                           count+=1
+              print(zixun)
+              return(zixun)  
+          elif  shijiand >'14:00:00'  and  shijian <='15:00:00':  #11点到15点的新闻
+              db3 = client.zixun
+              collection3 = db3.zixun   
+              cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$gt':'15:00:00'}},
+                                             {'爬取日期':str(shijian2)}
+                                              ]})    
+              zixun_df = pd.DataFrame(list(cursor3))
+              zixun_df = zixun_df.sort_values(by='时间', ascending=False)
+              a=len(zixun_df)
+              len0=min(a,18)
+              print(len0)
+              for i in range(0,len0):       
+                           huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           print(huifu0)
+                           zixun=('%s\r\n————\r\n%s')%(zixun,huifu0)
+                           count+=1
+              print(zixun)
+              return(zixun)                                          
+          elif  shijiand >'15:00:00' :  #看15点的新闻
+              db3 = client.zixun
+              collection3 = db3.zixun   
+              cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},
+                                             {'爬取日期':str(shijian2)}
+                                              ]})    
+              zixun_df = pd.DataFrame(list(cursor3))
+              zixun_df = zixun_df.sort_values(by='时间', ascending=False)
+              a=len(zixun_df)
+              len0=min(a,18)
+              print(len0)
+              for i in range(0,len0):       
+                           huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           print(huifu0)
+                           zixun=('%s\r%s')%(zixun,huifu0)
+                           count+=1
+              print(zixun)
+              return(zixun)                                            
+                                                  
+                                                  
        if string[0]=='资讯':
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.zixun
           collection3 = db3.zixun   
           cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},
-                                             {"$or":[{'爬取日期':str(shijian2)},{'爬取时间':str(shijian0)}]}
+                                             {"$or":[{'爬取日期':str(shijian2)},{'爬取日期':str(shijian0)}]}
                                               ]})    
           zixun_df = pd.DataFrame(list(cursor3))
           a=len(zixun_df)

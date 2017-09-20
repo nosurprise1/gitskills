@@ -269,7 +269,7 @@ def text_reply(msg):
                    laiyuan=zixun_df.ix[a-1-i,'内容']
                    biaoti=zixun_df.ix[a-1-i,'标题']
                    shijian=zixun_df.ix[a-1-i,'时间']
-                   huiful=('%s,《%s》,“%s”：\n%s\n%s'%(shijian,biaoti,laiyuan,neirong,zixun_df.ix[a-1-i,'链接'])
+                   huiful=('%s,《%s》,“%s”：\n%s\n%s'%(shijian,biaoti,laiyuan,neirong,zixun_df.ix[a-1-i,'链接']))
                    #return('zhidaol ')
                    return (huiful)
                    

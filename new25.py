@@ -120,17 +120,14 @@ def text_reply(msg):
      zixun='最新资讯：'
      co=re.compile(u'[\U00010000-\U0010ffff]')
      co=co.sub(u'',msg['Content'])
-     string=re.split('；|：|。|？|！|~~|，| |…',co)   #将字符串分割，中午字符串分割需要用u
+     string=re.split('；|：|。|！|~~|，| |…',co)   #将字符串分割，中午字符串分割需要用u
      while '' in string:
         string.remove('')
      num=len(string)     #计量列表长
      print(num)
      if num>8:
-         return('欢迎您使用汇票交易发送广告，我提供票据、福费廷、存单、理财四种广告对接业务。\n为了提高效率，您在发送给我广告时，请勿输入过多短句，请控制在8个句子以内。')#为防止数量太大占内存          
+         return('请勿输入过多短句，请控制在8个句子以内。')#为防止数量太大占内存          
      else:
-       
-    
-    
        if co=='资讯':
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           shijiand=time.strftime('%H:%M:%S',time.localtime(time.time()))  
@@ -149,7 +146,7 @@ def text_reply(msg):
               len0=min(a,18)
               print(len0)
               for i in range(0,len0):       
-                           huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
                            print(huifu0)
                            zixun=('%s\n\n%s')%(zixun,huifu0)
                            count+=1
@@ -169,7 +166,7 @@ def text_reply(msg):
               len0=min(a,18)
               print(len0)
               for i in range(0,len0):       
-                           huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
                            print(huifu0)
                            zixun=('%s\n\n%s')%(zixun,huifu0)
                            count+=1
@@ -188,7 +185,7 @@ def text_reply(msg):
               len0=min(a,18)
               print(len0)
               for i in range(0,len0):       
-                           huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
                            print(huifu0)
                            zixun=('%s\n\n%s')%(zixun,huifu0)
                            count+=1
@@ -208,7 +205,7 @@ def text_reply(msg):
               len0=min(a,18)
               print(len0)
               for i in range(0,len0):       
-                           huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
                            print(huifu0)
                            zixun=('%s\n\n%s')%(zixun,huifu0)
                            count+=1
@@ -227,7 +224,7 @@ def text_reply(msg):
               len0=min(a,18)
               print(len0)
               for i in range(0,len0):       
-                           huifu0=('%s,%s 获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
                            print(huifu0)
                            zixun=('%s\n\n%s')%(zixun,huifu0)
                            count+=1
@@ -249,7 +246,7 @@ def text_reply(msg):
               len0=min(a,18)
               print(len0)
               for i in range(0,len0):       
-                           huifu0=('%s,%s  获取号:%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           huifu0=('%s,%s\n获取号:%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
                            print(huifu0)
                            zixun=('%s\n\n%s')%(zixun,huifu0)
                            count+=1
@@ -387,7 +384,7 @@ def text_reply(msg):
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break
          else:
-            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。例如“票据。收跨年票，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
+            return('抱歉，未能识别您的广告。\n例如:\n“票据。收跨年票，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
          shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
          shijian2=time.strftime('%H:%M',time.localtime(time.time()))
          print(shijian11)
@@ -667,7 +664,7 @@ def text_reply(msg):
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break   #是否要跳出二层循环
          else:
-            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。例如“福费廷。收证，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
+            return('抱歉，未能识别您的广告。\n例如:\n“福费廷。收证，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
          shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
          shijian2=time.strftime('%H:%M',time.localtime(time.time()))
          print(shijian11)
@@ -819,7 +816,7 @@ def text_reply(msg):
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break   #是否要跳出二层循环
          else:
-            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。例如“理财。收非保本理财，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
+            return('抱歉，未能识别您的广告。\n例如:\n“理财。收非保本理财，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
          shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
          shijian2=time.strftime('%H:%M',time.localtime(time.time()))
          print(shijian11)
@@ -970,7 +967,7 @@ def text_reply(msg):
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break   #是否要跳出二层循环
          else:
-            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。例如“存单。收3个月存单，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
+            return('抱歉，未能识别您的广告。\n例如:\n“存单。收3个月存单，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
          shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
          shijian2=time.strftime('%H:%M',time.localtime(time.time()))
          print(shijian11)
@@ -1101,8 +1098,11 @@ def text_reply(msg):
                 
                 
        else:
-           return('欢迎您使用汇票交易广告撮合功能。\n请在您想要发送的广告前面加上“票据。”，“福费廷。”，“存单。”或“理财。”，\n选择一个业务方向，我才能为您对接广告。\n例如“票据。收各期限国股承兑电银，工行***0571-88888888”，\n注意：如果您想别人能及时联系到您，发送广告务必带上联系方式！\n没有业务需求时，也可以通过发送‘票据分析’、“福费廷分析”、“存单分析”或"理财分析"单独指令来了解当日实时的市场情况。')
-         
+           return('欢迎您使用自动回复撮合功能。\n使用说明：\n
+                   1.发送”资讯”，获得最新金融新闻。\n
+                   2.发送”票据分析”等，获得某个产品的市场数据。\n
+                   3.发送”票据。”+广告，获得对应业务方向的6条广告。\n
+                   4.以上服务同业适用于“理财”、“福费廷”、“存单”。')
 
        
            

@@ -266,8 +266,8 @@ def text_reply(msg):
           for i in range(0,len(zixun_df)):
                if string[1] == str(zixun_df.ix[a-1-i,'获取号']):
                    
-                   neirong=str(zixun_df.ix[a-1-i,'内容'])[0:300]
-                   neirong= neirong.replace('  ','  \n')
+                   neirong=str(zixun_df.ix[a-1-i,'内容'])[0:400]
+                   neirong= neirong.replace('  ','\n  ')
                    laiyuan=zixun_df.ix[a-1-i,'序号']
                    biaoti=zixun_df.ix[a-1-i,'标题']
                    shijian=zixun_df.ix[a-1-i,'时间']

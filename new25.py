@@ -135,7 +135,7 @@ def text_reply(msg):
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           shijiand=time.strftime('%H:%M:%S',time.localtime(time.time()))  
           print(shijiand)
-          if  shijiand <='08:30:00':  #早间新闻
+          if  shijiand <='08:35:00':  #早间新闻
               print('早间新闻')
               db3 = client.zixun
               collection3 = db3.zixun   
@@ -155,7 +155,7 @@ def text_reply(msg):
                            count+=1
               print(zixun)
               return(zixun)
-          elif  shijiand >'8:03:00'  and  shijiand <='10:00:00':  #6点到8点的新闻
+          elif  shijiand >'8:05:00'  and  shijiand <='10:00:00':  #6点到8点的新闻
               db3 = client.zixun
               collection3 = db3.zixun   
               cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$lte':'08:00:00'}},

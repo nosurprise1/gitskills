@@ -254,7 +254,7 @@ def text_reply(msg):
               return(zixun)                                            
                                                   
                                                   
-       if string[0]=='获取号':
+       if string[0].isdigit() is true:
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.zixun
           collection3 = db3.zixun   
@@ -264,7 +264,7 @@ def text_reply(msg):
           zixun_df = pd.DataFrame(list(cursor3))
           a=len(zixun_df)
           for i in range(0,len(zixun_df)):
-               if string[1] == str(zixun_df.ix[a-1-i,'获取号']):
+               if string[0] == str(zixun_df.ix[a-1-i,'获取号']):
                    
                    neirong=str(zixun_df.ix[a-1-i,'内容'])[0:400]
                   # neirong= neirong.replace('  ','\n')

@@ -265,10 +265,10 @@ def text_reply(msg):
           a=len(zixun_df)
           for i in range(0,len(zixun_df)):
                if string[1] == str(zixun_df.ix[a-1-i,'获取号']):
-                   print(zixun_df.ix[a-1-i,'链接'])
+                   #print(zixun_df.ix[a-1-i,'链接'])
                    
-                   return('zhidaol ')
-                   #return(zixun_df.ix[a-1-i,'链接'])
+                   #return('zhidaol ')
+                   return(zixun_df.ix[a-1-i,'链接'])
                    
             
             

@@ -266,13 +266,13 @@ def text_reply(msg):
           for i in range(0,len(zixun_df)):
                if string[0] == str(zixun_df.ix[a-1-i,'获取号']):
                    
-                   neirong=str(zixun_df.ix[a-1-i,'内容'])[0:300]
+                   neirong=str(zixun_df.ix[a-1-i,'内容'])[0:100]
                   # neirong= neirong.replace('  ','\n')
                    laiyuan=zixun_df.ix[a-1-i,'序号']
                    biaoti=zixun_df.ix[a-1-i,'标题']
                    shijian=zixun_df.ix[a-1-i,'时间']
                    huiful=('%s,《%s》,来源“%s”：\n%s……\n%s'%(shijian,biaoti,laiyuan,neirong,zixun_df.ix[a-1-i,'链接']))
-                   #return('zhidaol ')
+                   print(huiful)#return('zhidaol ')
                    return (huiful)
                    
             

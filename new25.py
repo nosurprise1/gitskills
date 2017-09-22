@@ -7,7 +7,7 @@ from pandas import DataFrame
 from pymongo import MongoClient
 client=MongoClient('mongodb://root:' + '5768116' + '@139.196.79.93')
 
-global content,collection3,piaofen_df,shijian11,shijian0,shijian01,shijian02
+#333global content,collection3,piaofen_df,shijian11,shijian0,shijian01,shijian02
 shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
 shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
 shijian0=shijian11-datetime.timedelta(days=1)
@@ -266,7 +266,7 @@ def text_reply(msg):
           for i in range(0,len(zixun_df)):
                if string[0] == str(zixun_df.ix[a-1-i,'获取号']):
                    
-                   neirong=str(zixun_df.ix[a-1-i,'内容'])[0:100]
+                   neirong=str(zixun_df.ix[a-1-i,'内容'])[0:600]
                   # neirong= neirong.replace('  ','\n')
                    laiyuan=zixun_df.ix[a-1-i,'序号']
                    biaoti=zixun_df.ix[a-1-i,'标题']

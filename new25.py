@@ -268,7 +268,7 @@ def text_reply(msg):
                    neirong=str(zixun_df.ix[a-1-i,'内容'])
                    chang=len(neirong)
                    print(chang)
-                   chang=(len(neirong),580)
+                   chang=min(len(neirong),580)
                    print(chang)
                    neirong=str(neirong)[0:chang]
                                # neirong= neirong.replace('  ','\n')

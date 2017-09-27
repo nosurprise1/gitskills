@@ -83,6 +83,21 @@ def text_reply(msg):
      global content,collection3,collection4,piaofen_df,shijian11,shijian10,shijian0,shijian01,shijian02,zixun_df
      guang=[]
      count=0
+     shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+     shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+     shijian10=shijian11-datetime.timedelta(days=1)  #明天
+     shijian0=-datetime.timedelta(days=1)
+     shijian01=shijian11-datetime.timedelta(days=2)
+     shijian02=shijian11-datetime.timedelta(days=3)
+     shijian11=shijian11.strftime("%Y-%m-%d")  #今天
+     shijian0=shijian0.strftime("%Y-%m-%d")     #昨天
+     shijian01=shijian01.strftime("%Y-%m-%d")   #前天
+     shijian02=shijian02.strftime("%Y-%m-%d")   #大前天
+     print(shijian11)
+     print(shijian0)
+     print(shijian01)
+     print(shijian02)
+        
      shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
      shijian2=time.strftime('%H:%M',time.localtime(time.time()))
      hanglei2=0
@@ -325,22 +340,7 @@ def text_reply(msg):
           print(huatudata4)
           return(str(huatudata4)) 
        elif string[0]=='存单发行0':
-           import time
-           shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
-           shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
-           shijian10=shijian11-datetime.timedelta(days=1)  #明天
-
-           shijian0=-datetime.timedelta(days=1)
-           shijian01=shijian11-datetime.timedelta(days=2)
-           shijian02=shijian11-datetime.timedelta(days=3)
-           shijian11=shijian11.strftime("%Y-%m-%d")  #今天
-           shijian0=shijian0.strftime("%Y-%m-%d")     #昨天
-           shijian01=shijian01.strftime("%Y-%m-%d")   #前天
-           shijian02=shijian02.strftime("%Y-%m-%d")   #大前天
-           print(shijian11)
-           print(shijian0)
-           print(shijian01)
-           print(shijian02)
+          
          
            db = client.cundan
            collection = db.cundan  

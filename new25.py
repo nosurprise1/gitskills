@@ -10,13 +10,15 @@ client=MongoClient('mongodb://root:' + '5768116' + '@139.196.79.93')
 #333global content,collection3,piaofen_df,shijian11,shijian0,shijian01,shijian02
 shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
 shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+shijian10=shijian11-datetime.timedelta(days=1)  #明天
+
 shijian0=shijian11-datetime.timedelta(days=1)
 shijian01=shijian11-datetime.timedelta(days=2)
 shijian02=shijian11-datetime.timedelta(days=3)
-shijian11=shijian11.strftime("%Y-%m-%d")  
-shijian0=shijian0.strftime("%Y-%m-%d")
-shijian01=shijian01.strftime("%Y-%m-%d")  
-shijian02=shijian02.strftime("%Y-%m-%d")  
+shijian11=shijian11.strftime("%Y-%m-%d")  #今天
+shijian0=shijian0.strftime("%Y-%m-%d")     #昨天
+shijian01=shijian01.strftime("%Y-%m-%d")   #前天
+shijian02=shijian02.strftime("%Y-%m-%d")   #大前天
 
 
 
@@ -325,14 +327,42 @@ def text_reply(msg):
                                                  })
           piaofen_df = pd.DataFrame(list(cursor3))
           if piaofen_df.empty:
-            return('暂无当日数据，请稍后再试。')          #做表
+            return('暂无当日市场数据，请稍后再试。')          #做表
           huatudata3=piaofen_df[['hanglei1','shoucun','chucun']]
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
           huatudata4=huatudata4.reset_index(drop = False)
           huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shoucun': '收', 'chucun': '出'}) 
           huatudata4=huatudata4.set_index('机构')
           print(huatudata4)
-          return(str(huatudata4))     
+          return(str(huatudata4)) 
+       elif string[0]=='存单发行':
+           db = client.cundan
+           collection = db.cundan  
+           cursor = collection.find({ "$and":[{"$or":[{'发行日':shijian11},{'发行日':shijian10},{'发行日':shijian0}]},  {'类型':'同业存单'}   ] })  
+           cundan_df= pd.DataFrame(list(cursor))
+           print(cundan_df)
+           data0=cundan_df[['类型','发行人','发行日','期限','实际发行','票面利率','收益率','计划发行','银行类别']]
+           for i in range(0,len(data0)):
+               if ('Shibor') in str(data0.iloc[i,5]):
+                   if (('--') in str(data0.iloc[i,4])) or (data0.iloc[i,4] is None) :
+                       data0.iloc[i,5]=999            
+                   else:
+                       data0.iloc[i,5]=data0.iloc[i,4]
+           data0=data0[data0['收益率'] !=999]
+           #data0.to_csv('分.csv',encoding='GB18030',mode='a',header=True)
+           data0['收益率'] = data0['收益率'].astype('float')
+           data0['实际发行'] = data0['实际发行'].astype('float')
+           data0['计划发行'] = data0['计划发行'].astype('float')
+           data0['ji1']=data0['收益率']*data0['实际发行']
+           data0['ji2']=data0['收益率']*data0['计划发行']
+           biao0=data0[['发行日','期限','实际发行','计划发行','ji1','ji2','银行类别']]
+           biao0=biao0.groupby(['发行日','银行类别','期限']).sum()
+           biao0['实际加权利率']=biao0['ji1']/biao0['实际发行']
+           biao0['计划加权利率']=biao0['ji2']/biao0['计划发行']
+           biao0=biao0[['实际发行','计划发行','实际加权利率','计划加权利率']]
+           biao0=biao0.round({'实际发行':2,'计划发行':2,'实际加权利率':2,'计划加权利率':2})
+           return(biao0)
+        
        elif string[0]=='理财分析':
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.piaofen

@@ -363,8 +363,10 @@ def text_reply(msg):
            biao0['计划加权利率']=biao0['ji2']/biao0['计划发行']
            biao0=biao0[['实际发行','计划发行','实际加权利率','计划加权利率']]
            biao0=biao0.round({'实际发行':2,'计划发行':2,'实际加权利率':2,'计划加权利率':2})
-           
+           return('分析成功，现在可以取数据了')
        elif string[0]=='存单发行':    
+           biaojin=biao0.get_group(shijian11)
+           print(biaojin)
            return(biao0)
        elif string[0]=='理财分析':
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))

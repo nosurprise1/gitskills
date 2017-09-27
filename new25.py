@@ -8,9 +8,6 @@ from pymongo import MongoClient
 client=MongoClient('mongodb://root:' + '5768116' + '@139.196.79.93')
 
 
-
-
-
 #从数据导入piao
 db = client.piao
 collection = db.piao  #http://www.jb51.net/article/77537.htm
@@ -86,7 +83,7 @@ def text_reply(msg):
      shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
      shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
      shijian10=shijian11-datetime.timedelta(days=1)  #明天
-     shijian0=-datetime.timedelta(days=1)
+     shijian0=shijian11-datetime.timedelta(days=1)
      shijian01=shijian11-datetime.timedelta(days=2)
      shijian02=shijian11-datetime.timedelta(days=3)
      shijian11=shijian11.strftime("%Y-%m-%d")  #今天

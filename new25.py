@@ -363,6 +363,7 @@ def text_reply(msg):
            biao0['计划加权利率']=biao0['ji2']/biao0['计划发行']
            biao0=biao0[['实际发行','计划发行','实际加权利率','计划加权利率']]
            biao0=biao0.round({'实际发行':2,'计划发行':2,'实际加权利率':2,'计划加权利率':2})
+           print(biao0)
            records = json.loads(biao0.T.to_json()).values()
            collection4.insert(records)
            return('分析成功')

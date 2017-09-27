@@ -77,7 +77,7 @@ itchatmp.update_config(itchatmp.WechatConfig(
 #分析订阅号文本信息
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
-     global content,collection3,collection4,piaofen_df,shijian11,shijian10,shijian0,shijian01,shijian02,zixun_df
+     global content,collection3,collection4,piaofen_df,shijian11,shijian10,shijian0,shijian01,shijian02,zixun_df,biao0
      guang=[]
      count=0
      shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
@@ -94,7 +94,7 @@ def text_reply(msg):
      print(shijian0)
      print(shijian01)
      print(shijian02)
-        
+     biao0=''   
      shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
      shijian2=time.strftime('%H:%M',time.localtime(time.time()))
      hanglei2=0
@@ -363,11 +363,9 @@ def text_reply(msg):
            biao0['计划加权利率']=biao0['ji2']/biao0['计划发行']
            biao0=biao0[['实际发行','计划发行','实际加权利率','计划加权利率']]
            biao0=biao0.round({'实际发行':2,'计划发行':2,'实际加权利率':2,'计划加权利率':2})
-           print(biao0)
-           records = json.loads(biao0.T.to_json()).values()
-           collection4.insert(records)
-           return('分析成功')
-        
+           
+       elif string[0]=='存单发行':    
+           return(biao0)
        elif string[0]=='理财分析':
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.piaofen

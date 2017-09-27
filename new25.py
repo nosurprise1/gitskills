@@ -349,7 +349,6 @@ def text_reply(msg):
                    else:
                        data0.iloc[i,5]=data0.iloc[i,4]
            data0=data0[data0['收益率'] !=999]
-           #data0.to_csv('分.csv',encoding='GB18030',mode='a',header=True)
            data0['收益率'] = data0['收益率'].astype('float')
            data0['实际发行'] = data0['实际发行'].astype('float')
            data0['计划发行'] = data0['计划发行'].astype('float')
@@ -361,7 +360,7 @@ def text_reply(msg):
            biao0['计划加权利率']=biao0['ji2']/biao0['计划发行']
            biao0=biao0[['实际发行','计划发行','实际加权利率','计划加权利率']]
            biao0=biao0.round({'实际发行':2,'计划发行':2,'实际加权利率':2,'计划加权利率':2})
-           return(biao0)
+           return('1')
         
        elif string[0]=='理财分析':
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))

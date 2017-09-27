@@ -272,6 +272,7 @@ def text_reply(msg):
             
             
        elif string[0]=='票据分析':
+          
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.piaofen
           collection3 = db3.piaofen   
@@ -324,6 +325,7 @@ def text_reply(msg):
           print(huatudata4)
           return(str(huatudata4)) 
        elif string[0]=='存单发行0':
+           import time
            shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
            shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
            shijian10=shijian11-datetime.timedelta(days=1)  #明天

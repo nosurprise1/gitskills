@@ -366,7 +366,7 @@ def text_reply(msg):
            return('分析成功，现在可以取数据了')
        elif string[0]=='存单发行':  
            print(biao0)
-           biaojin=biao0.get_group(shijian11)
+           biaojin=biao0[(biao0['发行日']==shijian11)] ##########
            print(biaojin)
            return(biao0)
        elif string[0]=='理财分析':

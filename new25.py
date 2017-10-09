@@ -139,7 +139,7 @@ def text_reply(msg):
               db3 = client.zixun
               collection3 = db3.zixun   
               cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$lte':'06:00:00'}},
-                                             {'爬取日期':str(shijian2)},{'权重':1}
+                                             {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
               zixun_df = zixun_df.sort_values(by='时间', ascending=True)
@@ -159,7 +159,7 @@ def text_reply(msg):
               db3 = client.zixun
               collection3 = db3.zixun   
               cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$lte':'08:00:00'}},
-                                             {'爬取日期':str(shijian2)},{'权重':1}
+                                             {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
               zixun_df = zixun_df.sort_values(by='时间', ascending=True)
@@ -178,7 +178,7 @@ def text_reply(msg):
               db3 = client.zixun
               collection3 = db3.zixun   
               cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$lte':'09:00:00'}},
-                                             {'爬取日期':str(shijian2)},{'权重':1}
+                                             {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
               zixun_df = zixun_df.sort_values(by='时间', ascending=True)
@@ -198,7 +198,7 @@ def text_reply(msg):
               db3 = client.zixun
               collection3 = db3.zixun   
               cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$lte':'11:00:00'}},
-                                             {'爬取日期':str(shijian2)},{'权重':1}
+                                             {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
               zixun_df = zixun_df.sort_values(by='时间', ascending=True)
@@ -217,7 +217,7 @@ def text_reply(msg):
               db3 = client.zixun
               collection3 = db3.zixun   
               cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$lte':'15:00:00'}},
-                                             {'爬取日期':str(shijian2)},{'权重':1}
+                                             {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
               zixun_df = zixun_df.sort_values(by='时间', ascending=True)
@@ -237,7 +237,7 @@ def text_reply(msg):
               db3 = client.zixun
               collection3 = db3.zixun   
               cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},
-                                             {'爬取日期':str(shijian2)},{'权重':1}
+                                             {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
               zixun_df=zixun_df[['时间','标题','获取号']]

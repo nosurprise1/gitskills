@@ -266,17 +266,17 @@ def text_reply(msg):
                                              
           zixun_df = pd.DataFrame(list(cursor3))
           print(zixun_df)
-          neirong=str(zixun_df.ix[1,'内容'])
+          neirong=str(zixun_df.ix[0,'内容'])
           chang=len(neirong)
           print(chang)
           chang=min(len(neirong),580)
           print(chang)
           neirong=str(neirong)[0:chang]
                               # neirong= neirong.replace('  ','\n')
-          laiyuan=zixun_df.ix[1,'序号']
-          biaoti=zixun_df.ix[1,'标题']
-          shijian=zixun_df.ix[1,'时间']
-          huiful=('%s,《%s》,来源“%s”：\n%s……\n%s'%(shijian,biaoti,laiyuan,neirong,zixun_df.ix[1,'链接']))
+          laiyuan=zixun_df.ix[0,'序号']
+          biaoti=zixun_df.ix[0,'标题']
+          shijian=zixun_df.ix[0,'时间']
+          huiful=('%s,《%s》,来源“%s”：\n%s……\n%s'%(shijian,biaoti,laiyuan,neirong,zixun_df.ix[0,'链接']))
           print(huiful)#return('zhidaol ')
           return (huiful)
                    

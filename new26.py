@@ -257,10 +257,11 @@ def text_reply(msg):
                                                   
                                                   
        if string[0].isdigit() is True:
+          
           #shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.zixun
           collection3 = db3.zixun   
-          cursor3 = collection3.find({'获取号':string[0]})
+          cursor3 = collection3.find({'获取号':int(string[0])})
                                           
                                              
           zixun_df = pd.DataFrame(list(cursor3))

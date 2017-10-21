@@ -258,28 +258,26 @@ def text_reply(msg):
                                                   
        if string[0].isdigit() is True:
           #shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-          #db3 = client.zixun
-          #collection3 = db3.zixun   
-          #cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},
-           #                                  {"$or":[{'爬取日期':str(shijian2)}]}
-            #                                  ]})    
-        #  zixun_df = pd.DataFrame(list(cursor3))
-          a=len(zixun_df)
-          for i in range(0,len(zixun_df)):
-               if string[0] == str(zixun_df.ix[a-1-i,'获取号']):
-                   neirong=str(zixun_df.ix[a-1-i,'内容'])
-                   chang=len(neirong)
-                   print(chang)
-                   chang=min(len(neirong),580)
-                   print(chang)
-                   neirong=str(neirong)[0:chang]
-                               # neirong= neirong.replace('  ','\n')
-                   laiyuan=zixun_df.ix[a-1-i,'序号']
-                   biaoti=zixun_df.ix[a-1-i,'标题']
-                   shijian=zixun_df.ix[a-1-i,'时间']
-                   huiful=('%s,《%s》,来源“%s”：\n%s……\n%s'%(shijian,biaoti,laiyuan,neirong,zixun_df.ix[a-1-i,'链接']))
-                   print(huiful)#return('zhidaol ')
-                   return (huiful)
+          db3 = client.zixun
+          collection3 = db3.zixun   
+          cursor3 = collection3.find({'获取号':string[0]})
+                                          
+                                             
+          zixun_df = pd.DataFrame(list(cursor3))
+  
+          neirong=str(zixun_df.ix[0,'内容'])
+          chang=len(neirong)
+          print(chang)
+          chang=min(len(neirong),580)
+          print(chang)
+          neirong=str(neirong)[0:chang]
+                              # neirong= neirong.replace('  ','\n')
+          laiyuan=zixun_df.ix[0,'序号']
+          biaoti=zixun_df.ix[0,'标题']
+          shijian=zixun_df.ix[0,'时间']
+          huiful=('%s,《%s》,来源“%s”：\n%s……\n%s'%(shijian,biaoti,laiyuan,neirong,zixun_df.ix[0,'链接']))
+          print(huiful)#return('zhidaol ')
+          return (huiful)
                    
             
             

@@ -138,7 +138,7 @@ def text_reply(msg):
               print('早间新闻')
               db3 = client.zixun
               collection3 = db3.zixun   
-              cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$lte':'06:00:00'}},
+              cursor3 = collection3.find({"$and":[{'时间':{'$lte':'06:00:00'}},
                                              {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
@@ -158,7 +158,7 @@ def text_reply(msg):
               print('6点到8点的新闻')
               db3 = client.zixun
               collection3 = db3.zixun   
-              cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$lte':'08:00:00'}},
+              cursor3 = collection3.find({"$and":[{'时间':{'$lte':'08:00:00'}},
                                              {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
@@ -177,7 +177,7 @@ def text_reply(msg):
           elif ( shijiand >'10:00:00')  and ( shijiand <='12:00:00'):  #8点到9点的新闻
               db3 = client.zixun
               collection3 = db3.zixun   
-              cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$lte':'09:00:00'}},
+              cursor3 = collection3.find({"$and":[{'时间':{'$lte':'09:00:00'}},
                                              {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
@@ -197,7 +197,7 @@ def text_reply(msg):
           elif  (shijiand >'12:00:00')  and  (shijiand <='14:00:00'):  #
               db3 = client.zixun
               collection3 = db3.zixun   
-              cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$lte':'11:00:00'}},
+              cursor3 = collection3.find({"$and":[{'时间':{'$lte':'11:00:00'}},
                                              {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
@@ -216,7 +216,7 @@ def text_reply(msg):
           elif ( shijiand >'14:00:00' ) and ( shijiand <='15:00:00'):  #11点到15点的新闻
               db3 = client.zixun
               collection3 = db3.zixun   
-              cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},{'时间':{'$lte':'15:00:00'}},
+              cursor3 = collection3.find({"$and":[{'时间':{'$lte':'15:00:00'}},
                                              {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))
@@ -236,7 +236,7 @@ def text_reply(msg):
               print('晚间新闻')
               db3 = client.zixun
               collection3 = db3.zixun   
-              cursor3 = collection3.find({"$and":[{'标签1':'金融资讯'},
+              cursor3 = collection3.find({"$and":[
                                              {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
                                               ]})    
               zixun_df = pd.DataFrame(list(cursor3))

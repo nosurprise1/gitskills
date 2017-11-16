@@ -209,7 +209,7 @@ def text_reply(msg):
               for i in range(0,len0):       
                            huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
                            print(huifu0)
-                           zixun=('%s\n\n%s')%(zixun,huifu0)
+                           zixun=('%s\n\n%es')%(zixun,huifu0)
                            count+=1
               print(zixun)
               return(zixun)  

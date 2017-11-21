@@ -185,7 +185,7 @@ def text_reply(msg):
             
           a=len(zixun_df)
           print(a)
-          len0=min(a,16)
+          len0=min(a,14)
           print(len0)
 
           for i in range(0,len0): 

@@ -188,7 +188,7 @@ def text_reply(msg):
                            print(huifu0)
                            zixun=('%s\n\n%s')%(zixun,huifu0)
                            count+=1
-          zixun=('共搜索出%s条相关资讯：\n%s')%(zixun)
+          zixun=('共搜索出%s条相关资讯：\n')%(zixun)
           return(zixun)                                              
                                               
             

@@ -209,7 +209,7 @@ def text_reply(msg):
           if piaofen_df.empty:
             return('暂无当日数据，请稍后再试。')
         #做表
-          huatudata3=piaofen_df[['hanglei1','shou','chu','shoudai','chudai']]
+          huatudata3=piaofen_df[['hanglei1','hanglei2','shou','chu','shoudai','chudai']]
           huatudata5=huatudata3.groupby(['hanglei2']).sum()
           print(huatudata5.ix[1,'shou'])
           print(huatudata5.ix[1,'chu'])

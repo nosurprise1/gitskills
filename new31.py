@@ -132,7 +132,7 @@ def text_reply(msg):
        if co=='资讯':
           db3 = client.zixun
           collection3 = db3.zixun   
-          cursor3 = collection3.find({"$and":[{'爬取日期'{'$gte':str(shijian0)},{'权重':{'$ne':'宏观'}}
+          cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian0)}},{'权重':{'$ne':'宏观'}}
                                               ]})    
           zixun_df = pd.DataFrame(list(cursor3))
           zixun_df = zixun_df.sort_values(by='时间', ascending=True)

@@ -181,9 +181,10 @@ def text_reply(msg):
           zixun_df = zixun_df.sort_values(by='爬取日期', ascending=True)
             
           zixun_df =  zixun_df.reset_index(drop=True)  
-          print(zixun_df)
+         # print(zixun_df)
             
           a=len(zixun_df)
+          print(a)
           len0=min(a,16)
           print(len0)
 

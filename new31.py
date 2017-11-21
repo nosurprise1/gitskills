@@ -176,14 +176,14 @@ def text_reply(msg):
           collection3 = db3.zixun   
           cursor3 = collection3.find({'标题':{'$regex':sousuo}})    
           zixun_df = pd.DataFrame(list(cursor3))
-          zixun_df = zixun_df.sort_values(by='时间', ascending=True)
+          zixun_df = zixun_df.sort_values(by='爬取日期', ascending=True)
           zixun_df =  zixun_df.reset_index(drop=True)  
           print(zixun_df)
           a=len(zixun_df)
           len0=min(a,18)
           print(len0)
           for i in range(0,len0):       
-                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           huifu0=('共搜索出%s条相关资讯：\n%s,%s\n获取号：%s'%(a,zixun_df.ix[a-1-i,'爬取日期'],zixun_df.ix[a-1-i,'标题'],int(zixun_df.ix[a-1-i,'获取号'])))
                            print(huifu0)
                            zixun=('%s\n\n%s')%(zixun,huifu0)
                            count+=1

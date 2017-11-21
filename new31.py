@@ -213,15 +213,14 @@ def text_reply(msg):
           huatudata5=huatudata3.groupby(['hanglei2']).sum()
           print(huatudata5.ix[1,'shou'])
           print(huatudata5.ix[1,'chu'])
-          shouchubi=round(huatudata5.ix[1,'shou']/huatudata5.ix[1,'chu'],2)
+          shouchubi=round(huatudata5.ix[1,'shou']/(huatudata5.ix[1,'chu']+0.0001),2)
             
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
           huatudata4=huatudata4.reset_index(drop = False)
           huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shou': '收', 'chu': '出', 'shoudai': '收代持', 'chudai': '出代持'}) 
-          #huatudata4=huatudata4.set_index('机构')
-          #df2 = df2.reset_index(drop=True)    #重新定义索引
+
           
-          huatuhui=('以下未即时广告计数（已排除重复广告）。银行收票数为%s，出票数为%s，收票/出票为%s。\n\n机构  收票  出票  收代持  出代持'%(huatudata5.ix[1,'shou'],huatudata5.ix[1,'chu'],shouchubi)     )
+          huatuhui=('当前银行收票数为%s，出票数为%s，收票/出票为%s。以下为具体广告计数（已排除重复广告）。\n\n机构  收票  出票  收代持  出代持'%(huatudata5.ix[1,'shou'],huatudata5.ix[1,'chu'],shouchubi)     )
           for i in range(0,len(huatudata4)):
                 huatuhui0=('%s      %s      %s      %s      %s'%(huatudata4.ix[i,'机构'],huatudata4.ix[i,'收'],huatudata4.ix[i,'出'],huatudata4.ix[i,'收代持'],huatudata4.ix[i,'出代持']))
                 huatuhui=('%s\n%s'%(huatuhui,huatuhui0))
@@ -237,12 +236,20 @@ def text_reply(msg):
           piaofen_df = pd.DataFrame(list(cursor3))
           if piaofen_df.empty:
             return('暂无当日数据，请稍后再试。')          #做表
-          huatudata3=piaofen_df[['hanglei1','shoufu','chufu']]
+          huatudata3=piaofen_df[['hanglei1','hanglei2','shoufu','chufu']]
+          huatudata5=huatudata3.groupby(['hanglei2']).sum()
+          print(huatudata5.ix[1,'shoufu'])
+          print(huatudata5.ix[1,'chufu'])
+          shouchubi=round(huatudata5.ix[1,'shoufu']/(huatudata5.ix[1,'chufu']+0.0001),2)
+            
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
           huatudata4=huatudata4.reset_index(drop = False)
-          huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shoufu': '收', 'chufu': '出'}) 
-          huatudata4=huatudata4.set_index('机构')
-          return(str(huatudata4))            
+
+          huatuhui=('当前银行收福费廷数为%s，出福费廷数为%s，收福费廷/出福费廷为%s。以下为具体广告计数（已排除重复广告）。\n\n机构  收福费廷  出福费廷'%(huatudata5.ix[1,'shoufu'],huatudata5.ix[1,'chufu'],shouchubi)     )
+          for i in range(0,len(huatudata4)):
+                huatuhui0=('%s      %s      %s'%(huatudata4.ix[i,'hanglei1'],huatudata4.ix[i,'shoufu'],huatudata4.ix[i,'chufu']))
+                huatuhui=('%s\n%s'%(huatuhui,huatuhui0))
+          return(str( huatuhui))
        elif string[0]=='存单分析':
        #   shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.piaofen
@@ -253,12 +260,20 @@ def text_reply(msg):
           piaofen_df = pd.DataFrame(list(cursor3))
           if piaofen_df.empty:
             return('暂无当日市场数据，请稍后再试。')          #做表
-          huatudata3=piaofen_df[['hanglei1','shoucun','chucun']]
+          huatudata3=piaofen_df[['hanglei1','hanglei2','shoucun','chucun']]
+          huatudata5=huatudata3.groupby(['hanglei2']).sum()
+          print(huatudata5.ix[1,'shoucun'])
+          print(huatudata5.ix[1,'chucun'])
+          shouchubi=round(huatudata5.ix[1,'shoucun']/(huatudata5.ix[1,'chucun']+0.0001),2)
+            
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
           huatudata4=huatudata4.reset_index(drop = False)
-          huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shoucun': '收', 'chucun': '出'}) 
-          huatudata4=huatudata4.set_index('机构')
-          return(str(huatudata4)) 
+
+          huatuhui=('当前银行收资金数为%s，出资金数为%s，收资金/出资金为%s。以下为具体广告计数（已排除重复广告）。\n\n机构  收资金  出资金'%(huatudata5.ix[1,'shoucun'],huatudata5.ix[1,'chucun'],shouchubi)     )
+          for i in range(0,len(huatudata4)):
+                huatuhui0=('%s      %s      %s'%(huatudata4.ix[i,'hanglei1'],huatudata4.ix[i,'shoucun'],huatudata4.ix[i,'chucun']))
+                huatuhui=('%s\n%s'%(huatuhui,huatuhui0))
+          return(str( huatuhui))
       
        elif string[0]=='理财分析':
          # shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
@@ -270,12 +285,20 @@ def text_reply(msg):
           piaofen_df = pd.DataFrame(list(cursor3))
           if piaofen_df.empty:
             return('暂无当日数据，请稍后再试。')          #做表
-          huatudata3=piaofen_df[['hanglei1','shouli','chuli']]
+          huatudata3=piaofen_df[['hanglei1','hanglei2','shouli','chuli']]
+          huatudata5=huatudata3.groupby(['hanglei2']).sum()
+          print(huatudata5.ix[1,'shouli'])
+          print(huatudata5.ix[1,'chuli'])
+          shouchubi=round(huatudata5.ix[1,'shouli']/(huatudata5.ix[1,'chuli']+0.0001),2)
+            
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
           huatudata4=huatudata4.reset_index(drop = False)
-          huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shouli': '收', 'chuli': '出'}) 
-          huatudata4=huatudata4.set_index('机构')
-          return(str(huatudata4))     
+
+          huatuhui=('当前银行收理财数为%s，出理财数为%s，收理财/出理财为%s。以下为具体广告计数（已排除重复广告）。\n\n机构  收理财  出理财'%(huatudata5.ix[1,'shouli'],huatudata5.ix[1,'chuli'],shouchubi)     )
+          for i in range(0,len(huatudata4)):
+                huatuhui0=('%s      %s      %s'%(huatudata4.ix[i,'hanglei1'],huatudata4.ix[i,'shouli'],huatudata4.ix[i,'chuli']))
+                huatuhui=('%s\n%s'%(huatuhui,huatuhui0))
+          return(str( huatuhui))
     
     
 #以下提供广告
@@ -333,7 +356,7 @@ def text_reply(msg):
          df2 = pd.DataFrame(list(cursor))
          contentyy=df2['content'].tolist()
          if(hanglei2==0):
-               return('请您在广告最后带上报价银行及联系方式。')
+               return('请您在广告最后附上所在银行（中介结构暂时不行）。')
          else:
                if (co not in contentyy):
                   data=pd.DataFrame({'time':[shijian11],
@@ -753,7 +776,7 @@ def text_reply(msg):
          df2 = pd.DataFrame(list(cursor))
          contentyy=df2['content'].tolist()
          if(hanglei2==0):
-               return('请您务必广告最后带上所在银行及联系方式。')
+               return('请您在广告最后附上所在银行（中介结构暂时不行）。')
          else:
                if (co not in contentyy):
                   data=pd.DataFrame({'time':[shijian11],
@@ -904,7 +927,7 @@ def text_reply(msg):
          df2 = pd.DataFrame(list(cursor))
          contentyy=df2['content'].tolist()
          if(hanglei2==0):
-               return('请您务必广告最后带上所在银行及联系方式。')
+               return('请您在广告最后附上所在银行（中介结构暂时不行）。')
          else:
                if (co not in contentyy):
                   data=pd.DataFrame({'time':[shijian11],

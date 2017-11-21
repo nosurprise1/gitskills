@@ -170,7 +170,7 @@ def text_reply(msg):
             
                                               
      #资讯搜索                                           
-       if string[0]=='搜索':
+       if string[0]=='资讯':
           sousuo=string[1]
           db3 = client.zixun
           collection3 = db3.zixun   
@@ -188,7 +188,7 @@ def text_reply(msg):
                            print(huifu0)
                            zixun=('%s\n\n%s')%(zixun,huifu0)
                            count+=1
-          zixun=('共搜索出%s条相关资讯：\n')%(zixun)
+          zixun=('共搜索出%s条相关资讯：\n%s')%(a,zixun)
           return(zixun)                                              
                                               
             

@@ -203,7 +203,7 @@ def text_reply(msg):
           db3 = client.piaofen
           collection3 = db3.piaofen   
           cursor3 = collection3.find({
-                                                 'time':str(shijian2)
+                                                 'time':str(shijian11)
                                                  })
           piaofen_df = pd.DataFrame(list(cursor3))
           if piaofen_df.empty:
@@ -221,7 +221,7 @@ def text_reply(msg):
           db3 = client.piaofen
           collection3 = db3.piaofen   
           cursor3 = collection3.find({
-                                                 'time':str(shijian2)
+                                                 'time':str(shijian11)
                                                  })
           piaofen_df = pd.DataFrame(list(cursor3))
           if piaofen_df.empty:
@@ -237,7 +237,7 @@ def text_reply(msg):
           db3 = client.piaofen
           collection3 = db3.piaofen   
           cursor3 = collection3.find({
-                                                 'time':str(shijian2)
+                                                 'time':str(shijian11)
                                                  })
           piaofen_df = pd.DataFrame(list(cursor3))
           if piaofen_df.empty:
@@ -254,7 +254,7 @@ def text_reply(msg):
           db3 = client.piaofen
           collection3 = db3.piaofen   
           cursor3 = collection3.find({
-                                                 'time':str(shijian2)
+                                                 'time':str(shijian11)
                                                  })
           piaofen_df = pd.DataFrame(list(cursor3))
           if piaofen_df.empty:

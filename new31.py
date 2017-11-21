@@ -213,9 +213,7 @@ def text_reply(msg):
           huatudata5=huatudata3.groupby(['hanglei2']).sum()
           print(huatudata5.ix[1,'shou'])
           print(huatudata5.ix[1,'chu'])
-          shouchubi=huatudata5.ix[1,'shou']/huatudata5.ix[1,'chu']
-          print(shouchubi)
-
+          shouchubi=round(huatudata5.ix[1,'shou']/huatudata5.ix[1,'chu'],2)
             
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
           huatudata4=huatudata4.reset_index(drop = False)
@@ -223,7 +221,7 @@ def text_reply(msg):
           #huatudata4=huatudata4.set_index('机构')
           #df2 = df2.reset_index(drop=True)    #重新定义索引
           
-          huatuhui='以下未即时广告计数（已排除重复广告），\n机构  收票数  出票数  收代持  出代持'
+          huatuhui=('以下未即时广告计数（已排除重复广告），银行收票数为%s，出票数为%s，收票/出票为%s。\n机构  收票  出票  收代持  出代持'%(huatudata5.ix[1,'shou'],huatudata5.ix[1,'chu'],shouchubi)     )
           for i in range(0,len(huatudata4)):
                 huatuhui0=('%s      %s      %s      %s      %s'%(huatudata4.ix[i,'机构'],huatudata4.ix[i,'收'],huatudata4.ix[i,'出'],huatudata4.ix[i,'收代持'],huatudata4.ix[i,'出代持']))
                 huatuhui=('%s\n%s'%(huatuhui,huatuhui0))

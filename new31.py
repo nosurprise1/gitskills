@@ -220,7 +220,7 @@ def text_reply(msg):
                 huatuhui0=('%s  %s  %s  %s  %s'%(huatudata4.ix[i,'机构'],huatudata4.ix[i,'收'],huatudata4.ix[i,'出'],huatudata4.ix[i,'收代持'],huatudata4.ix[i,'出代持']))
                 huatuhui=('%s\n%s'%(huatuhui,huatuhui0))
                 
-          return(str(huifu))
+          return(str( huatuhui))
        elif string[0]=='福费廷分析':
          # shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.piaofen

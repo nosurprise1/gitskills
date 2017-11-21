@@ -94,7 +94,6 @@ def text_reply(msg):
      print(shijian0)
      print(shijian01)
      print(shijian02)
-     #biao0=''   
      shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
      shijian2=time.strftime('%H:%M',time.localtime(time.time()))
      hanglei2=0
@@ -131,139 +130,29 @@ def text_reply(msg):
          return('请勿输入过多短句，请控制在8个句子以内。')#为防止数量太大占内存          
      else:
        if co=='资讯':
-          shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-          shijiand=time.strftime('%H:%M:%S',time.localtime(time.time()))  
-          print(shijiand)
-          if  shijiand <='08:35:00':  #早间新闻
-              print('早间新闻')
-              db3 = client.zixun
-              collection3 = db3.zixun   
-              cursor3 = collection3.find({"$and":[{'时间':{'$lte':'06:00:00'}},
-                                             {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
-                                              ]})    
-              zixun_df = pd.DataFrame(list(cursor3))
-              zixun_df = zixun_df.sort_values(by='时间', ascending=True)
-              zixun_df =  zixun_df.reset_index(drop=True)  
-              a=len(zixun_df)
-              len0=min(a,18)
-              print(len0)
-              for i in range(0,len0):       
-                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
-                           print(huifu0)
-                           zixun=('%s\n\n%s')%(zixun,huifu0)
-                           count+=1
-              print(zixun)
-              return(zixun)
-          elif  (shijiand >'08:05:00')  and ( shijiand <='10:00:00'):  #6点到8点的新闻
-              print('6点到8点的新闻')
-              db3 = client.zixun
-              collection3 = db3.zixun   
-              cursor3 = collection3.find({"$and":[{'时间':{'$lte':'08:00:00'}},
-                                             {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
-                                              ]})    
-              zixun_df = pd.DataFrame(list(cursor3))
-              zixun_df = zixun_df.sort_values(by='时间', ascending=True)
-              zixun_df =  zixun_df.reset_index(drop=True)  
-              a=len(zixun_df)
-              len0=min(a,18)
-              print(len0)
-              for i in range(0,len0):       
-                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
-                           print(huifu0)
-                           zixun=('%s\n\n%s')%(zixun,huifu0)
-                           count+=1
-              print(zixun)
-              return(zixun) 
-          elif ( shijiand >'10:00:00')  and ( shijiand <='12:00:00'):  #8点到9点的新闻
-              db3 = client.zixun
-              collection3 = db3.zixun   
-              cursor3 = collection3.find({"$and":[{'时间':{'$lte':'09:00:00'}},
-                                             {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
-                                              ]})    
-              zixun_df = pd.DataFrame(list(cursor3))
-              zixun_df = zixun_df.sort_values(by='时间', ascending=True)
-              zixun_df =  zixun_df.reset_index(drop=True)  
-              a=len(zixun_df)
-              len0=min(a,18)
-              print(len0)
-              for i in range(0,len0):       
-                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
-                           print(huifu0)
-                           zixun=('%s\n\n%s')%(zixun,huifu0)
-                           count+=1
-              print(zixun)
-              return(zixun) 
-                                                  
-          elif  (shijiand >'12:00:00')  and  (shijiand <='14:00:00'):  #
-              db3 = client.zixun
-              collection3 = db3.zixun   
-              cursor3 = collection3.find({"$and":[{'时间':{'$lte':'11:00:00'}},
-                                             {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
-                                              ]})    
-              zixun_df = pd.DataFrame(list(cursor3))
-              zixun_df = zixun_df.sort_values(by='时间', ascending=True)
-              zixun_df =  zixun_df.reset_index(drop=True)  
-              a=len(zixun_df)
-              len0=min(a,18)
-              print(len0)
-              for i in range(0,len0):       
-                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
-                           print(huifu0)
-                           zixun=('%s\n\n%s')%(zixun,huifu0)
-                           count+=1
-              print(zixun)
-              return(zixun)  
-          elif ( shijiand >'14:00:00' ) and ( shijiand <='15:00:00'):  #11点到15点的新闻
-              db3 = client.zixun
-              collection3 = db3.zixun   
-              cursor3 = collection3.find({"$and":[{'时间':{'$lte':'15:00:00'}},
-                                             {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
-                                              ]})    
-              zixun_df = pd.DataFrame(list(cursor3))
-              zixun_df = zixun_df.sort_values(by='时间', ascending=True)
-              zixun_df =  zixun_df.reset_index(drop=True)  
-              a=len(zixun_df)
-              len0=min(a,18)
-              print(len0)
-              for i in range(0,len0):       
-                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
-                           print(huifu0)
-                           zixun=('%s\n\n%s')%(zixun,huifu0)
-                           count+=1
-              print(zixun)
-              return(zixun)                                          
-          elif  shijiand >'15:00:00' :  #看15点的新闻
-              print('晚间新闻')
-              db3 = client.zixun
-              collection3 = db3.zixun   
-              cursor3 = collection3.find({"$and":[
-                                             {'爬取日期':str(shijian2)},{'权重':{'$ne':0}}
-                                              ]})    
-              zixun_df = pd.DataFrame(list(cursor3))
-              zixun_df=zixun_df[['时间','标题','获取号']]
-              zixun_df = zixun_df.sort_values(by='时间', ascending=True)
-              zixun_df =  zixun_df.reset_index(drop=True)    #在排序后如果要按照新的顺序必须把原来的索引删除
-              print(zixun_df)
-              a=len(zixun_df)
-              len0=min(a,18)
-              print(len0)
-              for i in range(0,len0):       
-                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
-                           print(huifu0)
-                           zixun=('%s\n\n%s')%(zixun,huifu0)
-                           count+=1
-              print(zixun)
-              return(zixun)                                            
-                                                  
-                                                  
-       if string[0].isdigit() is True:
-          
-          #shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.zixun
           collection3 = db3.zixun   
-          cursor3 = collection3.find({'获取号':int(string[0])})
-                                          
-                                             
+          cursor3 = collection3.find({"$and":[{'爬取日期'{'$lge':str(shijian0)},{'权重':{'$ne':'宏观'}}
+                                              ]})    
+          zixun_df = pd.DataFrame(list(cursor3))
+          zixun_df = zixun_df.sort_values(by='时间', ascending=True)
+          zixun_df =  zixun_df.reset_index(drop=True)  
+          a=len(zixun_df)
+          len0=min(a,18)
+          print(len0)
+          for i in range(0,len0):       
+                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           print(huifu0)
+                           zixun=('%s\n\n%s')%(zixun,huifu0)
+                           count+=1
+          print(zixun)
+          return(zixun)
+         
+       #获取单个新闻                                           
+       if string[0].isdigit() is True:
+          db3 = client.zixun
+          collection3 = db3.zixun   
+          cursor3 = collection3.find({'获取号':int(string[0])})                           
           zixun_df = pd.DataFrame(list(cursor3))
           print(zixun_df)
           neirong=str(zixun_df.ix[0,'内容'])
@@ -272,14 +161,35 @@ def text_reply(msg):
           chang=min(len(neirong),580)
           print(chang)
           neirong=str(neirong)[0:chang]
-                              # neirong= neirong.replace('  ','\n')
           laiyuan=zixun_df.ix[0,'序号']
           biaoti=zixun_df.ix[0,'标题']
           shijian=zixun_df.ix[0,'时间']
           huiful=('%s,《%s》,来源“%s”：\n%s……\n%s'%(shijian,biaoti,laiyuan,neirong,zixun_df.ix[0,'链接']))
           print(huiful)#return('zhidaol ')
           return (huiful)
-                   
+            
+                                              
+     #资讯搜索                                           
+       if string[0]=='搜索':
+          sousuo=string[1]
+          db3 = client.zixun
+          collection3 = db3.zixun   
+          cursor3 = collection3.find({'标题':{'$regex':sousuo}})    
+          zixun_df = pd.DataFrame(list(cursor3))
+          zixun_df = zixun_df.sort_values(by='时间', ascending=True)
+          zixun_df =  zixun_df.reset_index(drop=True)  
+          print(zixun_df)
+          a=len(zixun_df)
+          len0=min(a,18)
+          print(len0)
+          for i in range(0,len0):       
+                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           print(huifu0)
+                           zixun=('%s\n\n%s')%(zixun,huifu0)
+                           count+=1
+          return(zixun)                                              
+                                              
+            
             
             
        elif string[0]=='票据分析':
@@ -508,7 +418,7 @@ def text_reply(msg):
                    for i in range(0,len0):       
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            print(huifu0)
-                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
@@ -540,7 +450,7 @@ def text_reply(msg):
                    for i in range(0,len0):       
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            print(huifu0)
-                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
@@ -572,7 +482,7 @@ def text_reply(msg):
                    for i in range(0,len0):       
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            print(huifu0)
-                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
@@ -604,7 +514,7 @@ def text_reply(msg):
                    for i in range(0,len0):       
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            print(huifu0)
-                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
@@ -636,7 +546,7 @@ def text_reply(msg):
                    for i in range(0,len0):       
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            print(huifu0)
-                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
@@ -666,7 +576,7 @@ def text_reply(msg):
                    for i in range(0,len0):       
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            print(huifu0)
-                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
@@ -718,7 +628,7 @@ def text_reply(msg):
          df2 = pd.DataFrame(list(cursor))
          contentyy=df2['content'].tolist()
          if(hanglei2==0):
-               return('请您务必广告最后带上所在银行及联系方式。')
+               return('请您在广告最后附上所在银行（中介结构暂时不行）。')
          else:
                if (co not in contentyy):
                   data=pd.DataFrame({'time':[shijian1],

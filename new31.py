@@ -209,15 +209,23 @@ def text_reply(msg):
           if piaofen_df.empty:
             return('暂无当日数据，请稍后再试。')
         #做表
-          huatudata3=piaofen_df[['hanglei1','shou','chu','shoudai','chudai','shouhui','chuhui']]
+          huatudata3=piaofen_df[['hanglei1','shou','chu','shoudai','chudai']]
+          huatudata5=huatudata3.groupby(['hanglei2']).sum()
+          print(huatudata5.ix[1,'shou'])
+          print(huatudata5.ix[1,'chu'])
+          shouchubi=huatudata5.ix[1,'shou']/huatudata5.ix[1,'chu']
+          print(shouchubi)
+
+            
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
           huatudata4=huatudata4.reset_index(drop = False)
           huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shou': '收', 'chu': '出', 'shoudai': '收代持', 'chudai': '出代持'}) 
           #huatudata4=huatudata4.set_index('机构')
           #df2 = df2.reset_index(drop=True)    #重新定义索引
-          huatuhui='以下未即时广告计数（已排除重复广告）'
+          
+          huatuhui='以下未即时广告计数（已排除重复广告），\n机构  收票数  出票数  收代持  出代持'
           for i in range(0,len(huatudata4)):
-                huatuhui0=('%s  %s  %s  %s  %s'%(huatudata4.ix[i,'机构'],huatudata4.ix[i,'收'],huatudata4.ix[i,'出'],huatudata4.ix[i,'收代持'],huatudata4.ix[i,'出代持']))
+                huatuhui0=('%s      %s      %s      %s      %s'%(huatudata4.ix[i,'机构'],huatudata4.ix[i,'收'],huatudata4.ix[i,'出'],huatudata4.ix[i,'收代持'],huatudata4.ix[i,'出代持']))
                 huatuhui=('%s\n%s'%(huatuhui,huatuhui0))
                 
           return(str( huatuhui))

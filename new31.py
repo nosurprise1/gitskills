@@ -86,6 +86,8 @@ def text_reply(msg):
      shijian0=shijian11-datetime.timedelta(days=1)
      shijian01=shijian11-datetime.timedelta(days=2)
      shijian02=shijian11-datetime.timedelta(days=3)
+     shijian014=shijian11-datetime.timedelta(days=13)
+
      shijian11=shijian11.strftime("%Y-%m-%d")  #今天
      shijian0=shijian0.strftime("%Y-%m-%d")     #昨天
      shijian01=shijian01.strftime("%Y-%m-%d")   #前天
@@ -174,7 +176,7 @@ def text_reply(msg):
           sousuo=string[1]
           db3 = client.zixun
           collection3 = db3.zixun   
-          cursor3 = collection3.find({'标题':{'$regex':sousuo}})    
+          cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{'标题':{'$regex':sousuo}}]})    
           zixun_df = pd.DataFrame(list(cursor3))
           if zixun_df.empty:
                 return('未检索到相关资讯~')

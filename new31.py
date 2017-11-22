@@ -275,7 +275,7 @@ def text_reply(msg):
           huatudata4=huatudata3.groupby(['hanglei1']).sum()
           huatudata4=huatudata4.reset_index(drop = False)
 
-          huatuhui=('当前银行收资金数为%s，出资金数为%s，收资金/出资金为%s。以下为具体广告计数（已排除重复广告）。\n\n机构  收资金  出资金'%(huatudata5.ix[1,'shoucun'],huatudata5.ix[1,'chucun'],shouchubi)     )
+          huatuhui=('当前银行收存单数为%s，出存单数为%s，收存单/出存单为%s。以下为具体广告计数（已排除重复广告）。\n\n机构  收存单  出存单'%(huatudata5.ix[1,'shoucun'],huatudata5.ix[1,'chucun'],shouchubi)     )
           for i in range(0,len(huatudata4)):
                 huatuhui0=('%s      %s      %s'%(huatudata4.ix[i,'hanglei1'],huatudata4.ix[i,'shoucun'],huatudata4.ix[i,'chucun']))
                 huatuhui=('%s\n%s'%(huatuhui,huatuhui0))
@@ -387,9 +387,9 @@ def text_reply(msg):
                               'leixing':['1']
                               })    
                   
-                  records = json.loads(data.T.to_json()).values()
-                  collection3.insert(records)
-                  print(data)     
+                 # records = json.loads(data.T.to_json()).values()
+                #  collection3.insert(records)
+                #  print(data)     
                 
 #回复广告  因为回复方式是return 所以回复必须放在最后一位。                
 
@@ -655,9 +655,9 @@ def text_reply(msg):
                               'leixing':['1']
                               })    
                   
-                  records = json.loads(data.T.to_json()).values()
-                  collection3.insert(records)
-                  print(data)     
+                 # records = json.loads(data.T.to_json()).values()
+                #  collection3.insert(records)
+                #  print(data)     
                 
        #回复广告  因为回复方式是return 所以回复必须放在最后一位。                
            
@@ -807,9 +807,9 @@ def text_reply(msg):
                               'leixing':['1']
                               })    
                   
-                  records = json.loads(data.T.to_json()).values()
-                  collection3.insert(records)
-                  print(data)     
+          #        records = json.loads(data.T.to_json()).values()
+           #       collection3.insert(records)
+            #      print(data)     
                 
        #回复广告  因为回复方式是return 所以回复必须放在最后一位。                
            
@@ -958,9 +958,9 @@ def text_reply(msg):
                               'leixing':['1']
                               })    
                   
-                  records = json.loads(data.T.to_json()).values()
-                  collection3.insert(records)
-                  print(data)     
+               #   records = json.loads(data.T.to_json()).values()
+                #  collection3.insert(records)
+                #  print(data)     
                 
        #回复广告  因为回复方式是return 所以回复必须放在最后一位。                
            

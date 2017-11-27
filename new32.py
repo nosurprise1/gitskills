@@ -7,24 +7,6 @@ from pandas import DataFrame
 from pymongo import MongoClient
 client=MongoClient('mongodb://root:' + '5768116' + '@139.196.79.93')
 
-global content,collection3,piaofen_df,shijian11,shijian0,shijian01,shijian02
-shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
-shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
-shijian0=shijian11-datetime.timedelta(days=1)
-shijian01=shijian11-datetime.timedelta(days=2)
-shijian02=shijian11-datetime.timedelta(days=3)
-shijian11=shijian11.strftime("%Y-%m-%d")  
-shijian0=shijian0.strftime("%Y-%m-%d")
-shijian01=shijian01.strftime("%Y-%m-%d")  
-shijian02=shijian02.strftime("%Y-%m-%d")  
-
-
-
-print(shijian11)
-print(shijian0)
-print(shijian01)
-print(shijian02)
-
 
 #从数据导入piao
 db = client.piao
@@ -80,6 +62,11 @@ collection3 = db3.piaofen
 #piaofen_df = pd.DataFrame(list(cursor3))
 content=[]
 
+db4 = client.cundanfenxi
+collection4 = db4.cundanfenxi 
+
+
+
 #连接订阅号
 itchatmp.update_config(itchatmp.WechatConfig(
     token='123456',
@@ -90,9 +77,25 @@ itchatmp.update_config(itchatmp.WechatConfig(
 #分析订阅号文本信息
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
-     global content,collection3,piaofen_df,shijian11,shijian0,shijian01,shijian02
+     global content,collection3,collection4,piaofen_df,shijian11,shijian10,shijian0,shijian01,shijian02,zixun_df,biao0
      guang=[]
      count=0
+     shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+     shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+     shijian10=shijian11-datetime.timedelta(days=1)  #明天
+     shijian0=shijian11-datetime.timedelta(days=1)
+     shijian01=shijian11-datetime.timedelta(days=2)
+     shijian02=shijian11-datetime.timedelta(days=3)
+     shijian014=shijian11-datetime.timedelta(days=13)
+
+     shijian11=shijian11.strftime("%Y-%m-%d")  #今天
+     shijian0=shijian0.strftime("%Y-%m-%d")     #昨天
+     shijian01=shijian01.strftime("%Y-%m-%d")   #前天
+     shijian02=shijian02.strftime("%Y-%m-%d")   #大前天
+     print(shijian11)
+     print(shijian0)
+     print(shijian01)
+     print(shijian02)
      shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
      shijian2=time.strftime('%H:%M',time.localtime(time.time()))
      hanglei2=0
@@ -117,88 +120,197 @@ def text_reply(msg):
      shoufa=0
      chufa=0
      huifu='对应广告：'
+     zixun='最新资讯（如需正文，发送获取号即可）：'
      co=re.compile(u'[\U00010000-\U0010ffff]')
      co=co.sub(u'',msg['Content'])
-     string=re.split('；|：|。|？|！|~~|，| |…',co)   #将字符串分割，中午字符串分割需要用u
+     string=re.split('；|：|:|。|！|~~|，| |…',co)   #将字符串分割，中午字符串分割需要用u
      while '' in string:
-        string.remove('')
+        string.remove('')   #删除空的元素
      num=len(string)     #计量列表长
      print(num)
      if num>8:
-         return('欢迎您使用汇票交易发送广告，我提供票据、福费廷、存单、理财四种广告对接业务。\n为了提高效率，您在发送给我广告时，请勿输入过多短句，请控制在8个句子以内。')#为防止数量太大占内存          
+         return('请勿输入过多语句，请控制在8个句子以内。')#为防止数量太大占内存          
      else:
-       if string[0]=='票据分析':
-          shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+       if co=='资讯':
+          db3 = client.zixun
+          collection3 = db3.zixun   
+          cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian0)}},{'权重':{'$ne':'宏观'}}
+                                              ]})    
+          zixun_df = pd.DataFrame(list(cursor3))
+          if zixun_df.empty:
+            return('暂无当日数据，请稍后再试。')          #做表
+          zixun_df = zixun_df.sort_values(by='时间', ascending=True)
+          zixun_df =  zixun_df.reset_index(drop=True)  
+          a=len(zixun_df)
+          len0=min(a,18)
+          print(len0)
+          for i in range(0,len0):       
+                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'时间'],zixun_df.ix[a-1-i,'标题'],zixun_df.ix[a-1-i,'获取号']))
+                           print(huifu0)
+                           zixun=('%s\n\n%s')%(zixun,huifu0)
+                           count+=1
+          print(zixun)
+          return(zixun)
+         
+       #获取单个新闻                                           
+       if string[0].isdigit() is True:
+          db3 = client.zixun
+          collection3 = db3.zixun   
+          cursor3 = collection3.find({'获取号':int(string[0])})                           
+          zixun_df = pd.DataFrame(list(cursor3))
+          print(zixun_df)
+          neirong=str(zixun_df.ix[0,'内容'])
+          chang=len(neirong)
+          print(chang)
+          chang=min(len(neirong),580)
+          print(chang)
+          neirong=str(neirong)[0:chang]
+          laiyuan=zixun_df.ix[0,'序号']
+          biaoti=zixun_df.ix[0,'标题']
+          shijian=zixun_df.ix[0,'时间']
+          huiful=('%s,《%s》,来源“%s”：\n%s……\n%s'%(shijian,biaoti,laiyuan,neirong,zixun_df.ix[0,'链接']))
+          print(huiful)
+          return (huiful)
+            
+                                              
+     #资讯搜索                                           
+       if string[0]=='资讯':
+          sousuo=string[1]
+          db3 = client.zixun
+          collection3 = db3.zixun   
+          cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{'标题':{'$regex':sousuo}}]})    
+          zixun_df = pd.DataFrame(list(cursor3))
+          if zixun_df.empty:
+                return('未检索到相关资讯~')
+          zixun_df = zixun_df.sort_values(by='爬取日期', ascending=True)
+            
+          zixun_df =  zixun_df.reset_index(drop=True)  
+         # print(zixun_df)
+            
+          a=len(zixun_df)
+          print(a)
+          len0=min(a,16)
+          print(len0)
+
+          for i in range(0,len0): 
+                           ti=zixun_df.ix[a-1-i,'标题']
+                           chang1=min(len(zixun_df.ix[a-1-i,'标题']),30)
+                           ti=str(ti)[0:chang1]
+                           huifu0=('%s,%s\n获取号：%s'%(zixun_df.ix[a-1-i,'爬取日期'],ti,int(zixun_df.ix[a-1-i,'获取号'])))
+                           print(huifu0)
+                           zixun=('%s\n\n%s')%(zixun,huifu0)
+                           count+=1
+          zixun=('共搜索出%s条相关资讯：\n%s')%(a,zixun)
+          return(zixun)                                              
+                                              
+            
+            
+            
+       elif string[0]=='票据分析':
+      #    shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           db3 = client.piaofen
           collection3 = db3.piaofen   
           cursor3 = collection3.find({
-                                                 'time':str(shijian2)
+                                                 'time':str(shijian11)
                                                  })
           piaofen_df = pd.DataFrame(list(cursor3))
           if piaofen_df.empty:
             return('暂无当日数据，请稍后再试。')
         #做表
-          huatudata3=piaofen_df[['hanglei1','shou','chu','shoudai','chudai','shouhui','chuhui']]
-          huatudata4=huatudata3.groupby(['hanglei1']).sum()
-          huatudata4=huatudata4.reset_index(drop = False)
-          huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shou': '收', 'chu': '出', 'shoudai': '收代', 'chudai': '出代', 'shouhui':'收回',  'chuhui':'出回'}) 
-          huatudata4=huatudata4.set_index('机构')
-          print(huatudata4)
-          return(str(huatudata4))
-       elif string[0]=='福费廷分析':
-          shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-          db3 = client.piaofen
-          collection3 = db3.piaofen   
-          cursor3 = collection3.find({
-                                                 'time':str(shijian2)
-                                                 })
-          piaofen_df = pd.DataFrame(list(cursor3))
-          if piaofen_df.empty:
-            return('暂无当日数据，请稍后再试。')          #做表
-          huatudata3=piaofen_df[['hanglei1','shoufu','chufu']]
-          huatudata4=huatudata3.groupby(['hanglei1']).sum()
-          huatudata4=huatudata4.reset_index(drop = False)
-          huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shoufu': '收', 'chufu': '出'}) 
-          huatudata4=huatudata4.set_index('机构')
-          print(huatudata4)
-          return(str(huatudata4))            
-       elif string[0]=='存单分析':
-          shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-          db3 = client.piaofen
-          collection3 = db3.piaofen   
-          cursor3 = collection3.find({
-                                                 'time':str(shijian2)
-                                                 })
-          piaofen_df = pd.DataFrame(list(cursor3))
-          if piaofen_df.empty:
-            return('暂无当日数据，请稍后再试。')          #做表
-          huatudata3=piaofen_df[['hanglei1','shoucun','chucun']]
-          huatudata4=huatudata3.groupby(['hanglei1']).sum()
-          huatudata4=huatudata4.reset_index(drop = False)
-          huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shoucun': '收', 'chucun': '出'}) 
-          huatudata4=huatudata4.set_index('机构')
-          print(huatudata4)
-          return(str(huatudata4))     
-       elif string[0]=='理财分析':
-          shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-          db3 = client.piaofen
-          collection3 = db3.piaofen   
-          cursor3 = collection3.find({
-                                                 'time':str(shijian2)
-                                                 })
-          piaofen_df = pd.DataFrame(list(cursor3))
-          if piaofen_df.empty:
-            return('暂无当日数据，请稍后再试。')          #做表
-          huatudata3=piaofen_df[['hanglei1','shouli','chuli']]
-          huatudata4=huatudata3.groupby(['hanglei1']).sum()
-          huatudata4=huatudata4.reset_index(drop = False)
-          huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shouli': '收', 'chuli': '出'}) 
-          huatudata4=huatudata4.set_index('机构')
-          print(huatudata4)
-          return(str(huatudata4))     
-        
-#以下一段分析票据
+          huatudata3=piaofen_df[['hanglei1','hanglei2','shou','chu','shoudai','chudai']]
+          huatudata5=huatudata3.groupby(['hanglei2']).sum()
+          print(huatudata5.ix[1,'shou'])
+          print(huatudata5.ix[1,'chu'])
+          shouchubi=round(huatudata5.ix[1,'shou']/(huatudata5.ix[1,'chu']+0.0001),2)
             
+          huatudata4=huatudata3.groupby(['hanglei1']).sum()
+          huatudata4=huatudata4.reset_index(drop = False)
+          huatudata4=huatudata4.rename(columns={'hanglei1': '机构', 'shou': '收', 'chu': '出', 'shoudai': '收代持', 'chudai': '出代持'}) 
+
+          
+          huatuhui=('当前银行收票数为%s，出票数为%s，收票/出票为%s。以下为具体广告计数（已排除重复广告）。\n\n机构  收票  出票  收代持  出代持'%(huatudata5.ix[1,'shou'],huatudata5.ix[1,'chu'],shouchubi)     )
+          for i in range(0,len(huatudata4)):
+                huatuhui0=('%s      %s      %s      %s      %s'%(huatudata4.ix[i,'机构'],huatudata4.ix[i,'收'],huatudata4.ix[i,'出'],huatudata4.ix[i,'收代持'],huatudata4.ix[i,'出代持']))
+                huatuhui=('%s\n%s'%(huatuhui,huatuhui0))
+                
+          return(str( huatuhui))
+       elif string[0]=='福费廷分析':
+         # shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+          db3 = client.piaofen
+          collection3 = db3.piaofen   
+          cursor3 = collection3.find({
+                                                 'time':str(shijian11)
+                                                 })
+          piaofen_df = pd.DataFrame(list(cursor3))
+          if piaofen_df.empty:
+            return('暂无当日数据，请稍后再试。')          #做表
+          huatudata3=piaofen_df[['hanglei1','hanglei2','shoufu','chufu']]
+          huatudata5=huatudata3.groupby(['hanglei2']).sum()
+          print(huatudata5.ix[1,'shoufu'])
+          print(huatudata5.ix[1,'chufu'])
+          shouchubi=round(huatudata5.ix[1,'shoufu']/(huatudata5.ix[1,'chufu']+0.0001),2)
+            
+          huatudata4=huatudata3.groupby(['hanglei1']).sum()
+          huatudata4=huatudata4.reset_index(drop = False)
+
+          huatuhui=('当前银行收福费廷数为%s，出福费廷数为%s，收福费廷/出福费廷为%s。以下为具体广告计数（已排除重复广告）。\n\n机构  收福费廷  出福费廷'%(huatudata5.ix[1,'shoufu'],huatudata5.ix[1,'chufu'],shouchubi)     )
+          for i in range(0,len(huatudata4)):
+                huatuhui0=('%s      %s      %s'%(huatudata4.ix[i,'hanglei1'],huatudata4.ix[i,'shoufu'],huatudata4.ix[i,'chufu']))
+                huatuhui=('%s\n%s'%(huatuhui,huatuhui0))
+          return(str( huatuhui))
+       elif string[0]=='存单分析':
+       #   shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+          db3 = client.piaofen
+          collection3 = db3.piaofen   
+          cursor3 = collection3.find({
+                                                 'time':str(shijian11)
+                                                 })
+          piaofen_df = pd.DataFrame(list(cursor3))
+          if piaofen_df.empty:
+            return('暂无当日市场数据，请稍后再试。')          #做表
+          huatudata3=piaofen_df[['hanglei1','hanglei2','shoucun','chucun']]
+          huatudata5=huatudata3.groupby(['hanglei2']).sum()
+          print(huatudata5.ix[1,'shoucun'])
+          print(huatudata5.ix[1,'chucun'])
+          shouchubi=round(huatudata5.ix[1,'shoucun']/(huatudata5.ix[1,'chucun']+0.0001),2)
+            
+          huatudata4=huatudata3.groupby(['hanglei1']).sum()
+          huatudata4=huatudata4.reset_index(drop = False)
+
+          huatuhui=('当前银行收存单数为%s，出存单数为%s，收存单/出存单为%s。以下为具体广告计数（已排除重复广告）。\n\n机构  收存单  出存单'%(huatudata5.ix[1,'shoucun'],huatudata5.ix[1,'chucun'],shouchubi)     )
+          for i in range(0,len(huatudata4)):
+                huatuhui0=('%s      %s      %s'%(huatudata4.ix[i,'hanglei1'],huatudata4.ix[i,'shoucun'],huatudata4.ix[i,'chucun']))
+                huatuhui=('%s\n%s'%(huatuhui,huatuhui0))
+          return(str( huatuhui))
+      
+       elif string[0]=='理财分析':
+         # shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+          db3 = client.piaofen
+          collection3 = db3.piaofen   
+          cursor3 = collection3.find({
+                                                 'time':str(shijian11)
+                                                 })
+          piaofen_df = pd.DataFrame(list(cursor3))
+          if piaofen_df.empty:
+            return('暂无当日数据，请稍后再试。')          #做表
+          huatudata3=piaofen_df[['hanglei1','hanglei2','shouli','chuli']]
+          huatudata5=huatudata3.groupby(['hanglei2']).sum()
+          print(huatudata5.ix[1,'shouli'])
+          print(huatudata5.ix[1,'chuli'])
+          shouchubi=round(huatudata5.ix[1,'shouli']/(huatudata5.ix[1,'chuli']+0.0001),2)
+            
+          huatudata4=huatudata3.groupby(['hanglei1']).sum()
+          huatudata4=huatudata4.reset_index(drop = False)
+
+          huatuhui=('当前银行收理财数为%s，出理财数为%s，收理财/出理财为%s。以下为具体广告计数（已排除重复广告）。\n\n机构  收理财  出理财'%(huatudata5.ix[1,'shouli'],huatudata5.ix[1,'chuli'],shouchubi)     )
+          for i in range(0,len(huatudata4)):
+                huatuhui0=('%s      %s      %s'%(huatudata4.ix[i,'hanglei1'],huatudata4.ix[i,'shouli'],huatudata4.ix[i,'chuli']))
+                huatuhui=('%s\n%s'%(huatuhui,huatuhui0))
+          return(str( huatuhui))
+    
+    
+#以下提供广告
+#以下一段分析票据
        elif string[0]=='票据':
          for i in range(0,num): 
             for j in range(1,164):
@@ -241,21 +353,21 @@ def text_reply(msg):
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break
          else:
-            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。例如“票据。收跨年票，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
-         shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-         shijian2=time.strftime('%H:%M',time.localtime(time.time()))
-         print(shijian11)
-         print(shijian1) 
+            return('未能识别广告。\n如:\n“票据：收跨年票，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
+      #   shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+       #  shijian2=time.strftime('%H:%M',time.localtime(time.time()))
+        # print(shijian11)
+        # print(shijian1) 
          db3=client.piaofen
          collection3=db3.piaofen
          cursor = collection3.find({'time':str(shijian11)})
          df2 = pd.DataFrame(list(cursor))
          contentyy=df2['content'].tolist()
          if(hanglei2==0):
-               return('请您务必广告最后带上所在银行及联系方式。')
+               return('请在广告最后附上所在银行（中介结构暂时不行）。')
          else:
                if (co not in contentyy):
-                  data=pd.DataFrame({'time':[shijian1],
+                  data=pd.DataFrame({'time':[shijian11],
                               'time2':[shijian2],
                               'hanglei2':[hanglei2],
                               'hanglei3':[hanglei3],
@@ -277,34 +389,22 @@ def text_reply(msg):
                               'leixing':['1']
                               })    
                   
-                  records = json.loads(data.T.to_json()).values()
-                  collection3.insert(records)
-                  print(data)     
+                 # records = json.loads(data.T.to_json()).values()
+                #  collection3.insert(records)
+                #  print(data)     
                 
 #回复广告  因为回复方式是return 所以回复必须放在最后一位。                
-           
-               print('shou,%s'%shou)
-               print('chu,%s'%chu)
-               print('shouhui,%s'%shouhui)
-               print('chuhui,%s'%chuhui)
-               print('shoudai,%s'%shoudai)
-               print('chudai,%s'%chudai)
-               print('shoucun,%s'%shoucun)
-               print('chucun,%s'%chucun)
-               print('shoufu,%s'%shoufu)
-               print('chufu,%s'%chufu)
-               print('shouli,%s'%shouli)
-               print('chuli,%s'%chuli)               
+
                if chu==1:
-                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
-                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
-                   shijian0=shijian11-datetime.timedelta(days=1)
-                   shijian01=shijian11-datetime.timedelta(days=2)
-                   shijian02=shijian11-datetime.timedelta(days=3)
-                   shijian11=shijian11.strftime("%Y-%m-%d")  
-                   shijian0=shijian0.strftime("%Y-%m-%d")
-                   shijian01=shijian01.strftime("%Y-%m-%d")  
-                   shijian02=shijian02.strftime("%Y-%m-%d")  
+                  # shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+                 #  shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+                  # shijian0=shijian11-datetime.timedelta(days=1)
+                 #  shijian01=shijian11-datetime.timedelta(days=2)
+                 #  shijian02=shijian11-datetime.timedelta(days=3)
+                 #  shijian11=shijian11.strftime("%Y-%m-%d")  
+                 #  shijian0=shijian0.strftime("%Y-%m-%d")
+                 #  shijian01=shijian01.strftime("%Y-%m-%d")  
+                 #  shijian02=shijian02.strftime("%Y-%m-%d")  
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[
@@ -322,21 +422,21 @@ def text_reply(msg):
                    for i in range(0,len0):       
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            print(huifu0)
-                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
                    return(huifu)
                elif shou==1:
-                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
-                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
-                   shijian0=shijian11-datetime.timedelta(days=1)
-                   shijian01=shijian11-datetime.timedelta(days=2)
-                   shijian02=shijian11-datetime.timedelta(days=3)
-                   shijian11=shijian11.strftime("%Y-%m-%d")  
-                   shijian0=shijian0.strftime("%Y-%m-%d")
-                   shijian01=shijian01.strftime("%Y-%m-%d")  
-                   shijian02=shijian02.strftime("%Y-%m-%d")  
+              #     shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+               #    shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+                #   shijian0=shijian11-datetime.timedelta(days=1)
+                 #  shijian01=shijian11-datetime.timedelta(days=2)
+                 #  shijian02=shijian11-datetime.timedelta(days=3)
+                 #  shijian11=shijian11.strftime("%Y-%m-%d")  
+                 #  shijian0=shijian0.strftime("%Y-%m-%d")
+                 #  shijian01=shijian01.strftime("%Y-%m-%d")  
+                 #  shijian02=shijian02.strftime("%Y-%m-%d")  
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[
@@ -354,21 +454,21 @@ def text_reply(msg):
                    for i in range(0,len0):       
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            print(huifu0)
-                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
                    return(huifu)
                elif shouhui==1:
-                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
-                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
-                   shijian0=shijian11-datetime.timedelta(days=1)
-                   shijian01=shijian11-datetime.timedelta(days=2)
-                   shijian02=shijian11-datetime.timedelta(days=3)
-                   shijian11=shijian11.strftime("%Y-%m-%d")  
-                   shijian0=shijian0.strftime("%Y-%m-%d")
-                   shijian01=shijian01.strftime("%Y-%m-%d")  
-                   shijian02=shijian02.strftime("%Y-%m-%d")  
+             #      shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+              #     shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+               #    shijian0=shijian11-datetime.timedelta(days=1)
+                #   shijian01=shijian11-datetime.timedelta(days=2)
+                 #  shijian02=shijian11-datetime.timedelta(days=3)
+                  # shijian11=shijian11.strftime("%Y-%m-%d")  
+                  # shijian0=shijian0.strftime("%Y-%m-%d")
+                  # shijian01=shijian01.strftime("%Y-%m-%d")  
+                  # shijian02=shijian02.strftime("%Y-%m-%d")  
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[
@@ -386,21 +486,21 @@ def text_reply(msg):
                    for i in range(0,len0):       
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            print(huifu0)
-                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
                    return(huifu)
                elif chuhui==1:
-                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
-                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
-                   shijian0=shijian11-datetime.timedelta(days=1)
-                   shijian01=shijian11-datetime.timedelta(days=2)
-                   shijian02=shijian11-datetime.timedelta(days=3)
-                   shijian11=shijian11.strftime("%Y-%m-%d")  
-                   shijian0=shijian0.strftime("%Y-%m-%d")
-                   shijian01=shijian01.strftime("%Y-%m-%d")  
-                   shijian02=shijian02.strftime("%Y-%m-%d")  
+             #      shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+              #     shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+               #    shijian0=shijian11-datetime.timedelta(days=1)
+                #   shijian01=shijian11-datetime.timedelta(days=2)
+                 #  shijian02=shijian11-datetime.timedelta(days=3)
+                  # shijian11=shijian11.strftime("%Y-%m-%d")  
+     #              shijian0=shijian0.strftime("%Y-%m-%d")
+      #             shijian01=shijian01.strftime("%Y-%m-%d")  
+       #            shijian02=shijian02.strftime("%Y-%m-%d")  
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[
@@ -418,21 +518,21 @@ def text_reply(msg):
                    for i in range(0,len0):       
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            print(huifu0)
-                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
                    return(huifu)
                elif shoudai==1:
-                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
-                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
-                   shijian0=shijian11-datetime.timedelta(days=1)
-                   shijian01=shijian11-datetime.timedelta(days=2)
-                   shijian02=shijian11-datetime.timedelta(days=3)
-                   shijian11=shijian11.strftime("%Y-%m-%d")  
-                   shijian0=shijian0.strftime("%Y-%m-%d")
-                   shijian01=shijian01.strftime("%Y-%m-%d")  
-                   shijian02=shijian02.strftime("%Y-%m-%d")  
+          #         shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+           #        shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+            #       shijian0=shijian11-datetime.timedelta(days=1)
+             #      shijian01=shijian11-datetime.timedelta(days=2)
+              #     shijian02=shijian11-datetime.timedelta(days=3)
+               #    shijian11=shijian11.strftime("%Y-%m-%d")  
+                #   shijian0=shijian0.strftime("%Y-%m-%d")
+                 #  shijian01=shijian01.strftime("%Y-%m-%d")  
+                  # shijian02=shijian02.strftime("%Y-%m-%d")  
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[
@@ -450,21 +550,21 @@ def text_reply(msg):
                    for i in range(0,len0):       
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            print(huifu0)
-                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
                    return(huifu)
                elif  chudai==1:
-                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
-                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
-                   shijian0=shijian11-datetime.timedelta(days=1)
-                   shijian01=shijian11-datetime.timedelta(days=2)
-                   shijian02=shijian11-datetime.timedelta(days=3)
-                   shijian11=shijian11.strftime("%Y-%m-%d")  
-                   shijian0=shijian0.strftime("%Y-%m-%d")
-                   shijian01=shijian01.strftime("%Y-%m-%d")  
-                   shijian02=shijian02.strftime("%Y-%m-%d")  
+        #           shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+         #          shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+          #         shijian0=shijian11-datetime.timedelta(days=1)
+           #        shijian01=shijian11-datetime.timedelta(days=2)
+            #       shijian02=shijian11-datetime.timedelta(days=3)
+             #      shijian11=shijian11.strftime("%Y-%m-%d")  
+              #     shijian0=shijian0.strftime("%Y-%m-%d")
+               #    shijian01=shijian01.strftime("%Y-%m-%d")  
+                #   shijian02=shijian02.strftime("%Y-%m-%d")  
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[
@@ -480,7 +580,7 @@ def text_reply(msg):
                    for i in range(0,len0):       
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            print(huifu0)
-                           huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
+                           huifu=('%s\r\n***\r\n%s')%(huifu,huifu0)
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
@@ -521,21 +621,21 @@ def text_reply(msg):
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break   #是否要跳出二层循环
          else:
-            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。例如“福费廷。收证，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
-         shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-         shijian2=time.strftime('%H:%M',time.localtime(time.time()))
-         print(shijian11)
-         print(shijian1) 
+            return('未能识别广告。\n例如:\n“福费廷：收证，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
+     #    shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+     #    shijian2=time.strftime('%H:%M',time.localtime(time.time()))
+      #   print(shijian11)
+      #   print(shijian1) 
          db3=client.piaofen
          collection3=db3.piaofen
          cursor = collection3.find({'time':str(shijian11)})
          df2 = pd.DataFrame(list(cursor))
          contentyy=df2['content'].tolist()
          if(hanglei2==0):
-               return('请您务必广告最后带上所在银行及联系方式。')
+               return('请在广告最后附上所在银行（中介机构暂时不行）。')
          else:
                if (co not in contentyy):
-                  data=pd.DataFrame({'time':[shijian1],
+                  data=pd.DataFrame({'time':[shijian11],
                               'time2':[shijian2],
                               'hanglei2':[hanglei2],
                               'hanglei3':[hanglei3],
@@ -557,34 +657,34 @@ def text_reply(msg):
                               'leixing':['1']
                               })    
                   
-                  records = json.loads(data.T.to_json()).values()
-                  collection3.insert(records)
-                  print(data)     
+                 # records = json.loads(data.T.to_json()).values()
+                #  collection3.insert(records)
+                #  print(data)     
                 
        #回复广告  因为回复方式是return 所以回复必须放在最后一位。                
            
-               print('shou,%s'%shou)
-               print('chu,%s'%chu)
-               print('shouhui,%s'%shouhui)
-               print('chuhui,%s'%chuhui)
-               print('shoudai,%s'%shoudai)
-               print('chudai,%s'%chudai)
-               print('shoucun,%s'%shoucun)
-               print('chucun,%s'%chucun)
-               print('shoufu,%s'%shoufu)
-               print('chufu,%s'%chufu)
-               print('shouli,%s'%shouli)
-               print('chuli,%s'%chuli)               
+  #             print('shou,%s'%shou)
+   #            print('chu,%s'%chu)
+    #           print('shouhui,%s'%shouhui)
+     #          print('chuhui,%s'%chuhui)
+      #         print('shoudai,%s'%shoudai)
+       #        print('chudai,%s'%chudai)
+        #       print('shoucun,%s'%shoucun)
+         #      print('chucun,%s'%chucun)
+          #     print('shoufu,%s'%shoufu)
+           #    print('chufu,%s'%chufu)
+            #   print('shouli,%s'%shouli)
+            #   print('chuli,%s'%chuli)               
                if chufu==1:
-                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
-                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
-                   shijian0=shijian11-datetime.timedelta(days=1)
-                   shijian01=shijian11-datetime.timedelta(days=2)
-                   shijian02=shijian11-datetime.timedelta(days=3)
-                   shijian11=shijian11.strftime("%Y-%m-%d")  
-                   shijian0=shijian0.strftime("%Y-%m-%d")
-                   shijian01=shijian01.strftime("%Y-%m-%d")  
-                   shijian02=shijian02.strftime("%Y-%m-%d")  
+ #                  shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+  #                 shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+   #                shijian0=shijian11-datetime.timedelta(days=1)
+    #               shijian01=shijian11-datetime.timedelta(days=2)
+     #              shijian02=shijian11-datetime.timedelta(days=3)
+      #             shijian11=shijian11.strftime("%Y-%m-%d")  
+       #            shijian0=shijian0.strftime("%Y-%m-%d")
+        #           shijian01=shijian01.strftime("%Y-%m-%d")  
+         #          shijian02=shijian02.strftime("%Y-%m-%d")  
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[
@@ -608,15 +708,15 @@ def text_reply(msg):
                    print(huifu)
                    return(huifu)
                elif shoufu==1:
-                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
-                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
-                   shijian0=shijian11-datetime.timedelta(days=1)
-                   shijian01=shijian11-datetime.timedelta(days=2)
-                   shijian02=shijian11-datetime.timedelta(days=3)
-                   shijian11=shijian11.strftime("%Y-%m-%d")  
-                   shijian0=shijian0.strftime("%Y-%m-%d")
-                   shijian01=shijian01.strftime("%Y-%m-%d")  
-                   shijian02=shijian02.strftime("%Y-%m-%d")  
+    #               shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+     #              shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+      #             shijian0=shijian11-datetime.timedelta(days=1)
+       #            shijian01=shijian11-datetime.timedelta(days=2)
+        #           shijian02=shijian11-datetime.timedelta(days=3)
+         #          shijian11=shijian11.strftime("%Y-%m-%d")  
+          #         shijian0=shijian0.strftime("%Y-%m-%d")
+           #        shijian01=shijian01.strftime("%Y-%m-%d")  
+            #       shijian02=shijian02.strftime("%Y-%m-%d")  
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[
@@ -673,21 +773,21 @@ def text_reply(msg):
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break   #是否要跳出二层循环
          else:
-            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。例如“理财。收非保本理财，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
-         shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-         shijian2=time.strftime('%H:%M',time.localtime(time.time()))
-         print(shijian11)
-         print(shijian1) 
+            return('未能识别广告。\n例如:\n“理财：收非保本理财，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
+    #     shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+     #    shijian2=time.strftime('%H:%M',time.localtime(time.time()))
+      #   print(shijian11)
+       #  print(shijian1) 
          db3=client.piaofen
          collection3=db3.piaofen
          cursor = collection3.find({'time':str(shijian11)})
          df2 = pd.DataFrame(list(cursor))
          contentyy=df2['content'].tolist()
          if(hanglei2==0):
-               return('请您务必广告最后带上所在银行及联系方式。')
+               return('请在广告最后附上所在银行（中介机构暂时不行）。')
          else:
                if (co not in contentyy):
-                  data=pd.DataFrame({'time':[shijian1],
+                  data=pd.DataFrame({'time':[shijian11],
                               'time2':[shijian2],
                               'hanglei2':[hanglei2],
                               'hanglei3':[hanglei3],
@@ -709,34 +809,34 @@ def text_reply(msg):
                               'leixing':['1']
                               })    
                   
-                  records = json.loads(data.T.to_json()).values()
-                  collection3.insert(records)
-                  print(data)     
+          #        records = json.loads(data.T.to_json()).values()
+           #       collection3.insert(records)
+            #      print(data)     
                 
        #回复广告  因为回复方式是return 所以回复必须放在最后一位。                
            
-               print('shou,%s'%shou)
-               print('chu,%s'%chu)
-               print('shouhui,%s'%shouhui)
-               print('chuhui,%s'%chuhui)
-               print('shoudai,%s'%shoudai)
-               print('chudai,%s'%chudai)
-               print('shoucun,%s'%shoucun)
-               print('chucun,%s'%chucun)
-               print('shoufu,%s'%shoufu)
-               print('chufu,%s'%chufu)
-               print('shouli,%s'%shouli)
-               print('chuli,%s'%chuli)               
+ #              print('shou,%s'%shou)
+  #             print('chu,%s'%chu)
+   #            print('shouhui,%s'%shouhui)
+    #           print('chuhui,%s'%chuhui)
+     #          print('shoudai,%s'%shoudai)
+      #         print('chudai,%s'%chudai)
+       #        print('shoucun,%s'%shoucun)
+        #       print('chucun,%s'%chucun)
+          #     print('shoufu,%s'%shoufu)
+           #    print('chufu,%s'%chufu)
+            #   print('shouli,%s'%shouli)
+             #  print('chuli,%s'%chuli)               
                if chuli==1:
-                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
-                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
-                   shijian0=shijian11-datetime.timedelta(days=1)
-                   shijian01=shijian11-datetime.timedelta(days=2)
-                   shijian02=shijian11-datetime.timedelta(days=3)
-                   shijian11=shijian11.strftime("%Y-%m-%d")  
-                   shijian0=shijian0.strftime("%Y-%m-%d")
-                   shijian01=shijian01.strftime("%Y-%m-%d")  
-                   shijian02=shijian02.strftime("%Y-%m-%d")  
+  #                 shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+   #                shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+    #               shijian0=shijian11-datetime.timedelta(days=1)
+     #              shijian01=shijian11-datetime.timedelta(days=2)
+      #             shijian02=shijian11-datetime.timedelta(days=3)
+       #            shijian11=shijian11.strftime("%Y-%m-%d")  
+        #           shijian0=shijian0.strftime("%Y-%m-%d")
+         #          shijian01=shijian01.strftime("%Y-%m-%d")  
+          #         shijian02=shijian02.strftime("%Y-%m-%d")  
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[
@@ -760,15 +860,15 @@ def text_reply(msg):
                    print(huifu)
                    return(huifu)
                elif shouli==1:
-                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
-                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
-                   shijian0=shijian11-datetime.timedelta(days=1)
-                   shijian01=shijian11-datetime.timedelta(days=2)
-                   shijian02=shijian11-datetime.timedelta(days=3)
-                   shijian11=shijian11.strftime("%Y-%m-%d")  
-                   shijian0=shijian0.strftime("%Y-%m-%d")
-                   shijian01=shijian01.strftime("%Y-%m-%d")  
-                   shijian02=shijian02.strftime("%Y-%m-%d")  
+#                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+ #                  shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+  #                 shijian0=shijian11-datetime.timedelta(days=1)
+   #                shijian01=shijian11-datetime.timedelta(days=2)
+    #               shijian02=shijian11-datetime.timedelta(days=3)
+     #              shijian11=shijian11.strftime("%Y-%m-%d")  
+      #             shijian0=shijian0.strftime("%Y-%m-%d")
+       #            shijian01=shijian01.strftime("%Y-%m-%d")  
+        #           shijian02=shijian02.strftime("%Y-%m-%d")  
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[
@@ -824,21 +924,21 @@ def text_reply(msg):
                                      hanglei3=bank_df.astype(str).loc[j2,'fenlei3'].strip()
                                      break   #是否要跳出二层循环
          else:
-            return('抱歉，未能识别您的广告。\n我提供票据、福费廷、存单、理财四种广告对接业务。例如“存单。收3个月存单，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
-         shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-         shijian2=time.strftime('%H:%M',time.localtime(time.time()))
-         print(shijian11)
-         print(shijian1) 
+            return('未能识别广告。\n例如:\n“存单：收3个月存单，**银行0571-88888888”。\n如有疑问请联系微信号：18969901812。')
+ #        shijian1=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+  #       shijian2=time.strftime('%H:%M',time.localtime(time.time()))
+   #      print(shijian11)
+    #     print(shijian1) 
          db3=client.piaofen
          collection3=db3.piaofen
          cursor = collection3.find({'time':str(shijian11)})
          df2 = pd.DataFrame(list(cursor))
          contentyy=df2['content'].tolist()
          if(hanglei2==0):
-               return('请您务必广告最后带上所在银行及联系方式。')
+               return('请在广告最后附上所在银行（中介机构暂时不行）。')
          else:
                if (co not in contentyy):
-                  data=pd.DataFrame({'time':[shijian1],
+                  data=pd.DataFrame({'time':[shijian11],
                               'time2':[shijian2],
                               'hanglei2':[hanglei2],
                               'hanglei3':[hanglei3],
@@ -860,34 +960,34 @@ def text_reply(msg):
                               'leixing':['1']
                               })    
                   
-                  records = json.loads(data.T.to_json()).values()
-                  collection3.insert(records)
-                  print(data)     
+               #   records = json.loads(data.T.to_json()).values()
+                #  collection3.insert(records)
+                #  print(data)     
                 
        #回复广告  因为回复方式是return 所以回复必须放在最后一位。                
            
-               print('shou,%s'%shou)
-               print('chu,%s'%chu)
-               print('shouhui,%s'%shouhui)
-               print('chuhui,%s'%chuhui)
-               print('shoudai,%s'%shoudai)
-               print('chudai,%s'%chudai)
-               print('shoucun,%s'%shoucun)
-               print('chucun,%s'%chucun)
-               print('shoufu,%s'%shoufu)
-               print('chufu,%s'%chufu)
-               print('shouli,%s'%shouli)
-               print('chuli,%s'%chuli)               
+#               print('shou,%s'%shou)
+ #              print('chu,%s'%chu)
+  #             print('shouhui,%s'%shouhui)
+   #            print('chuhui,%s'%chuhui)
+    #           print('shoudai,%s'%shoudai)
+     #          print('chudai,%s'%chudai)
+      #         print('shoucun,%s'%shoucun)
+       #        print('chucun,%s'%chucun)
+        #       print('shoufu,%s'%shoufu)
+         #      print('chufu,%s'%chufu)
+          #     print('shouli,%s'%shouli)
+           #    print('chuli,%s'%chuli)               
                if chucun==1:
-                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
-                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
-                   shijian0=shijian11-datetime.timedelta(days=1)
-                   shijian01=shijian11-datetime.timedelta(days=2)
-                   shijian02=shijian11-datetime.timedelta(days=3)
-                   shijian11=shijian11.strftime("%Y-%m-%d")  
-                   shijian0=shijian0.strftime("%Y-%m-%d")
-                   shijian01=shijian01.strftime("%Y-%m-%d")  
-                   shijian02=shijian02.strftime("%Y-%m-%d")  
+            #       shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+             #      shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+              #     shijian0=shijian11-datetime.timedelta(days=1)
+               #    shijian01=shijian11-datetime.timedelta(days=2)
+                #   shijian02=shijian11-datetime.timedelta(days=3)
+                 #  shijian11=shijian11.strftime("%Y-%m-%d")  
+                  # shijian0=shijian0.strftime("%Y-%m-%d")
+         #          shijian01=shijian01.strftime("%Y-%m-%d")  
+          #         shijian02=shijian02.strftime("%Y-%m-%d")  
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[
@@ -911,15 +1011,15 @@ def text_reply(msg):
                    print(huifu)
                    return(huifu)
                elif shoucun==1:
-                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
-                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
-                   shijian0=shijian11-datetime.timedelta(days=1)
-                   shijian01=shijian11-datetime.timedelta(days=2)
-                   shijian02=shijian11-datetime.timedelta(days=3)
-                   shijian11=shijian11.strftime("%Y-%m-%d")  
-                   shijian0=shijian0.strftime("%Y-%m-%d")
-                   shijian01=shijian01.strftime("%Y-%m-%d")  
-                   shijian02=shijian02.strftime("%Y-%m-%d")  
+  #                 shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+   #                shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+    #               shijian0=shijian11-datetime.timedelta(days=1)
+     #              shijian01=shijian11-datetime.timedelta(days=2)
+      #             shijian02=shijian11-datetime.timedelta(days=3)
+       #            shijian11=shijian11.strftime("%Y-%m-%d")  
+        #           shijian0=shijian0.strftime("%Y-%m-%d")
+         #          shijian01=shijian01.strftime("%Y-%m-%d")  
+          #         shijian02=shijian02.strftime("%Y-%m-%d")  
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[
@@ -955,14 +1055,6 @@ def text_reply(msg):
                 
                 
        else:
-           return('欢迎您使用汇票交易广告撮合功能。\n请在您想要发送的广告前面加上“票据。”，“福费廷。”，“存单。”或“理财。”，\n选择一个业务方向，我才能为您对接广告。\n例如“票据。收各期限国股承兑电银，工行***0571-88888888”，\n注意：如果您想别人能及时联系到您，发送广告务必带上联系方式！\n没有业务需求时，也可以通过发送‘票据分析’、“福费廷分析”、“存单分析”或"理财分析"单独指令来了解当日实时的市场情况。')
-         
-
-       
-           
-           
-                
-        
-        
+           return('您可发送指令获得服务。指令可以是单个短句，也可以是多个短句，中间用空格或标点隔开。\n目前您可使用如下11条指令\n”资讯” ———获得最新金融新闻。如需正文，发送对应获取号。\n“资讯”+“搜索关键词” ———检索文章。如“资讯 政策”\n“获取号” ———获得单篇资讯，如（“4988”）\n“票据分析” ———获得某个产品的市场数据。\n”票据”+“广告” ———获得对应业务方向的6条广告。如“票据 收票，工行广州”\n“理财分析”\n“福费廷分析”\n“存单分析”')
 itchatmp.run()
 

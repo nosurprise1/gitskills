@@ -134,7 +134,7 @@ def text_reply(msg):
        if co=='资讯':
           db3 = client.zixun
           collection3 = db3.zixun   
-          cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian0)}}}
+          cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian0)}}
                                               ]})    
           zixun_df = pd.DataFrame(list(cursor3))
           if zixun_df.empty:

@@ -29,7 +29,7 @@ def get_tasks(task_id):
     if task_id==1:
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           shijian2 = datetime.datetime.strptime(shijian2, "%Y-%m-%d")
-          shijian2=shijian2.strftime("%Y-%m-%d")  #今天
+          shijian2=shijian2.strftime("%Y-%m-%d")  
           
           db3 = client.piaofen
           collection3 = db3.piaofen   

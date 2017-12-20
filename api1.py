@@ -19,7 +19,7 @@ def get_password(username):
 
 @auth.error_handler
 def unauthorized():
-     return('!!!!!')
+     return('用户名密码不对!!!!!')
 
 @app.route('/<int:task_id>', methods=['GET'])
 @auth.login_required
@@ -59,7 +59,7 @@ def get_tasks(task_id):
 
 
     else:
-        abort(404)
+        return('网络不好!!!!!')
 
 
 

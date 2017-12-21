@@ -51,11 +51,33 @@ def get_tasks(task_id):
          # df=df.to_json(orient='index')
          # return(df)
 
-
+    if task_id==2:
           
+                   shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
+                   shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
+                   shijian10=shijian11-datetime.timedelta(days=1)  #明天
+                   shijian0=shijian11-datetime.timedelta(days=1)
+                   shijian01=shijian11-datetime.timedelta(days=2)
+                   shijian02=shijian11-datetime.timedelta(days=3)
+                   shijian014=shijian11-datetime.timedelta(days=13)
 
+                   shijian11=shijian11.strftime("%Y-%m-%d")  #今天
+                   shijian0=shijian0.strftime("%Y-%m-%d")     #昨天
+                   shijian01=shijian01.strftime("%Y-%m-%d")   #前天
+                   shijian02=shijian02.strftime("%Y-%m-%d")   #大前天
+                   db3 = client.piaofen
+                   collection3 = db3.piaofen   
+                   cursor3 = collection3.find({"$and":[
+                                                   {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]},
+                                                   {'chuli':1},
+                                                   {'hanglei2':1},
+                                                    ]})
+                   piaofen_df = pd.DataFrame(list(cursor3))
+                   del piaofen_df['_id']
 
+                   piaofen_df=piaofen_df.to_json()
 
+                   return(piaofen_df)
 
 
     else:

@@ -32,7 +32,7 @@ def get_tasks(task_id):
     shijian0=shijian11-datetime.timedelta(days=1)
     shijian01=shijian11-datetime.timedelta(days=2)
     shijian02=shijian11-datetime.timedelta(days=3)
-    shijian014=shijian11-datetime.timedelta(days=13)
+    shijian014=shijian11-datetime.timedelta(days=30)
 
     shijian11=shijian11.strftime("%Y-%m-%d")  #今天
     shijian0=shijian0.strftime("%Y-%m-%d")     #昨天
@@ -245,10 +245,29 @@ def get_tasks(task_id):
 
                    return(piaofen_df)                
     elif task_id==14:
+        
+        
         sou = request.args.get('text')
-        return(sou)
-        
-        
+        db3 = client.zixun
+        collection3 = db3.zixun   
+        cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{'标题':{'$regex':sou}}]})    
+        zixun_df = pd.DataFrame(list(cursor3))
+        if zixun_df.empty:
+                return('未检索到相关资讯~')
+        zixun_df = zixun_df.sort_values(by='爬取日期', ascending=True)
+        zixun_df =  zixun_df.reset_index(drop=True)  
+        return(zixun_df)    
+    elif task_id==15:
+        sou = request.args.get('text')
+        db3 = client.zixun
+        collection3 = db3.zixun   
+        cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{'内容':{'$regex':sou}}]})    
+        zixun_df = pd.DataFrame(list(cursor3))
+        if zixun_df.empty:
+                return('未检索到相关资讯~')
+        zixun_df = zixun_df.sort_values(by='爬取日期', ascending=True)
+        zixun_df =  zixun_df.reset_index(drop=True)  
+        return(zixun_df)    
         
     else:
         return('网络不好!!!!!')

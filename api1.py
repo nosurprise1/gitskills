@@ -249,7 +249,7 @@ def get_tasks(task_id):
         
         sou = request.args.get('text')
         print(sou)
-        sou=sou.encode('utf-8')
+        sou=sou.decode('utf-8')
         print(sou)
         db3 = client.zixun
         collection3 = db3.zixun   
@@ -263,7 +263,7 @@ def get_tasks(task_id):
     elif task_id==15:
         sou = request.args.get('text')
         print(sou)
-        sou=sou.encode('utf-8')
+        sou=sou.decode('utf-8')
         print(sou)
         db3 = client.zixun
         collection3 = db3.zixun   

@@ -248,23 +248,29 @@ def get_tasks(task_id):
         
         
         sou = request.args.get('text')
+        print(sou)
+        sou=sou.encode('utf-8')
+        print(sou)
         db3 = client.zixun
         collection3 = db3.zixun   
         cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{'标题':{'$regex':sou}}]})    
         zixun_df = pd.DataFrame(list(cursor3))
         if zixun_df.empty:
-                return(999)
+                return('999')
         zixun_df = zixun_df.sort_values(by='爬取日期', ascending=True)
         zixun_df =  zixun_df.reset_index(drop=True)  
         return(zixun_df)    
     elif task_id==15:
         sou = request.args.get('text')
+        print(sou)
+        sou=sou.encode('utf-8')
+        print(sou)
         db3 = client.zixun
         collection3 = db3.zixun   
         cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{'内容':{'$regex':sou}}]})    
         zixun_df = pd.DataFrame(list(cursor3))
         if zixun_df.empty:
-                return(999)
+                return('999')
         zixun_df = zixun_df.sort_values(by='爬取日期', ascending=True)
         zixun_df =  zixun_df.reset_index(drop=True)  
         return(zixun_df)    

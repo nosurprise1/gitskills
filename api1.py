@@ -243,7 +243,7 @@ def get_tasks(task_id):
                    piaofen_df=piaofen_df.to_json()
 
                    return(piaofen_df)                
-    elif task_id==1&(.*):
+    elif task_id=='1&(.*)':
           print('4444444')                     
     else:
         return('网络不好!!!!!')

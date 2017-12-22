@@ -21,7 +21,7 @@ def get_password(username):
 def unauthorized():
      return('用户名密码不对!!!!!')
 
-@app.route('/<int:task_id>', methods=['GET'])
+@app.route('/<int:task_id>/<str:sou>', methods=['GET'])
 @auth.login_required
 
 def get_tasks(task_id):
@@ -243,8 +243,8 @@ def get_tasks(task_id):
                    piaofen_df=piaofen_df.to_json()
 
                    return(piaofen_df)                
-    elif '1&' in task_id:
-          return('4444444')                     
+    elif task_id=14:
+          return(sou)                     
     else:
         return('网络不好!!!!!')
 

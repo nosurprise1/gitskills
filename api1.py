@@ -4,6 +4,7 @@ from pymongo import MongoClient
 import pandas as pd
 from flask.ext.httpauth import HTTPBasicAuth
 import datetime,time
+import request
 auth = HTTPBasicAuth()
 
 app = Flask(__name__)
@@ -21,7 +22,7 @@ def get_password(username):
 def unauthorized():
      return('wrong password or usename!!!!!')
 
-@app.route('/<int:task_id>/<str:sou>', methods=['GET'])
+@app.route('/<int:task_id>', methods=['GET'])
 @auth.login_required
 
 def get_tasks(task_id):
@@ -244,6 +245,11 @@ def get_tasks(task_id):
 
                    return(piaofen_df)                
     elif task_id==14:
+        sou = request.args.get('text')
+        return (sou)
+        
+        
+        
           return(sou)                     
     else:
         return('网络不好!!!!!')

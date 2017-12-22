@@ -253,7 +253,7 @@ def get_tasks(task_id):
         cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{'标题':{'$regex':sou}}]})    
         zixun_df = pd.DataFrame(list(cursor3))
         if zixun_df.empty:
-                return('未检索到相关资讯~')
+                return(999)
         zixun_df = zixun_df.sort_values(by='爬取日期', ascending=True)
         zixun_df =  zixun_df.reset_index(drop=True)  
         return(zixun_df)    
@@ -264,7 +264,7 @@ def get_tasks(task_id):
         cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{'内容':{'$regex':sou}}]})    
         zixun_df = pd.DataFrame(list(cursor3))
         if zixun_df.empty:
-                return('未检索到相关资讯~')
+                return(999)
         zixun_df = zixun_df.sort_values(by='爬取日期', ascending=True)
         zixun_df =  zixun_df.reset_index(drop=True)  
         return(zixun_df)    

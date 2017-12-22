@@ -6,7 +6,7 @@ from flask.ext.httpauth import HTTPBasicAuth
 import datetime,time
 from flask import request
 auth = HTTPBasicAuth()
-
+import urllib.parse
 app = Flask(__name__)
 client=MongoClient('mongodb://root:' + '5768116' + '@139.196.79.93')
 
@@ -249,7 +249,7 @@ def get_tasks(task_id):
         
         sou = request.args.get('text')
         print(sou)
-        sou=sou.decode('utf-8')
+        sou=urllib.parse.unquote(sou)
         print(sou)
         db3 = client.zixun
         collection3 = db3.zixun   
@@ -263,8 +263,9 @@ def get_tasks(task_id):
     elif task_id==15:
         sou = request.args.get('text')
         print(sou)
-        sou=sou.decode('utf-8')
+        sou=urllib.parse.unquote(sou)
         print(sou)
+        
         db3 = client.zixun
         collection3 = db3.zixun   
         cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{'内容':{'$regex':sou}}]})    

@@ -4,7 +4,7 @@ from pymongo import MongoClient
 import pandas as pd
 from flask.ext.httpauth import HTTPBasicAuth
 import datetime,time
-import request
+from flask import request
 auth = HTTPBasicAuth()
 
 app = Flask(__name__)
@@ -246,11 +246,10 @@ def get_tasks(task_id):
                    return(piaofen_df)                
     elif task_id==14:
         sou = request.args.get('text')
-        return (sou)
+        return(sou)
         
         
         
-          return(sou)                     
     else:
         return('网络不好!!!!!')
 

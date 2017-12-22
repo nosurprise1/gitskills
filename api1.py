@@ -259,6 +259,11 @@ def get_tasks(task_id):
                 return('999')
         zixun_df = zixun_df.sort_values(by='爬取日期', ascending=True)
         zixun_df =  zixun_df.reset_index(drop=True)  
+        
+        del zixun_df['_id']
+
+        zixun_df=zixun_df.to_json()
+        
         return(zixun_df)    
     elif task_id==15:
         sou = request.args.get('text')
@@ -274,6 +279,11 @@ def get_tasks(task_id):
                 return('999')
         zixun_df = zixun_df.sort_values(by='爬取日期', ascending=True)
         zixun_df =  zixun_df.reset_index(drop=True)  
+                
+        del zixun_df['_id']
+
+        zixun_df=zixun_df.to_json()
+        
         return(zixun_df)    
         
     else:

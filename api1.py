@@ -19,7 +19,7 @@ def get_password(username):
 
 @auth.error_handler
 def unauthorized():
-     return('用户名密码不对!!!!!')
+     return('wrong password or usename!!!!!')
 
 @app.route('/<int:task_id>/<str:sou>', methods=['GET'])
 @auth.login_required

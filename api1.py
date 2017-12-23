@@ -63,10 +63,10 @@ def get_tasks(task_id):
          # return(df)
 
     elif task_id==2:
-        leixing = request.args.get('leixing')
-        print(leixing)
-        jigou=request.args.get('jigou')
-        print(jigou)
+                   leixing = request.args.get('leixing')
+                   print(leixing)
+                   jigou=request.args.get('jigou')
+                   print(jigou)
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[

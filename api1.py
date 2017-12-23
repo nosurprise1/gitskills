@@ -71,6 +71,9 @@ def get_tasks(task_id):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
+                   if piaofen_df.empty:
+                        return('999')
+          
                    del piaofen_df['_id']
 
                    piaofen_df=piaofen_df.to_json()
@@ -86,6 +89,9 @@ def get_tasks(task_id):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
+                   if piaofen_df.empty:
+                        return('999')
+          
                    del piaofen_df['_id']
 
                    piaofen_df=piaofen_df.to_json()
@@ -101,6 +107,9 @@ def get_tasks(task_id):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
+                   if piaofen_df.empty:
+                        return('999')
+          
                    del piaofen_df['_id']
 
                    piaofen_df=piaofen_df.to_json()
@@ -116,6 +125,9 @@ def get_tasks(task_id):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
+                   if piaofen_df.empty:
+                        return('999')
+          
                    del piaofen_df['_id']
 
                    piaofen_df=piaofen_df.to_json()
@@ -131,6 +143,9 @@ def get_tasks(task_id):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
+                   if piaofen_df.empty:
+                        return('999')
+          
                    del piaofen_df['_id']
 
                    piaofen_df=piaofen_df.to_json()
@@ -146,6 +161,9 @@ def get_tasks(task_id):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
+                   if piaofen_df.empty:
+                        return('999')
+          
                    del piaofen_df['_id']
 
                    piaofen_df=piaofen_df.to_json()
@@ -161,6 +179,9 @@ def get_tasks(task_id):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
+                   if piaofen_df.empty:
+                        return('999')
+          
                    del piaofen_df['_id']
 
                    piaofen_df=piaofen_df.to_json()
@@ -176,6 +197,9 @@ def get_tasks(task_id):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
+                   if piaofen_df.empty:
+                        return('999')
+          
                    del piaofen_df['_id']
 
                    piaofen_df=piaofen_df.to_json()
@@ -191,6 +215,9 @@ def get_tasks(task_id):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
+                   if piaofen_df.empty:
+                        return('999')
+          
                    del piaofen_df['_id']
 
                    piaofen_df=piaofen_df.to_json()
@@ -206,6 +233,9 @@ def get_tasks(task_id):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
+                   if piaofen_df.empty:
+                        return('999')
+          
                    del piaofen_df['_id']
 
                    piaofen_df=piaofen_df.to_json()
@@ -223,6 +253,9 @@ def get_tasks(task_id):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
+                   if piaofen_df.empty:
+                        return('999')
+          
                    del piaofen_df['_id']
 
                    piaofen_df=piaofen_df.to_json()
@@ -238,6 +271,9 @@ def get_tasks(task_id):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
+                   if piaofen_df.empty:
+                        return('999')
+          
                    del piaofen_df['_id']
 
                    piaofen_df=piaofen_df.to_json()

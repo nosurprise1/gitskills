@@ -319,24 +319,7 @@ def get_tasks(task_id):
         zixun_df=zixun_df.to_json()
         
         return(zixun_df)    
-    elif task_id==15:
-
-        db3 = client.zixun
-        collection3 = db3.zixun   
-        cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{'内容':{'$regex':jiansuoci}}]})    
-        zixun_df = pd.DataFrame(list(cursor3))
-        if zixun_df.empty:
-                return('999')
-        zixun_df = zixun_df.sort_values(by='爬取日期', ascending=True)
-        zixun_df =  zixun_df.reset_index(drop=True)  
-                
-        del zixun_df['_id']
-        zixun_df=zixun_df[['爬取日期','标题','权重','时间','内容','链接','序号']]
-        zixun_df.rename(columns={'爬取日期': '日期', '权重': '分类', '序号': '来源'}, inplace=True) 
-
-        zixun_df=zixun_df.to_json()
-        
-        return(zixun_df)    
+ 
         
     else:
         return('网络不好!!!!!')

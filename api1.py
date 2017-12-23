@@ -51,8 +51,7 @@ def get_tasks(task_id):
           piaofen_df = pd.DataFrame(list(cursor3))
           
           if piaofen_df.empty:
-             aaa='999'
-             return(jsonify(aaa))
+             return('999')
           else:
             del piaofen_df['_id']
 

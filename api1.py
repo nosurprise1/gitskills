@@ -37,6 +37,7 @@ def get_tasks(task_id):
     shijian0=shijian0.strftime("%Y-%m-%d")     #昨天
     shijian01=shijian01.strftime("%Y-%m-%d")   #前天
     shijian02=shijian02.strftime("%Y-%m-%d")   #大前天
+    #获取业务撮合关键词
     leixing = request.args.get('leixing')
     print(leixing)
     jigou=request.args.get('jigou')
@@ -48,12 +49,20 @@ def get_tasks(task_id):
     qixian=request.args.get('qixian')
     print(qixian)    
     
-    print(jigou) 
+    #获取资讯搜索关键词
+    mubiao=request.args.get('mubiao')
+    print(mubiao)    
+    jiansuoci=request.args.get('jiansuoci')
+    print(jiansuoci)    
+
+    #获取市场分析关键词
+    yewu=request.args.get('yewu')
+    print(yewu)  
+    
     if task_id==1:
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           shijian2 = datetime.datetime.strptime(shijian2, "%Y-%m-%d")
           shijian2=shijian2.strftime("%Y-%m-%d")  
-          
           db3 = client.piaofen
           collection3 = db3.piaofen   
           cursor3 = collection3.find({

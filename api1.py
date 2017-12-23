@@ -41,6 +41,14 @@ def get_tasks(task_id):
     print(leixing)
     jigou=request.args.get('jigou')
     print(jigou)
+    lianxi=request.args.get('lianxi')
+    print(lianxi)
+    beizhu=request.args.get('beizhu')
+    print(beizhu)
+    qixian=request.args.get('qixian')
+    print(qixian)    
+    
+    print(jigou) 
     if task_id==1:
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           shijian2 = datetime.datetime.strptime(shijian2, "%Y-%m-%d")

@@ -51,7 +51,7 @@ def get_tasks(task_id):
           piaofen_df = pd.DataFrame(list(cursor3))
           
           if piaofen_df.empty:
-             aaa='empty'
+             aaa='999'
              return(jsonify(aaa))
           else:
             del piaofen_df['_id']
@@ -261,7 +261,7 @@ def get_tasks(task_id):
         zixun_df =  zixun_df.reset_index(drop=True)  
         
         del zixun_df['_id']
-        zixun_df=[['爬取日期','标题','权重','时间','内容','链接','序号']]
+        zixun_df=zixun_df[['爬取日期','标题','权重','时间','内容','链接','序号']]
         zixun_df.rename(columns={'爬取日期': '日期', '权重': '分类', '序号': '来源'}, inplace=True) 
 
         zixun_df=zixun_df.to_json()
@@ -283,7 +283,7 @@ def get_tasks(task_id):
         zixun_df =  zixun_df.reset_index(drop=True)  
                 
         del zixun_df['_id']
-        zixun_df=[['爬取日期','标题','权重','时间','内容','链接','序号']]
+        zixun_df=zixun_df[['爬取日期','标题','权重','时间','内容','链接','序号']]
         zixun_df.rename(columns={'爬取日期': '日期', '权重': '分类', '序号': '来源'}, inplace=True) 
 
         zixun_df=zixun_df.to_json()

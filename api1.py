@@ -302,14 +302,10 @@ def get_tasks(task_id):
                    return(piaofen_df)                
     elif task_id==14:
         
-        
-        sou = request.args.get('text')
-        print(sou)
-        sou=urllib.parse.unquote(sou)
-        print(sou)
+
         db3 = client.zixun
         collection3 = db3.zixun   
-        cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{'标题':{'$regex':sou}}]})    
+        cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{mubiao:{'$regex':jiansuoci}}]})    
         zixun_df = pd.DataFrame(list(cursor3))
         if zixun_df.empty:
                 return('999')
@@ -324,14 +320,10 @@ def get_tasks(task_id):
         
         return(zixun_df)    
     elif task_id==15:
-        sou = request.args.get('text')
-        print(sou)
-        sou=urllib.parse.unquote(sou)
-        print(sou)
-        
+
         db3 = client.zixun
         collection3 = db3.zixun   
-        cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{'内容':{'$regex':sou}}]})    
+        cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{'内容':{'$regex':jiansuoci}}]})    
         zixun_df = pd.DataFrame(list(cursor3))
         if zixun_df.empty:
                 return('999')

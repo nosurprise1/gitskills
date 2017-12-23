@@ -33,11 +33,14 @@ def get_tasks(task_id):
     shijian01=shijian11-datetime.timedelta(days=2)
     shijian02=shijian11-datetime.timedelta(days=3)
     shijian014=shijian11-datetime.timedelta(days=30)
-
     shijian11=shijian11.strftime("%Y-%m-%d")  #今天
     shijian0=shijian0.strftime("%Y-%m-%d")     #昨天
     shijian01=shijian01.strftime("%Y-%m-%d")   #前天
     shijian02=shijian02.strftime("%Y-%m-%d")   #大前天
+    leixing = request.args.get('leixing')
+    print(leixing)
+    jigou=request.args.get('jigou')
+    print(jigou)
     if task_id==1:
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
           shijian2 = datetime.datetime.strptime(shijian2, "%Y-%m-%d")
@@ -63,10 +66,7 @@ def get_tasks(task_id):
          # return(df)
 
     elif task_id==2:
-                   leixing = request.args.get('leixing')
-                   print(leixing)
-                   jigou=request.args.get('jigou')
-                   print(jigou)
+
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[

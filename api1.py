@@ -3,7 +3,7 @@ from flask import Flask, jsonify
 from pymongo import MongoClient
 import pandas as pd
 from flask.ext.httpauth import HTTPBasicAuth
-import datetime,time
+import datetime,time,json
 from flask import request
 auth = HTTPBasicAuth()
 import urllib.parse

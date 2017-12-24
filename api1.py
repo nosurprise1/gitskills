@@ -43,7 +43,7 @@ def get_tasks(task_id):
     shijian01=shijian01.strftime("%Y-%m-%d")   #前天
     shijian02=shijian02.strftime("%Y-%m-%d")   #大前天
    
-    ggg = reguest.args.get('ggg')
+    ggg = request.args.get('ggg')
     print(ggg)
     #获取业务撮合关键词
     leixing = request.args.get('leixing')

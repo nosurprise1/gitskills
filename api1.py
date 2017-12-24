@@ -9,6 +9,9 @@ auth = HTTPBasicAuth()
 import urllib.parse
 app = Flask(__name__)
 client=MongoClient('mongodb://root:' + '5768116' + '@139.196.79.93')
+#从数据导入piao
+db = client.piaofen2
+collection = db.piaofen2  #http://www.jb51.net/article/77537.htm
 
 
 
@@ -26,6 +29,8 @@ def unauthorized():
 @auth.login_required
 
 def get_tasks(task_id):
+    shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+
     shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
     shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
     shijian10=shijian11-datetime.timedelta(days=1)  #明天
@@ -37,6 +42,9 @@ def get_tasks(task_id):
     shijian0=shijian0.strftime("%Y-%m-%d")     #昨天
     shijian01=shijian01.strftime("%Y-%m-%d")   #前天
     shijian02=shijian02.strftime("%Y-%m-%d")   #大前天
+   
+    ggg = reguest.args.get('ggg')
+    print(ggg)
     #获取业务撮合关键词
     leixing = request.args.get('leixing')
     print(leixing)
@@ -58,6 +66,28 @@ def get_tasks(task_id):
     #获取市场分析关键词
     yewu=request.args.get('yewu')
     print(yewu)  
+    
+    
+    data=pd.DataFrame({'time':[shijian11],
+                              'time2':[shijian2],
+                              '业务类型':[leixing],
+                              '银行':[jigou],
+                              '联系人':[lianxi],
+                              '备注':[beizhu],
+                              '期限':[qixian],
+                              '搜索目标':[mubiao],
+                              '检索词':[jiansuoci],
+                              '业务分析':[yewu],
+                              '用户':[ggg],
+                             
+                              })    
+                  
+    records = json.loads(data.T.to_json()).values()
+    collection.insert(records)
+    print(data)     
+    
+    
+    
     
     if task_id==1:
           shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))

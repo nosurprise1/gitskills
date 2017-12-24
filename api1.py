@@ -29,8 +29,7 @@ def unauthorized():
 @auth.login_required
 
 def get_tasks(task_id):
-    shijian2=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-
+    shijian2=time.strftime('%H:%M',time.localtime(time.time()))
     shijian11=time.strftime('%y-%m-%d',time.localtime(time.time()))
     shijian11 = datetime.datetime.strptime(shijian11, "%y-%m-%d")
     shijian10=shijian11-datetime.timedelta(days=1)  #明天
@@ -42,7 +41,8 @@ def get_tasks(task_id):
     shijian0=shijian0.strftime("%Y-%m-%d")     #昨天
     shijian01=shijian01.strftime("%Y-%m-%d")   #前天
     shijian02=shijian02.strftime("%Y-%m-%d")   #大前天
-   
+    caozuo= request.args.get('caozuo')
+    print(caozuo) 
     ggg = request.args.get('ggg')
     print(ggg)
     #获取业务撮合关键词
@@ -79,7 +79,7 @@ def get_tasks(task_id):
                               '检索词':[jiansuoci],
                               '业务分析':[yewu],
                               '用户':[ggg],
-                             
+                             '操作':[caozuo]
                               })    
                   
     records = json.loads(data.T.to_json()).values()

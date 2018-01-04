@@ -113,12 +113,31 @@ def get_tasks(task_id):
          # return(df)
 
     elif task_id==2:
-
+                   if leixing=='票据买断':
+                       yec='chu'
+                   elif leixing=='票据卖断':
+                       yec='shou'
+                   elif leixing=='票据收买返':
+                       yec='chuhui'
+                   elif leixing=='票据出回购':
+                       yec='shouhui'
+                   elif leixing=='票据收代持':
+                       yec='chudai'
+                   elif leixing=='票据出代持':
+                       yec='shoudai'
+                   elif leixing=='收福费廷':
+                       yec='chufu'
+                   elif leixing=='出福费廷':
+                       yec='shoufu'
+                   elif leixing=='收存单':
+                       yec='chucun'            
+                   elif leixing=='出存单':
+                       yec='shoucun'               
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[
                                                    {"$or":[{'time':str(shijian11)},{'time':str(shijian0)},{'time':str(shijian01)},{'time':str(shijian02)}]},
-                                                   {'chu':1},
+                                                   {yec:1},
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))

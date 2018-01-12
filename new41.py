@@ -268,6 +268,8 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
+                   lend=min(len(huifu),600)
+                   huifu=huifu[:lend]
                    return(huifu)
      elif (co=='16') or(co=='26'):
 

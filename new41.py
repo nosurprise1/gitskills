@@ -168,7 +168,7 @@ def text_reply(msg):
                            count+=1
                    print(huifu)
                    return(huifu)
-     elif (co=='12) or(co=='22'):
+     elif (co=='12') or (co=='22'):
                    db3 = client.piaofen
                    collection3 = db3.piaofen   
                    cursor3 = collection3.find({"$and":[

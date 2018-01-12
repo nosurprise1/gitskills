@@ -168,6 +168,8 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
+                   lend=min(len(huifu),620)
+                   huifu=huifu[:lend]
                    return(huifu)
      elif (co=='12') or (co=='22'):
                    db3 = client.piaofen
@@ -191,6 +193,8 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
+                   lend=min(len(huifu),620)
+                   huifu=huifu[:lend]
                    return(huifu)
                   
                 
@@ -218,6 +222,8 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
+                   lend=min(len(huifu),620)
+                   huifu=huifu[:lend]
                    return(huifu)
      elif (co=='14') or(co=='24'):
 
@@ -242,6 +248,8 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
+                   lend=min(len(huifu),620)
+                   huifu=huifu[:lend]
                    return(huifu)   
                         
        
@@ -268,7 +276,7 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
-                   lend=min(len(huifu),600)
+                   lend=min(len(huifu),620)
                    huifu=huifu[:lend]
                    return(huifu)
      elif (co=='16') or(co=='26'):
@@ -294,6 +302,8 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
+                   lend=min(len(huifu),620)
+                   huifu=huifu[:lend]
                    return(huifu)  
                 
 #以下一段分析存单                        
@@ -319,6 +329,8 @@ def text_reply(msg):
                            #itchatmp.send('%s,%s:%s'%(data.ix[a-1-i,'time2'],data.ix[a-1-i,'nickname'],data.ix[a-1-i,'content']),msg['FromUserName'])
                            count+=1
                    print(huifu)
+                   lend=min(len(huifu),620)
+                   huifu=huifu[:lend]
                    return(huifu)
      elif (co=='18') or(co=='28'):
 
@@ -342,6 +354,8 @@ def text_reply(msg):
                            huifu=('%s\r\n***************\r\n%s')%(huifu,huifu0)
                            count+=1
                    print(huifu)
+                   lend=min(len(huifu),620)
+                   huifu=huifu[:lend]
                    return(huifu)           
           
                 

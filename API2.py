@@ -9,9 +9,9 @@ auth = HTTPBasicAuth()
 import urllib.parse
 app = Flask(__name__)
 client=MongoClient('mongodb://root:' + '5768116' + '@139.196.79.93')
-#从数据导入piao
-#db = client.piaofen2
-#collection = db.piaofen2  #http://www.jb51.net/article/77537.htm
+#piaofen2是记录exe的操作
+db = client.piaofen2
+collection = db.piaofen2  #http://www.jb51.net/article/77537.htm
 
 
 

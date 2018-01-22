@@ -176,7 +176,7 @@ def get_tasks(task_id):
         zixun_df=zixun_df.to_json()
         
         return(zixun_df)    
-     elif task_id==15:
+    elif task_id==15:
         db3 = client.cundan
         collection3 = db3.cundan  
         cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{'发行人':{'$regex':yinhang_cun}}]})    

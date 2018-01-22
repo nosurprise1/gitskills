@@ -10,8 +10,8 @@ import urllib.parse
 app = Flask(__name__)
 client=MongoClient('mongodb://root:' + '5768116' + '@139.196.79.93')
 #从数据导入piao
-db = client.piaofen2
-collection = db.piaofen2  #http://www.jb51.net/article/77537.htm
+#db = client.piaofen2
+#collection = db.piaofen2  #http://www.jb51.net/article/77537.htm
 
 
 
@@ -107,7 +107,7 @@ def get_tasks(task_id):
                                                  'time':str(shijian2)
                                                  })
           piaofen_df = pd.DataFrame(list(cursor3))
-          
+          print(piaofen_df)
           if piaofen_df.empty:
              return('999')
           else:

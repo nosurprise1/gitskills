@@ -179,8 +179,10 @@ def get_tasks(task_id):
     elif task_id==15:
         db3 = client.cundan
         collection3 = db3.cundan  
-        cursor3 = collection3.find({"$and":[{'爬取日期':{'$gte':str(shijian014)}},{'发行人':{'$regex':yinhang_cun}}]})    
+        cursor3 = collection3.find({"$and":[{'发行日':{'$gte':str(shijian014)}},{'发行人':{'$regex':yinhang_cun}}]}) 
+        
         cun_df = pd.DataFrame(list(cursor3))
+        print(cun_df)
         if cun_df.empty:
                 return('999')
         cun_df = cun_df.sort_values(by='爬取日期', ascending=True)

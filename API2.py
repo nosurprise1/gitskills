@@ -180,7 +180,7 @@ def get_tasks(task_id):
         print(yinhang_cun)
         db3 = client.cundan
         collection3 = db3.cundan  
-        cursor3 = collection3.find({"$and":[{'发行日':{'$gte':str(shijian02)}},{'发行人':{'$regex':yinhang_cun}}]}) 
+        cursor3 = collection3.find({"$and":[{'发行日':{'$gte':str(shijian014)}},{'发行人':{'$regex':yinhang_cun}}]}) 
         
         cun_df = pd.DataFrame(list(cursor3))
         print(cun_df)

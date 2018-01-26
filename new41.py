@@ -182,7 +182,8 @@ def text_reply(msg):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
-                   
+                   piaofen_df= piaofen_df.sort_values(by=['time','time2'], ascending=True)
+                   piaofen_df = piaofen_df.reset_index(drop=True)  
                    
                    print(piaofen_df)
                    a=len(piaofen_df)
@@ -211,7 +212,8 @@ def text_reply(msg):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
-                   
+                   piaofen_df= piaofen_df.sort_values(by=['time','time2'], ascending=True)
+                   piaofen_df = piaofen_df.reset_index(drop=True)  
               
                    print(piaofen_df)
                    a=len(piaofen_df)
@@ -240,7 +242,8 @@ def text_reply(msg):
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
                    
-                   
+                   piaofen_df= piaofen_df.sort_values(by=['time','time2'], ascending=True)
+                   piaofen_df = piaofen_df.reset_index(drop=True)  
                    print(piaofen_df)
                    a=len(piaofen_df)
                    len0=min(a,5)
@@ -267,7 +270,8 @@ def text_reply(msg):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
-                   
+                   piaofen_df= piaofen_df.sort_values(by=['time','time2'], ascending=True)
+                   piaofen_df = piaofen_df.reset_index(drop=True)  
                    
                    print(piaofen_df)
                    a=len(piaofen_df)
@@ -293,7 +297,8 @@ def text_reply(msg):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
-                   
+                   piaofen_df= piaofen_df.sort_values(by=['time','time2'], ascending=True)
+                   piaofen_df = piaofen_df.reset_index(drop=True)  
                    
                    print(piaofen_df)
                    a=len(piaofen_df)
@@ -320,7 +325,8 @@ def text_reply(msg):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
-                   
+                   piaofen_df= piaofen_df.sort_values(by=['time','time2'], ascending=True)
+                   piaofen_df = piaofen_df.reset_index(drop=True)  
                    
                    print(piaofen_df)
                    a=len(piaofen_df)
@@ -346,7 +352,8 @@ def text_reply(msg):
                                                    {'hanglei2':1},
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
-                   
+                   piaofen_df= piaofen_df.sort_values(by=['time','time2'], ascending=True)
+                   piaofen_df = piaofen_df.reset_index(drop=True)  
                    
                    print(piaofen_df)
                    a=len(piaofen_df)

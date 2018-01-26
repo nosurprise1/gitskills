@@ -156,6 +156,7 @@ def text_reply(msg):
                                                     ]})
                    piaofen_df = pd.DataFrame(list(cursor3))
                    piaofen_df= piaofen_df.sort_values(by=['time','time2'], ascending=True)
+                   piaofen_df = piaofen_df.reset_index(drop=True)  
 
                    
                    print(piaofen_df)
@@ -216,6 +217,8 @@ def text_reply(msg):
                    a=len(piaofen_df)
                    len0=min(a,5)
                    print(len0)
+                    
+                    
                    for i in range(0,len0):       
                            huifu0=('%s,%s,%s:%s'%(piaofen_df.ix[a-1-i,'time'],piaofen_df.ix[a-1-i,'time2'],piaofen_df.ix[a-1-i,'nickname'],piaofen_df.ix[a-1-i,'content']))
                            print(huifu0)

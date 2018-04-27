@@ -22,7 +22,7 @@ itchatmp.update_config(itchatmp.WechatConfig(
 
 
 #分析订阅号文本信息
-
+@itchatmp.route('/ff')
 @itchatmp.msg_register(itchatmp.content.TEXT)
 def text_reply(msg):
      huifu='对应广告：'
